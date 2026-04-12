@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <title>Expériences — Benjamin Deiber</title>
+  <!-- Google Fonts: non-blocking -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&display=swap">
+  <!-- Critical CSS: prevents unstyled flash on slow connections -->
+  <style>
+    #terminal-overlay{display:none!important;position:fixed;inset:0;z-index:8000;}
+    #terminal-overlay.open{display:flex!important;}
+    .nav-drawer{display:none!important;}
+    .nav-drawer.open{display:flex!important;}
+    .header-avatar{width:100px;height:100px;border-radius:50%;object-fit:cover;flex-shrink:0;}
+    body{background:#04080f;color:#c8d8e8;}
+  </style>
+</head>
+<body>
+<div class="scanline"></div>
+<div id="terminal-overlay"><div id="terminal-box"><div id="terminal-topbar"><div class="term-dots"><div class="term-dot red"></div><div class="term-dot yellow"></div><div class="term-dot green"></div></div><span>benjamin@portfolio: ~/experiences</span><button id="terminal-close">&#x2715;</button></div><div id="terminal-output"></div><div id="terminal-input-row"><span>benjamin@portfolio:~$</span><input id="terminal-input" type="text" autocomplete="off" spellcheck="false" placeholder="tapez une commande…"></div></div></div>
+
+<div id="shared-header-nav"></div>
+
+<main class="main-wrapper">
+
+  <a href="detail-stage.html" class="card card-link" style="display:block;" id="stage">
+    <div class="section-title"><i class="fa-solid fa-briefcase"></i> Stage d'observation de 3ème <span class="year-badge">Janv. 2022</span></div>
+    <h1 class="entry-title">Crédit Mutuel — Agence de Fessenheim</h1>
+    <h2 class="entry-subtitle">Secteur bancaire · Relation client · 1 semaine</h2>
+    <img src="images/banque.webp" alt="Agence Crédit Mutuel Fessenheim" style="width:100%;height:140px;object-fit:cover;border-radius:6px;border:1px solid var(--border);margin:10px 0;">
+    <p class="desc-text">Immersion professionnelle au sein de l'agence Crédit Mutuel de Fessenheim pour découvrir les métiers du secteur bancaire, les outils numériques et les techniques de relation client. Première expérience en entreprise.</p>
+    <div class="tech-tags">
+      <span class="tech-tag">Relation client</span><span class="tech-tag">Outils SI bancaires</span>
+      <span class="tech-tag">Communication</span><span class="tech-tag">Rigueur professionnelle</span>
+    </div>
+    <div class="open-hint"><i class="fa-solid fa-arrow-right"></i> <span data-i18n="open_detail">Voir le détail</span></div>
+  </a>
+
+  <div class="back-top"><a href="#" data-i18n="back_top">RETOUR EN HAUT</a></div>
+</main>
+
+<footer><p>Web-design : Deiber Benjamin &nbsp;·&nbsp; <kbd>`</kbd> <span data-i18n="footer_terminal">pour le terminal</span></p></footer>
+<script src="i18n.js"></script>
+<script src="shared.js"></script>
+<script src="terminal.js"></script>
+<script>document.addEventListener('DOMContentLoaded',()=>{injectShared();applyTranslations();});</script>
+</body>
+</html>

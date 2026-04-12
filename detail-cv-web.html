@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <title>Projet CV Web — Benjamin Deiber</title>
+  <style>
+    .proof-row{display:flex;flex-direction:column;gap:10px;}
+    .proof-line{padding:12px 16px;border:1px solid rgba(0,212,255,.15);border-radius:6px;background:rgba(0,212,255,.03);font-size:.85rem;color:var(--txt2);display:flex;align-items:flex-start;gap:10px;}
+    .proof-line i{color:var(--cyan);margin-top:2px;flex-shrink:0;}
+    /* Site preview box */
+    .site-preview {
+      border:1px solid var(--border); border-radius:8px; overflow:hidden;
+      margin:16px 0; background:#030d18;
+    }
+    .site-preview-bar {
+      background:rgba(0,212,255,.08); padding:8px 14px;
+      display:flex; align-items:center; gap:8px;
+      font-family:'JetBrains Mono',monospace; font-size:.68rem; color:var(--txt3);
+    }
+    .site-preview-bar .dot { width:9px;height:9px;border-radius:50%; }
+    .site-preview-bar .url { margin-left:8px; color:var(--txt2); }
+    .site-preview-link {
+      display:flex; align-items:center; justify-content:center;
+      padding:32px; text-decoration:none; gap:12px;
+      color:var(--cyan); font-family:'JetBrains Mono',monospace;
+      font-size:.85rem; transition:background .25s;
+    }
+    .site-preview-link:hover { background:rgba(0,212,255,.06); }
+    .site-preview-link i { font-size:1.5rem; }
+  </style>
+  <!-- Google Fonts: non-blocking -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&display=swap">
+  <!-- Critical CSS: prevents unstyled flash on slow connections -->
+  <style>
+    #terminal-overlay{display:none!important;position:fixed;inset:0;z-index:8000;}
+    #terminal-overlay.open{display:flex!important;}
+    .nav-drawer{display:none!important;}
+    .nav-drawer.open{display:flex!important;}
+    .header-avatar{width:100px;height:100px;border-radius:50%;object-fit:cover;flex-shrink:0;}
+    body{background:#04080f;color:#c8d8e8;}
+  </style>
+</head>
+<body>
+<div class="scanline"></div>
+<div id="terminal-overlay"><div id="terminal-box"><div id="terminal-topbar"><div class="term-dots"><div class="term-dot red"></div><div class="term-dot yellow"></div><div class="term-dot green"></div></div><span>benjamin@portfolio: ~/projets/cv-web</span><button id="terminal-close">&#x2715;</button></div><div id="terminal-output"></div><div id="terminal-input-row"><span>benjamin@portfolio:~$</span><input id="terminal-input" type="text" autocomplete="off" spellcheck="false" placeholder="tapez une commande…"></div></div></div>
+
+<div id="shared-header-nav"></div>
+
+<main class="main-wrapper">
+  <a href="projets.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> <span data-i18n="com_back">Retour</span></a>
+
+  <div class="card">
+    <div class="section-title"><i class="fa-solid fa-globe"></i> SAÉ 1.04 — BUT R&amp;T <span class="year-badge">2025–2026</span></div>
+    <h1 class="entry-title" data-i18n="cvw_title">Site web CV — Version initiale</h1>
+    <h2 class="entry-subtitle">HTML5 · CSS3 · Flexbox · Grid · Multi-pages</h2>
+
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px;">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--green);background:rgba(0,255,136,.08);border:1px solid rgba(0,255,136,.3);padding:3px 10px;border-radius:4px;">✓ Projet terminé</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--cyan);background:rgba(0,212,255,.06);border:1px solid rgba(0,212,255,.2);padding:3px 10px;border-radius:4px;">SAÉ 1.04 — IUT Colmar</span>
+    </div>
+
+    <p class="desc-text">Dans le cadre de la SAÉ 1.04 du BUT R&T, j'ai créé un site web multi-pages présentant mon CV. Le but était de créer une page web donnant son CV en utilisant HTML, CSS, les ancres, les flexbox et les grids. Ce site est hébergé sur GitHub Pages et accessible en ligne.</p>
+
+    <!-- Live site preview -->
+    <h2 class="block-title"><i class="fa-solid fa-globe"></i> Site en ligne</h2>
+    <div class="site-preview">
+      <div class="site-preview-bar">
+        <div class="dot" style="background:#ff5f57;"></div>
+        <div class="dot" style="background:#febc2e;"></div>
+        <div class="dot" style="background:#28c840;"></div>
+        <span class="url">debenji68.github.io/cv-web/</span>
+      </div>
+      <a href="https://debenji68.github.io/cv-web/" target="_blank" class="site-preview-link">
+        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        Ouvrir le site CV original sur GitHub Pages →
+      </a>
+    </div>
+
+    <!-- Original project description from SAE sheet -->
+    <h2 class="block-title"><i class="fa-solid fa-file-lines"></i> Description du projet (SAÉ 1.04)</h2>
+    <div class="project-card">
+      <h3>📄 Projet page « web » de Curriculum Vitae</h3>
+      <p>Le but de cette SAÉ est de créer une page « web » donnant son CV.</p>
+      <ul>
+        <li>Création de plusieurs pages HTML</li>
+        <li>Utilisation d'une seule page de style en CSS</li>
+        <li>Utilisation des "ancres" vers d'autres pages</li>
+        <li>Utilisation des "flexbox" et des "grids"</li>
+      </ul>
+      <div class="tech-tags">
+        <span class="tech-tag">HTML5</span>
+        <span class="tech-tag">CSS3</span>
+        <span class="tech-tag">Flexbox</span>
+        <span class="tech-tag">CSS Grid</span>
+        <span class="tech-tag">Ancres HTML</span>
+        <span class="tech-tag">Visual Studio Code</span>
+        <span class="tech-tag">GitHub Pages</span>
+      </div>
+    </div>
+
+    <h2 class="block-title" style="margin-top:20px;"><i class="fa-solid fa-layer-group"></i> <span data-i18n="lbl_stack">Stack technique</span></h2>
+    <div class="tech-tags">
+      <span class="tech-tag">HTML5</span><span class="tech-tag">CSS3</span>
+      <span class="tech-tag">Flexbox</span><span class="tech-tag">CSS Grid</span>
+      <span class="tech-tag">Font Awesome</span><span class="tech-tag">VS Code</span>
+      <span class="tech-tag">GitHub Pages</span>
+    </div>
+
+    <h2 class="block-title" style="margin-top:20px;"><i class="fa-solid fa-circle-check"></i> <span data-i18n="lbl_learned">Ce que j'ai appris</span></h2>
+    <ul class="result-list">
+      <li>Maîtrise de la structure HTML sémantique multi-pages</li>
+      <li>CSS Grid et Flexbox pour des mises en page complexes</li>
+      <li>Navigation entre pages avec ancres HTML</li>
+      <li>Feuille de style CSS partagée entre toutes les pages</li>
+      <li>Déploiement sur GitHub Pages</li>
+    </ul>
+
+    <!-- RÉFÉRENTIEL -->
+    <h2 class="block-title" style="margin-top:24px;"><i class="fa-solid fa-graduation-cap"></i> <span data-i18n="ref_title">Référentiel de compétences BUT R&amp;T</span></h2>
+    <div id="ref-container" data-project="cvweb"></div>
+
+    <!-- PREUVES -->
+    <h2 class="block-title" style="margin-top:24px;"><i class="fa-solid fa-shield-halved"></i> <span data-i18n="lbl_proof">Preuves</span></h2>
+    <div class="proof-row">
+      <div class="proof-line"><i class="fa-solid fa-circle-check"></i> Site CV original disponible en ligne sur GitHub Pages : <a href="https://debenji68.github.io/cv-web/" target="_blank" class="ext-link">debenji68.github.io/cv-web/ <i class="fa-solid fa-arrow-up-right-from-square"></i></a></div>
+      <div class="proof-line"><i class="fa-solid fa-circle-check"></i> Code source disponible sur GitHub. <a href="https://github.com/debenji68/cv-web" target="_blank" class="ext-link">Voir le dépôt <i class="fa-solid fa-arrow-up-right-from-square"></i></a></div>
+      <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: start; margin-top: 10px;">
+        <img src="images/cv_web_index.png" alt="Image de la page d'accueil" style="width: calc(50% - 10px); height: auto;">
+        <img src="images/cv_web_formation.png" alt="Image de la page formation" style="width: calc(50% - 10px); height: auto;">
+        <img src="images/cv_web_projet.png" alt="Image de la page projets" style="width: calc(50% - 10px); height: auto;">
+        <img src="images/cv_web_diplome.png" alt="Image de la page diplômes" style="width: calc(50% - 10px); height: auto;">
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <div class="back-top"><a href="#" data-i18n="idx_back_top">RETOUR EN HAUT</a></div>
+</main>
+<footer><p>Web-design : Deiber Benjamin &nbsp;·&nbsp; <kbd>`</kbd> <span data-i18n="footer_terminal">pour le terminal</span></p></footer>
+<script src="i18n.js"></script>
+<script src="shared.js"></script>
+<script src="terminal.js"></script>
+<script>
+function buildPageRef() { buildReferentielSection('cvweb', 'ref-container'); }
+document.addEventListener('DOMContentLoaded', () => {
+  injectShared();
+  applyTranslations();
+  buildPageRef();
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <title>Diplômes — Benjamin Deiber</title>
+  <!-- Google Fonts: non-blocking -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&display=swap">
+  <!-- Critical CSS: prevents unstyled flash on slow connections -->
+  <style>
+    #terminal-overlay{display:none!important;position:fixed;inset:0;z-index:8000;}
+    #terminal-overlay.open{display:flex!important;}
+    .nav-drawer{display:none!important;}
+    .nav-drawer.open{display:flex!important;}
+    .header-avatar{width:100px;height:100px;border-radius:50%;object-fit:cover;flex-shrink:0;}
+    body{background:#04080f;color:#c8d8e8;}
+  </style>
+</head>
+<body>
+<div class="scanline"></div>
+<div id="terminal-overlay"><div id="terminal-box"><div id="terminal-topbar"><div class="term-dots"><div class="term-dot red"></div><div class="term-dot yellow"></div><div class="term-dot green"></div></div><span>benjamin@portfolio: ~/diplomes</span><button id="terminal-close">&#x2715;</button></div><div id="terminal-output"></div><div id="terminal-input-row"><span>benjamin@portfolio:~$</span><input id="terminal-input" type="text" autocomplete="off" spellcheck="false" placeholder="tapez une commande…"></div></div></div>
+
+<div id="shared-header-nav"></div>
+
+<main class="main-wrapper">
+
+  <!-- BAC -->
+  <a href="detail-bac.html" class="card card-link" style="display:block;">
+    <div class="dpl-header">
+      <span class="dpl-icon">🏆</span>
+      <div style="flex:1">
+        <div class="section-title" style="margin-bottom:4px;">Baccalauréat Général <span class="year-badge">2025</span></div>
+        <h2 class="entry-subtitle">// <span style="color:var(--cyan);">Lycée Théodore Deck, Guebwiller</span></h2>
+      </div>
+    </div>
+    <div class="score-row">
+      <div class="score-box"><div class="label">Note finale</div><div class="value">14.14<span style="font-size:.75rem;color:var(--txt3)">/20</span></div></div>
+      <div class="score-box"><div class="label">Mention</div><div class="value" style="color:var(--green);font-size:1.1rem;">Bien</div></div>
+      <div class="score-box"><div class="label">Grand Oral</div><div class="value" style="color:var(--gold);">20/20</div></div>
+    </div>
+    <div class="open-hint">&#x2192; Voir les résultats détaillés + relevé de notes</div>
+  </a>
+
+  <!-- DSD1 KMK -->
+  <a href="detail-dsd1.html" class="card card-link" style="display:block;border-color:rgba(180,79,255,.35);">
+    <div class="dpl-header">
+      <span class="dpl-icon">🇩🇪</span>
+      <div style="flex:1">
+        <div class="section-title" style="margin-bottom:4px;color:var(--purple);">DSD1 — KMK <span class="year-badge" style="background:rgba(180,79,255,.15);color:var(--purple);border-color:rgba(180,79,255,.4);">09/06/2023</span></div>
+        <h2 class="entry-subtitle">// <span style="color:var(--purple);">Deutsches Sprachdiplom · Lycée Théodore Deck, Guebwiller</span></h2>
+      </div>
+    </div>
+    <div class="score-row">
+      <div class="score-box" style="border-color:rgba(180,79,255,.3)"><div class="label">Leseverstehen</div><div class="value" style="color:var(--gold);font-size:.95rem;">A2</div></div>
+      <div class="score-box" style="border-color:rgba(180,79,255,.3)"><div class="label">Hörverstehen</div><div class="value" style="color:var(--green);font-size:.95rem;">B1</div></div>
+      <div class="score-box" style="border-color:rgba(180,79,255,.3)"><div class="label">Schriftl. Komm.</div><div class="value" style="color:var(--green);font-size:.95rem;">B1</div></div>
+      <div class="score-box" style="border-color:rgba(180,79,255,.3)"><div class="label">Mündl. Komm.</div><div class="value" style="color:var(--green);font-size:.95rem;">B1</div></div>
+    </div>
+    <div class="open-hint">&#x2192; Voir le détail du diplôme</div>
+  </a>
+
+  <!-- BREVET -->
+  <a href="detail-brevet.html" class="card card-link" style="display:block;">
+    <div class="dpl-header">
+      <span class="dpl-icon">🥇</span>
+      <div style="flex:1">
+        <div class="section-title" style="margin-bottom:4px;">Diplôme National du Brevet <span class="year-badge">2022</span></div>
+        <h2 class="entry-subtitle">// <span style="color:var(--cyan);">Collège Félix Éboué, Fessenheim</span></h2>
+      </div>
+    </div>
+    <div class="score-row">
+      <div class="score-box"><div class="label">Note finale</div><div class="value">17.8<span style="font-size:.75rem;color:var(--txt3)">/20</span></div></div>
+      <div class="score-box"><div class="label">Mention</div><div class="value" style="color:var(--green);font-size:1.1rem;">Très Bien</div></div>
+      <div class="score-box"><div class="label">Oral</div><div class="value" style="color:var(--gold);">20/20</div></div>
+    </div>
+    <div class="open-hint">&#x2192; Voir les résultats détaillés</div>
+  </a>
+
+  <!-- PIX -->
+  <a href="detail-pix.html" class="card card-link" style="display:block;">
+    <div class="dpl-header">
+      <span class="dpl-icon">💻</span>
+      <div style="flex:1">
+        <div class="section-title" style="margin-bottom:4px;">Certification PIX <span class="year-badge">2025</span></div>
+        <h2 class="entry-subtitle">// <span style="color:var(--purple);">Compétences numériques — Certification nationale</span></h2>
+      </div>
+    </div>
+    <div class="score-row">
+      <div class="score-box"><div class="label">Score</div><div class="value">531<span style="font-size:.75rem;color:var(--txt3)"> pix</span></div></div>
+      <div class="score-box"><div class="label">Niveau</div><div class="value" style="color:var(--purple);font-size:1rem;">Avancé 1</div></div>
+      <div class="score-box"><div class="label">Domaines</div><div class="value" style="color:var(--cyan);font-size:1rem;">5 x Niv.5</div></div>
+    </div>
+    <div class="open-hint">&#x2192; Voir les résultats par domaine + certificat</div>
+  </a>
+
+  <div class="back-top"><a href="#" data-i18n="idx_back_top">RETOUR EN HAUT</a></div>
+</main>
+
+<footer><p>Web-design : Deiber Benjamin &nbsp;·&nbsp; <kbd>`</kbd> <span data-i18n="footer_terminal">pour le terminal</span></p></footer>
+<script src="i18n.js"></script>
+<script src="shared.js"></script>
+<script src="terminal.js"></script>
+<script>document.addEventListener('DOMContentLoaded', () => { injectShared(); applyTranslations(); });</script>
+</body>
+</html>

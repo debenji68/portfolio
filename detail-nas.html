@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <title>Projet NAS — Benjamin Deiber</title>
+  <style>
+    .services-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-top:12px;}
+    .service-card{background:rgba(0,212,255,.04);border:1px solid var(--border);border-radius:8px;padding:14px;transition:all .25s;position:relative;overflow:hidden;}
+    .service-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;opacity:0;transition:opacity .3s;}
+    .service-card:hover{border-color:var(--border-h);}.service-card:hover::before{opacity:1;}
+    .sc{background:var(--cyan);}.sg{background:var(--green);}.sp{background:var(--purple);}.sgo{background:var(--gold);}
+    .service-card .sc-icon{font-size:1.3rem;margin-bottom:7px;}
+    .service-card h3{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--cyan);margin-bottom:4px;}
+    .service-card p{font-size:.8rem;color:var(--txt2);line-height:1.5;}
+    .svc-status{display:inline-flex;align-items:center;gap:5px;font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--green);margin-top:8px;}
+    .svc-status::before{content:'';display:block;width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green);animation:sp1 1.2s ease-in-out infinite alternate;}
+    @keyframes sp1{from{opacity:.4}to{opacity:1}}
+    .proof-row{display:flex;flex-direction:column;gap:10px;}
+    .proof-line{padding:12px 16px;border:1px solid rgba(0,212,255,.15);border-radius:6px;background:rgba(0,212,255,.03);font-size:.85rem;color:var(--txt2);display:flex;align-items:flex-start;gap:10px;}
+    .proof-line i{color:var(--cyan);margin-top:2px;flex-shrink:0;}
+  </style>
+  <!-- Google Fonts: non-blocking -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&display=swap">
+  <!-- Critical CSS: prevents unstyled flash on slow connections -->
+  <style>
+    #terminal-overlay{display:none!important;position:fixed;inset:0;z-index:8000;}
+    #terminal-overlay.open{display:flex!important;}
+    .nav-drawer{display:none!important;}
+    .nav-drawer.open{display:flex!important;}
+    .header-avatar{width:100px;height:100px;border-radius:50%;object-fit:cover;flex-shrink:0;}
+    body{background:#04080f;color:#c8d8e8;}
+  </style>
+</head>
+<body>
+<div class="scanline"></div>
+<div id="terminal-overlay"><div id="terminal-box"><div id="terminal-topbar"><div class="term-dots"><div class="term-dot red"></div><div class="term-dot yellow"></div><div class="term-dot green"></div></div><span>benjamin@portfolio: ~/projets/nas</span><button id="terminal-close">&#x2715;</button></div><div id="terminal-output"></div><div id="terminal-input-row"><span>benjamin@portfolio:~$</span><input id="terminal-input" type="text" autocomplete="off" spellcheck="false" placeholder="tapez une commande…"></div></div></div>
+
+<div id="shared-header-nav"></div>
+
+<main class="main-wrapper">
+  <a href="projets.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> <span data-i18n="lbl_back">← Retour</span></a>
+
+  <div class="card">
+    <div class="section-title"><i class="fa-solid fa-server"></i> Projet Serveur NAS <span class="year-badge">2023 – Présent</span></div>
+    <h1 class="entry-title" data-i18n="nas_title">Infrastructure Domestique Sécurisée</h1>
+    <h2 class="entry-subtitle">OpenMediaVault · Docker · WireGuard · Home Assistant · 12 services</h2>
+
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px;">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--green);background:rgba(0,255,136,.08);border:1px solid rgba(0,255,136,.3);padding:3px 10px;border-radius:4px;display:flex;align-items:center;gap:5px;"><span style="width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green);display:inline-block;animation:sp1 1.2s ease-in-out infinite alternate;"></span>PRODUCTION 24/7</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--cyan);background:rgba(0,212,255,.06);border:1px solid rgba(0,212,255,.2);padding:3px 10px;border-radius:4px;">12 services actifs</span>
+    </div>
+
+    <p class="desc-text">Depuis 2023, je maintiens une infrastructure serveur domestique complète tournant 24h/24. Ce projet couvre l'administration système Linux, la conteneurisation Docker, la sécurité réseau, le VPN WireGuard, le reverse proxy Nginx, le DNS Pi-hole, et la domotique avec Home Assistant + ESPHome.</p>
+
+    <img src="images/serveur.jpg" alt="Photo réelle du serveur" class="detail-img">
+    <p style="font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--txt3);text-align:center;margin:-8px 0 20px;">📷 Photo réelle — carte mère Gigabyte GA-H55M-USB3, processeur Intel</p>
+
+    <!-- NETWORK MAP -->
+    <h2 class="block-title"><i class="fa-solid fa-diagram-project"></i> Carte réseau des services</h2>
+    <p style="font-size:.8rem;color:var(--txt3);margin-bottom:8px;font-family:'JetBrains Mono',monospace;">Survolez un nœud pour les détails · Constellation animée</p>
+    <div class="net-viz-container" id="netViz" style="height:440px;">
+      <canvas id="netCanvas"></canvas>
+      <div class="net-viz-title">🏠 HOMELAB — Services actifs</div>
+      <div class="net-viz-legend">
+        <div class="net-viz-legend-item"><div class="net-viz-legend-dot" style="background:#00d4ff;"></div>Système</div>
+        <div class="net-viz-legend-item"><div class="net-viz-legend-dot" style="background:#00ff88;"></div>Services</div>
+        <div class="net-viz-legend-item"><div class="net-viz-legend-dot" style="background:#ff4466;"></div>Sécurité</div>
+        <div class="net-viz-legend-item"><div class="net-viz-legend-dot" style="background:#b44fff;"></div>VPN/Proxy</div>
+        <div class="net-viz-legend-item"><div class="net-viz-legend-dot" style="background:#ffd700;"></div>Domotique</div>
+      </div>
+    </div>
+
+    <!-- SERVICES -->
+    <h2 class="block-title" style="margin-top:24px;"><i class="fa-solid fa-cubes"></i> 12 services déployés</h2>
+    <div class="services-grid">
+      <div class="service-card" style="--bc:var(--cyan)"><div class="sc-icon">🗄️</div><h3>OpenMediaVault</h3><p>OS NAS — RAID, partages SMB/NFS, admin web.</p><div class="svc-status">En production</div></div>
+      <div class="service-card" style="--bc:var(--green)"><div class="sc-icon">🐳</div><h3>Portainer CE</h3><p>Interface graphique Docker — conteneurs, volumes, stacks.</p><div class="svc-status">En production</div></div>
+      <div class="service-card" style="--bc:var(--cyan)"><div class="sc-icon">🎬</div><h3>Jellyfin</h3><p>Serveur média personnel — streaming vidéo/musique.</p><div class="svc-status">En production</div></div>
+      <div class="service-card" style="--bc:var(--green)"><div class="sc-icon">🎮</div><h3>Minecraft Server</h3><p>Serveur jeu multijoueur avec backups automatiques.</p><div class="svc-status">En production</div></div>
+      <div class="service-card" style="--bc:var(--purple)"><div class="sc-icon">🔒</div><h3>WireGuard VPN</h3><p>Accès distant chiffré — VPN rapide et moderne.</p><div class="svc-status">En production</div></div>
+      <div class="service-card" style="--bc:var(--purple)"><div class="sc-icon">🌐</div><h3>Nginx Proxy Manager</h3><p>Reverse proxy + SSL/TLS automatique Let's Encrypt.</p><div class="svc-status">En production</div></div>
+      <div class="service-card" style="--bc:var(--purple)"><div class="sc-icon">🦆</div><h3>DuckDNS</h3><p>DNS dynamique — domaine toujours pointé sur mon IP.</p><div class="svc-status">En production</div></div>
+      <div class="service-card" style="--bc:var(--gold)"><div class="sc-icon">🏠</div><h3>Home Assistant</h3><p>Domotique open-source — appareils connectés centralisés.</p><div class="svc-status">En production</div></div>
+      <div class="service-card" style="--bc:var(--gold)"><div class="sc-icon">⚡</div><h3>ESPHome</h3><p>Firmware ESP32/ESP8266 — capteurs DIY dans HA.</p><div class="svc-status">En production</div></div>
+      <div class="service-card" style="--bc:var(--red)"><div class="sc-icon">🚫</div><h3>Pi-hole</h3><p>Blocage DNS pub &amp; traqueurs — tout le réseau local.</p><div class="svc-status">En production</div></div>
+      <div class="service-card" style="--bc:var(--red)"><div class="sc-icon">🛡️</div><h3>Fail2Ban</h3><p>Anti brute-force — bannit les IP suspectes automatiquement.</p><div class="svc-status">En production</div></div>
+      <div class="service-card" style="--bc:var(--purple)"><div class="sc-icon">🔑</div><h3>LDAP + SSL/TLS</h3><p>Auth centralisée et chiffrement des communications.</p><div class="svc-status">En production</div></div>
+    </div>
+
+    <h2 class="block-title" style="margin-top:24px;"><i class="fa-solid fa-layer-group"></i> <span data-i18n="lbl_stack">Stack technique</span></h2>
+    <div class="tech-tags">
+      <span class="tech-tag">OpenMediaVault</span><span class="tech-tag">Debian Linux</span><span class="tech-tag">RAID</span><span class="tech-tag">LVM</span><span class="tech-tag">Samba/SMB</span><span class="tech-tag">NFS</span><span class="tech-tag">Docker</span><span class="tech-tag">Docker Compose</span><span class="tech-tag">Portainer</span><span class="tech-tag">Jellyfin</span><span class="tech-tag">Minecraft</span><span class="tech-tag">WireGuard</span><span class="tech-tag">Nginx PM</span><span class="tech-tag">DuckDNS</span><span class="tech-tag">Home Assistant</span><span class="tech-tag">ESPHome</span><span class="tech-tag">Pi-hole</span><span class="tech-tag">Fail2Ban</span><span class="tech-tag">iptables/UFW</span><span class="tech-tag">SSL/TLS</span><span class="tech-tag">LDAP</span><span class="tech-tag">Bash</span><span class="tech-tag">cron</span>
+    </div>
+
+    <h2 class="block-title" style="margin-top:24px;"><i class="fa-solid fa-chart-line"></i> <span data-i18n="lbl_results">Résultats clés</span></h2>
+    <ul class="result-list">
+      <li>Infrastructure opérationnelle 24h/24 depuis 2023 — uptime &gt; 99%</li>
+      <li>12 services conteneurisés actifs en production simultanément</li>
+      <li>Accès VPN sécurisé depuis l'extérieur via WireGuard + DuckDNS</li>
+      <li>Réseau domestique entier filtré par Pi-hole</li>
+      <li>Domotique maison intégrée via Home Assistant + capteurs ESPHome DIY</li>
+    </ul>
+
+    <!-- RÉFÉRENTIEL -->
+    <h2 class="block-title" style="margin-top:24px;"><i class="fa-solid fa-graduation-cap"></i> <span data-i18n="ref_title">Référentiel de compétences BUT R&amp;T</span></h2>
+    <div id="ref-container" data-project="nas"></div>
+
+    <!-- PREUVES -->
+    <h2 class="block-title" style="margin-top:24px;"><i class="fa-solid fa-shield-halved"></i> <span data-i18n="lbl_proof">Preuves</span></h2>
+    <div class="proof-row">
+      <div class="proof-line"><i class="fa-solid fa-circle-check"></i> Mise en pratique sur infrastructure réelle en production 24/7 — administration Linux, Docker, sécurité réseau, domotique. <a href="projets.html" class="ext-link" style="margin-left:6px;">Voir tous les projets <i class="fa-solid fa-arrow-up-right-from-square"></i></a></div>
+      <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between; margin-top: 10px;">
+        <img src="images/opm.png" alt="OpenMediaVault" style="width: calc(50% - 5px); height: auto; margin-bottom: 5px;">
+        <img src="images/portainer.png" alt="Portainer" style="width: calc(50% - 5px); height: auto; margin-bottom: 5px;">
+        <img src="images/home_assistant.png" alt="Home Assistant" style="width: calc(50% - 5px); height: auto; margin-bottom: 5px;">
+        <img src="images/jellifyn.png" alt="Jellyfin" style="width: calc(50% - 5px); height: auto; margin-bottom: 5px;">
+        <img src="images/pi_hole.png" alt="Pi-hole" style="width: calc(50% - 5px); height: auto; margin-bottom: 5px;">
+        <img src="images/nginx.png" alt="Nginx" style="width: calc(50% - 5px); height: auto; margin-bottom: 5px;">
+      </div>
+    </div>
+
+    <h2 class="block-title" style="margin-top:24px;"><i class="fa-solid fa-road"></i> <span data-i18n="lbl_roadmap">Roadmap</span></h2>
+    <div class="project-card">
+      <h3>🚀 Évolutions futures</h3>
+      <ul><li>Monitoring : Grafana + Prometheus</li><li>IDS/IPS : Suricata</li><li>Nextcloud — sync fichiers chiffrés</li><li>Vaultwarden — gestionnaire de mots de passe</li></ul>
+      <div class="tech-tags"><span class="tech-tag">Grafana</span><span class="tech-tag">Prometheus</span><span class="tech-tag">Suricata</span><span class="tech-tag">Nextcloud</span></div>
+    </div>
+  </div>
+  <div class="back-top"><a href="#" data-i18n="back_top">RETOUR EN HAUT</a></div>
+</main>
+<footer><p>Web-design : Deiber Benjamin &nbsp;·&nbsp; <kbd>`</kbd> <span data-i18n="footer_terminal">pour le terminal</span></p></footer>
+
+<script src="i18n.js"></script>
+<script src="shared.js"></script>
+<script src="terminal.js"></script>
+<script>
+// Network constellation
+const NV=document.getElementById('netViz');
+const canvas=document.getElementById('netCanvas');
+const ctx=canvas.getContext('2d');
+const NODES=[
+  {id:'nas',   label:'OpenMediaVault',color:'#00d4ff',x:.5, y:.5, r:22,fr:'OS NAS — RAID, SMB/NFS',          en:'NAS OS — RAID, SMB/NFS'},
+  {id:'docker',label:'Docker',        color:'#00d4ff',x:.35,y:.35,r:16,fr:'12 conteneurs actifs',             en:'12 active containers'},
+  {id:'port',  label:'Portainer',     color:'#4488ff',x:.65,y:.28,r:13,fr:'Admin web Docker',                 en:'Docker web admin'},
+  {id:'jelly', label:'Jellyfin',      color:'#00ff88',x:.22,y:.45,r:14,fr:'Streaming média',                  en:'Media streaming'},
+  {id:'mc',    label:'Minecraft',     color:'#00ff88',x:.78,y:.6, r:13,fr:'Serveur jeu multijoueur',          en:'Multiplayer game server'},
+  {id:'wg',    label:'WireGuard',     color:'#b44fff',x:.72,y:.38,r:16,fr:'VPN accès distant chiffré',        en:'Encrypted remote VPN'},
+  {id:'nginx', label:'Nginx PM',      color:'#b44fff',x:.55,y:.22,r:14,fr:'Reverse proxy SSL/TLS',            en:'SSL/TLS reverse proxy'},
+  {id:'duck',  label:'DuckDNS',       color:'#cc88ff',x:.38,y:.18,r:12,fr:'DNS dynamique IP résidentielle',   en:'Dynamic DNS'},
+  {id:'ha',    label:'Home Assistant',color:'#ffd700',x:.28,y:.7, r:16,fr:'Domotique centralisée',            en:'Centralised home automation'},
+  {id:'esp',   label:'ESPHome',       color:'#ffaa00',x:.18,y:.58,r:12,fr:'Capteurs ESP32 DIY',               en:'DIY ESP32 sensors'},
+  {id:'pihole',label:'Pi-hole',       color:'#ff4466',x:.6, y:.72,r:15,fr:'Blocage DNS pub & traqueurs',      en:'DNS ad & tracker blocking'},
+  {id:'f2b',   label:'Fail2Ban',      color:'#ff6644',x:.82,y:.45,r:13,fr:'Anti brute-force SSH',             en:'SSH brute-force protection'},
+];
+const EDGES=[['nas','docker'],['docker','port'],['docker','jelly'],['docker','mc'],['docker','wg'],['docker','nginx'],['nginx','duck'],['docker','ha'],['ha','esp'],['docker','pihole'],['docker','f2b']];
+let W,H,hovered=null,t2=0;
+const off=NODES.map(()=>({ax:(Math.random()-.5)*.03,ay:(Math.random()-.5)*.03,px:0,py:0}));
+function resize(){W=NV.offsetWidth;H=NV.offsetHeight;canvas.width=W;canvas.height=H;}
+function nx(n){return n.x*W;}function ny(n){return n.y*H;}
+function draw(){
+  if(!W){requestAnimationFrame(draw);return;}
+  ctx.clearRect(0,0,W,H);t2+=.007;
+  off.forEach((o,i)=>{o.px=Math.sin(t2+i*1.3)*o.ax*W;o.py=Math.cos(t2+i*.9)*o.ay*H;});
+  EDGES.forEach(([a,b])=>{
+    const ni=NODES.findIndex(n=>n.id===a),nj=NODES.findIndex(n=>n.id===b);
+    if(ni<0||nj<0)return;
+    const n1=NODES[ni],n2=NODES[nj];
+    const x1=nx(n1)+off[ni].px,y1=ny(n1)+off[ni].py,x2=nx(n2)+off[nj].px,y2=ny(n2)+off[nj].py;
+    const active=hovered&&(hovered===n1.id||hovered===n2.id);
+    const g=ctx.createLinearGradient(x1,y1,x2,y2);
+    g.addColorStop(0,n1.color+'55');g.addColorStop(1,n2.color+'55');
+    ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);
+    ctx.strokeStyle=g;ctx.lineWidth=active?2:.7;ctx.globalAlpha=active?.9:.25;ctx.stroke();ctx.globalAlpha=1;
+  });
+  NODES.forEach((n,i)=>{
+    const x=nx(n)+off[i].px,y=ny(n)+off[i].py,isHov=hovered===n.id,r=n.r+(isHov?5:0);
+    ctx.save();ctx.shadowColor=n.color;ctx.shadowBlur=isHov?30:14;
+    ctx.fillStyle=n.color+(isHov?'28':'15');ctx.beginPath();ctx.arc(x,y,r+7,0,Math.PI*2);ctx.fill();
+    ctx.shadowBlur=0;ctx.strokeStyle=n.color;ctx.lineWidth=isHov?2.5:1.5;
+    ctx.fillStyle=isHov?n.color+'22':'transparent';ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fill();ctx.stroke();ctx.restore();
+    const fs=Math.max(8,Math.min(11,W/90));
+    ctx.font=`700 ${fs}px JetBrains Mono,monospace`;
+    ctx.fillStyle=isHov?'#fff':n.color+'dd';ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillText(n.label,x,y+r+12);
+    if(isHov){
+      const desc=currentLang==='en'?n.en:n.fr;
+      ctx.font=`600 ${fs}px JetBrains Mono,monospace`;
+      const tw=ctx.measureText(desc).width+22;
+      let tx=Math.min(W-tw-4,Math.max(4,x-tw/2)),ty=y-r-36;
+      if(ty<4)ty=y+r+20;
+      ctx.fillStyle='rgba(3,12,24,.96)';ctx.strokeStyle=n.color+'99';ctx.lineWidth=1;
+      ctx.beginPath();ctx.roundRect(tx,ty-14,tw,24,4);ctx.fill();ctx.stroke();
+      ctx.fillStyle=n.color;ctx.textAlign='left';ctx.fillText(desc,tx+11,ty);
+    }
+  });
+  requestAnimationFrame(draw);
+}
+canvas.addEventListener('mousemove',e=>{
+  const rect=canvas.getBoundingClientRect(),mx=e.clientX-rect.left,my=e.clientY-rect.top;
+  let found=null;NODES.forEach((n,i)=>{const dx=mx-(nx(n)+off[i].px),dy=my-(ny(n)+off[i].py);if(Math.sqrt(dx*dx+dy*dy)<n.r+12)found=n.id;});
+  hovered=found;canvas.style.cursor=found?'pointer':'default';
+});
+canvas.addEventListener('mouseleave',()=>{hovered=null;});
+window.addEventListener('resize',resize);
+
+function buildPageRef(){buildReferentielSection('nas','ref-container');}
+document.addEventListener('DOMContentLoaded',()=>{
+  injectShared();applyTranslations();buildPageRef();
+  setTimeout(()=>{resize();draw();},150);
+});
+</script>
+</body>
+</html>

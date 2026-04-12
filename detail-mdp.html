@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <title>Générateur MDP — Benjamin Deiber</title>
+  <style>
+    /* ── Live generator UI ── */
+    .gen-app {
+      background: rgba(4,14,26,.95);
+      border: 1px solid rgba(0,212,255,.25);
+      border-radius: 12px;
+      padding: 28px;
+      margin: 16px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .gen-app::before {
+      content:''; position:absolute; top:0;left:0;right:0;height:2px;
+      background:linear-gradient(90deg,var(--cyan),var(--green),var(--purple));
+    }
+    .gen-title {
+      font-family:'JetBrains Mono',monospace;
+      font-size:.72rem; color:var(--txt3);
+      text-transform:uppercase; letter-spacing:.1em;
+      margin-bottom:20px; display:flex; align-items:center; gap:8px;
+    }
+    .gen-title span{color:var(--cyan);}
+
+    /* Password output */
+    .gen-output {
+      display:flex; align-items:center; gap:10px;
+      background:#030d18; border:1px solid rgba(0,212,255,.25);
+      border-radius:6px; padding:12px 16px; margin-bottom:20px;
+    }
+    .gen-output #mdp-display {
+      flex:1; font-family:'JetBrains Mono',monospace;
+      font-size:1.1rem; font-weight:700; color:var(--green);
+      letter-spacing:.14em; word-break:break-all;
+      min-height:1.4em;
+    }
+    .gen-output #mdp-display.empty { color:var(--txt3); font-size:.78rem; font-weight:400; letter-spacing:.05em; }
+    .copy-btn {
+      background:rgba(0,212,255,.08); border:1px solid rgba(0,212,255,.3);
+      border-radius:5px; padding:8px 12px; cursor:pointer; color:var(--cyan);
+      font-family:'JetBrains Mono',monospace; font-size:.7rem;
+      transition:all .25s; flex-shrink:0; white-space:nowrap;
+      display:flex; align-items:center; gap:6px;
+    }
+    .copy-btn:hover { background:rgba(0,212,255,.18); box-shadow:0 0 12px rgba(0,212,255,.25); }
+    .copy-btn.copied { color:var(--green); border-color:rgba(0,255,136,.4); }
+
+    /* Strength bar */
+    .strength-row { display:flex; align-items:center; gap:10px; margin-bottom:18px; }
+    .strength-bar-wrap { flex:1; height:5px; background:rgba(255,255,255,.08); border-radius:3px; overflow:hidden; }
+    .strength-bar { height:100%; border-radius:3px; transition:width .4s ease, background .4s; width:0; }
+    .strength-label { font-family:'JetBrains Mono',monospace; font-size:.64rem; color:var(--txt3); width:80px; text-align:right; }
+
+    /* Length slider */
+    .gen-row { margin-bottom:14px; }
+    .gen-row label { font-family:'JetBrains Mono',monospace; font-size:.68rem; color:var(--txt2); display:flex; justify-content:space-between; margin-bottom:6px; }
+    .gen-row label span { color:var(--cyan); font-weight:700; }
+    input[type=range] {
+      width:100%; -webkit-appearance:none; height:4px;
+      background:rgba(0,212,255,.15); border-radius:2px; outline:none;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance:none; width:16px; height:16px; border-radius:50%;
+      background:var(--cyan); cursor:pointer; box-shadow:0 0 8px rgba(0,212,255,.5);
+    }
+
+    /* Checkboxes */
+    .gen-checks { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:18px; }
+    .gen-check {
+      display:flex; align-items:center; gap:10px;
+      padding:10px 14px; border:1px solid var(--border);
+      border-radius:6px; cursor:pointer; transition:all .2s;
+      font-family:'JetBrains Mono',monospace; font-size:.7rem; color:var(--txt2);
+    }
+    .gen-check:hover { border-color:rgba(0,212,255,.35); color:var(--txt); }
+    .gen-check input[type=checkbox] { display:none; }
+    .check-box {
+      width:18px; height:18px; border-radius:4px;
+      border:1px solid var(--border); background:#030d18;
+      display:flex; align-items:center; justify-content:center;
+      flex-shrink:0; transition:all .2s; font-size:.75rem;
+    }
+    .gen-check.active .check-box { background:var(--cyan); border-color:var(--cyan); }
+    .gen-check.active { border-color:rgba(0,212,255,.4); color:#fff; }
+
+    /* Generate button */
+    .gen-btn {
+      width:100%; padding:14px; border-radius:6px;
+      background:linear-gradient(135deg,rgba(0,212,255,.15),rgba(0,255,136,.1));
+      border:1px solid rgba(0,212,255,.4); color:var(--cyan);
+      font-family:'JetBrains Mono',monospace; font-size:.82rem;
+      font-weight:700; letter-spacing:.1em; cursor:pointer;
+      transition:all .25s; display:flex; align-items:center; justify-content:center; gap:10px;
+    }
+    .gen-btn:hover { background:linear-gradient(135deg,rgba(0,212,255,.25),rgba(0,255,136,.18)); box-shadow:0 0 20px rgba(0,212,255,.25); }
+    .gen-btn:active { transform:scale(.98); }
+
+    /* Info toast */
+    .gen-toast {
+      text-align:center; font-family:'JetBrains Mono',monospace;
+      font-size:.65rem; color:var(--txt3); margin-top:10px;
+      min-height:1em; transition:color .3s;
+    }
+    .gen-toast.ok { color:var(--green); }
+    .gen-toast.warn { color:var(--red); }
+
+    /* Code block */
+    .code-block {
+      background:#060e18; border:1px solid rgba(0,212,255,.18);
+      border-radius:8px; padding:18px; overflow-x:auto; margin:14px 0;
+    }
+    .code-block pre { font-family:'JetBrains Mono',monospace; font-size:.68rem; line-height:1.65; color:var(--txt); margin:0; white-space:pre; }
+    .kw{color:#cc88ff;}.fn{color:#00ff88;}.st{color:#88dd88;}.cm{color:#4a6a7a;}.cn{color:#00d4ff;}
+
+    /* Proof rows */
+    .proof-row{display:flex;flex-direction:column;gap:10px;}
+    .proof-line{padding:12px 16px;border:1px solid rgba(0,212,255,.15);border-radius:6px;background:rgba(0,212,255,.03);font-size:.85rem;color:var(--txt2);display:flex;align-items:flex-start;gap:10px;}
+    .proof-line i{color:var(--cyan);margin-top:2px;flex-shrink:0;}
+
+    @media(max-width:500px){ .gen-checks{grid-template-columns:1fr;} }
+  </style>
+  <!-- Google Fonts: non-blocking -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&display=swap">
+  <!-- Critical CSS: prevents unstyled flash on slow connections -->
+  <style>
+    #terminal-overlay{display:none!important;position:fixed;inset:0;z-index:8000;}
+    #terminal-overlay.open{display:flex!important;}
+    .nav-drawer{display:none!important;}
+    .nav-drawer.open{display:flex!important;}
+    .header-avatar{width:100px;height:100px;border-radius:50%;object-fit:cover;flex-shrink:0;}
+    body{background:#04080f;color:#c8d8e8;}
+  </style>
+</head>
+<body>
+<div class="scanline"></div>
+<div id="terminal-overlay"><div id="terminal-box"><div id="terminal-topbar"><div class="term-dots"><div class="term-dot red"></div><div class="term-dot yellow"></div><div class="term-dot green"></div></div><span>benjamin@portfolio: ~/projets/mdp</span><button id="terminal-close">&#x2715;</button></div><div id="terminal-output"></div><div id="terminal-input-row"><span>benjamin@portfolio:~$</span><input id="terminal-input" type="text" autocomplete="off" spellcheck="false" placeholder="tapez une commande…"></div></div></div>
+
+<div id="shared-header-nav"></div>
+
+<main class="main-wrapper">
+  <a href="projets.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> <span data-i18n="lbl_back">← Retour</span></a>
+
+  <div class="card">
+    <div class="section-title"><i class="fa-solid fa-key"></i> Projet NSI — Terminale <span class="year-badge">2024–2025</span></div>
+    <h1 class="entry-title" data-i18n="mdp_title">Générateur de mots de passe sécurisés</h1>
+    <h2 class="entry-subtitle">Python · Tkinter · module random · NSI — Lycée Théodore Deck</h2>
+
+    <p class="desc-text">Application Python avec interface graphique Tkinter développée en classe de Terminale NSI. Elle génère un mot de passe aléatoire entre 6 et 18 caractères en combinant lettres, chiffres et symboles. L'interface propose un menu Fichier (Nouveau, Quitter) et un bouton central de génération. Essayez la version interactive ci-dessous !</p>
+
+    <!-- LIVE GENERATOR -->
+    <h2 class="block-title"><i class="fa-solid fa-play"></i> Essayer le générateur en live</h2>
+    <div class="gen-app">
+      <div class="gen-title">$ python3 <span>generateurMdp.py</span> &nbsp;— version web interactive</div>
+
+      <div class="gen-output">
+        <div id="mdp-display" class="empty">Cliquez sur "Générer" pour créer un mot de passe…</div>
+        <button class="copy-btn" id="copyBtn" onclick="copyMdp()">
+          <i class="fa-regular fa-copy"></i> Copier
+        </button>
+      </div>
+
+      <div class="strength-row">
+        <div class="strength-bar-wrap"><div class="strength-bar" id="strengthBar"></div></div>
+        <div class="strength-label" id="strengthLabel">—</div>
+      </div>
+
+      <div class="gen-row">
+        <label>Longueur <span id="lenVal">12</span> caractères</label>
+        <input type="range" id="lenRange" min="6" max="32" value="12" oninput="document.getElementById('lenVal').textContent=this.value">
+      </div>
+
+      <div class="gen-checks">
+        <label class="gen-check active" id="chk-upper" onclick="toggleCheck('upper')">
+          <input type="checkbox" id="cb-upper" checked>
+          <div class="check-box">✓</div>
+          Majuscules (A-Z)
+        </label>
+        <label class="gen-check active" id="chk-lower" onclick="toggleCheck('lower')">
+          <input type="checkbox" id="cb-lower" checked>
+          <div class="check-box">✓</div>
+          Minuscules (a-z)
+        </label>
+        <label class="gen-check active" id="chk-digits" onclick="toggleCheck('digits')">
+          <input type="checkbox" id="cb-digits" checked>
+          <div class="check-box">✓</div>
+          Chiffres (0-9)
+        </label>
+        <label class="gen-check active" id="chk-special" onclick="toggleCheck('special')">
+          <input type="checkbox" id="cb-special" checked>
+          <div class="check-box">✓</div>
+          Symboles (!@#…)
+        </label>
+      </div>
+
+      <button class="gen-btn" onclick="genererMdp()">
+        <i class="fa-solid fa-rotate"></i> GÉNÉRER LE MOT DE PASSE
+      </button>
+      <div class="gen-toast" id="toast"></div>
+    </div>
+
+    <!-- CODE SOURCE -->
+    <h2 class="block-title"><i class="fa-brands fa-python"></i> Code source Python (original)</h2>
+    <div style="display:flex;justify-content:flex-end;margin-bottom:8px;">
+      <a href="generateurMdp.py" download class="ext-link"><i class="fa-solid fa-download"></i> Télécharger generateurMdp.py</a>
+    </div>
+    <div class="code-block"><pre><span class="kw">import</span> <span class="cn">tkinter</span>
+<span class="kw">import</span> <span class="cn">string</span>
+<span class="kw">import</span> <span class="cn">random</span>
+
+<span class="cm">#variable globale</span>
+lgFen=720; hFen=480
+couleurDeFonds=<span class="st">'#406599'</span>
+
+<span class="kw">def</span> <span class="fn">generer_mdp</span>():
+    <span class="cm">"""Génération de mot de passe aléatoire"""</span>
+    mdp_mini=6; mdp_maxi=18
+    caracteres_autorises = string.ascii_letters + string.punctuation + string.digits
+    mdp = <span class="st">""</span>.join(
+        random.choice(caracteres_autorises)
+        <span class="kw">for</span> x <span class="kw">in</span> range(random.randint(mdp_mini, mdp_maxi))
+    )
+    champ_mdp.delete(0, <span class="st">'end'</span>)
+    champ_mdp.insert(0, mdp)
+    <span class="kw">return</span> None
+
+<span class="cm"># Création de la fenêtre</span>
+window = tkinter.Tk()
+window.title(<span class="st">" Générateur de mot de passe"</span>)
+window.geometry(<span class="st">f"{lgFen}x{hFen}"</span>)
+window.config(background=couleurDeFonds)
+
+<span class="cm"># Frame principale + image + frame droite</span>
+frame = tkinter.Frame(window, bg=couleurDeFonds)
+frame.pack(expand=<span class="st">'yes'</span>)
+img = tkinter.PhotoImage(file=<span class="st">'login2.png'</span>).zoom(1).subsample(2)
+canvas = tkinter.Canvas(frame, width=lgFen//2, height=hFen,
+    bg=couleurDeFonds, bd=0, highlightthickness=0)
+canvas.create_image(lgFen//4, hFen//2, image=img)
+canvas.grid(row=0, column=0)
+
+frame_droite = tkinter.Frame(frame, bg=couleurDeFonds)
+frame_droite.grid(row=0, column=1)
+
+<span class="cm"># Widgets</span>
+titre = tkinter.Label(frame_droite, text=<span class="st">"Mot de passe"</span>,
+    font=(<span class="st">"Courrier"</span>,20), bg=couleurDeFonds, fg=<span class="st">'#FFFFFF'</span>)
+titre.pack()
+
+champ_mdp = tkinter.Entry(frame_droite, font=(<span class="st">"Courier"</span>,20),
+    bg=couleurDeFonds, fg=<span class="st">'#FFFFFF'</span>)
+champ_mdp.pack()
+
+BP_mdp = tkinter.Button(frame_droite, text=<span class="st">"Générer le mot de passe"</span>,
+    font=(<span class="st">"Courrier"</span>,20), bg=couleurDeFonds, fg=<span class="st">'#FFFFFF'</span>,
+    command=generer_mdp)
+BP_mdp.pack(fill=tkinter.BOTH, pady=20)
+
+<span class="cm"># Barre de menu Fichier</span>
+menu_barre = tkinter.Menu(window)
+menu_fichier = tkinter.Menu(menu_barre, tearoff=0)
+menu_fichier.add_command(label=<span class="st">"Nouveau"</span>, command=generer_mdp)
+menu_fichier.add_command(label=<span class="st">"Quitter"</span>, command=window.destroy)
+menu_barre.add_cascade(label=<span class="st">"Fichier"</span>, menu=menu_fichier)
+window.config(menu=menu_barre)
+
+window.mainloop()</pre></div>
+
+    <!-- FONCTIONNALITES -->
+    <h2 class="block-title" style="margin-top:20px;"><i class="fa-solid fa-list-check"></i> <span data-i18n="lbl_features">Fonctionnalités</span></h2>
+    <div class="exp-info-grid">
+      <div class="exp-info-block">
+        <h3>🎨 Interface Tkinter</h3>
+        <ul><li>Fenêtre graphique 720×480px</li><li>Canvas pour l'image de fond</li><li>Champ d'affichage du mot de passe</li><li>Bouton de génération</li><li>Menu Fichier (Nouveau / Quitter)</li></ul>
+      </div>
+      <div class="exp-info-block">
+        <h3>⚙️ Génération</h3>
+        <ul><li>Longueur aléatoire 6–18 caractères</li><li>Tous les caractères ASCII (lettres + ponctuation + chiffres)</li><li>Module <code>random.choice</code></li><li>Effacement et insertion automatiques</li></ul>
+      </div>
+    </div>
+
+    <h2 class="block-title" style="margin-top:20px;"><i class="fa-solid fa-layer-group"></i> <span data-i18n="lbl_stack">Stack technique</span></h2>
+    <div class="tech-tags">
+      <span class="tech-tag">Python 3</span><span class="tech-tag">Tkinter</span>
+      <span class="tech-tag">random</span><span class="tech-tag">string</span><span class="tech-tag">Thonny IDE</span>
+    </div>
+
+    <!-- RÉFÉRENTIEL -->
+    <h2 class="block-title" style="margin-top:24px;"><i class="fa-solid fa-graduation-cap"></i> <span data-i18n="ref_title">Référentiel de compétences BUT R&amp;T</span></h2>
+    <div id="ref-container" data-project="mdp"></div>
+
+    <!-- PREUVES -->
+    <h2 class="block-title" style="margin-top:24px;"><i class="fa-solid fa-shield-halved"></i> <span data-i18n="lbl_proof">Preuves</span></h2>
+    <div class="proof-row">
+      <div class="proof-line"><i class="fa-solid fa-circle-check"></i> Le générateur interactif ci-dessus est une reproduction fidèle de l'application Tkinter originale, fonctionnant en JavaScript dans le navigateur.</div>
+      <div class="proof-line"><i class="fa-solid fa-file-code"></i> Code source Python original disponible en téléchargement : <a href="python/generateurMdp.py" download class="ext-link">generateurMdp.py <i class="fa-solid fa-download"></i></a></div>
+      <img src="images/mdp_python.png" alt="Preuve de l'application originale" class="detail-img-sm">
+    </div>
+  </div>
+
+  <div class="back-top"><a href="#" data-i18n="back_top">RETOUR EN HAUT</a></div>
+</main>
+<footer><p>Web-design : Deiber Benjamin &nbsp;·&nbsp; <kbd>`</kbd> <span data-i18n="footer_terminal">pour le terminal</span></p></footer>
+
+<script src="i18n.js"></script>
+<script src="shared.js"></script>
+<script src="terminal.js"></script>
+<script>
+// ── Password Generator Logic ───────────────────────────────
+const UPPER   = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+const LOWER   = 'abcdefghijklmnopqrstuvwxyz';
+const DIGITS  = '0123456789';
+const SPECIAL = '!@#$%^&*()_+-=[]{}|;:,.<>?';
+
+const checks = { upper: true, lower: true, digits: true, special: true };
+
+function toggleCheck(type) {
+  checks[type] = !checks[type];
+  const el = document.getElementById('chk-' + type);
+  const box = el.querySelector('.check-box');
+  if (checks[type]) { el.classList.add('active'); box.textContent = '✓'; }
+  else              { el.classList.remove('active'); box.textContent = ''; }
+}
+
+function genererMdp() {
+  let charset = '';
+  if (checks.upper)   charset += UPPER;
+  if (checks.lower)   charset += LOWER;
+  if (checks.digits)  charset += DIGITS;
+  if (checks.special) charset += SPECIAL;
+
+  const toast = document.getElementById('toast');
+  if (!charset) {
+    toast.textContent = '⚠ Sélectionnez au moins un type de caractère.';
+    toast.className = 'gen-toast warn';
+    return;
+  }
+
+  const len = parseInt(document.getElementById('lenRange').value);
+  let mdp = '';
+  // Guarantee at least 1 char of each selected type
+  const required = [];
+  if (checks.upper)   required.push(UPPER[Math.floor(Math.random()*UPPER.length)]);
+  if (checks.lower)   required.push(LOWER[Math.floor(Math.random()*LOWER.length)]);
+  if (checks.digits)  required.push(DIGITS[Math.floor(Math.random()*DIGITS.length)]);
+  if (checks.special) required.push(SPECIAL[Math.floor(Math.random()*SPECIAL.length)]);
+
+  for (let i = required.length; i < len; i++) {
+    required.push(charset[Math.floor(Math.random()*charset.length)]);
+  }
+  // Shuffle
+  for (let i = required.length-1; i > 0; i--) {
+    const j = Math.floor(Math.random()*(i+1));
+    [required[i],required[j]] = [required[j],required[i]];
+  }
+  mdp = required.join('');
+
+  const display = document.getElementById('mdp-display');
+  display.textContent = mdp;
+  display.className = '';
+
+  // Strength
+  updateStrength(mdp, charset.length, len);
+  toast.textContent = '';
+  toast.className = 'gen-toast';
+
+  // Reset copy button
+  const btn = document.getElementById('copyBtn');
+  btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copier';
+  btn.classList.remove('copied');
+}
+
+function updateStrength(pwd, charsetLen, len) {
+  const entropy = Math.log2(Math.pow(charsetLen, len));
+  const bar = document.getElementById('strengthBar');
+  const lbl = document.getElementById('strengthLabel');
+  let pct, color, label;
+  if      (entropy < 40) { pct=15; color='#ff4466'; label = currentLang==='en'?'Weak':'Faible'; }
+  else if (entropy < 60) { pct=35; color='#ff8800'; label = currentLang==='en'?'Moderate':'Moyen'; }
+  else if (entropy < 80) { pct=60; color='#ffd700'; label = currentLang==='en'?'Good':'Bien'; }
+  else if (entropy < 100){ pct=80; color='#00ff88'; label = currentLang==='en'?'Strong':'Fort'; }
+  else                   { pct=100;color='#00ff88'; label = currentLang==='en'?'Very strong':'Très fort'; }
+  bar.style.width = pct + '%';
+  bar.style.background = color;
+  lbl.textContent = label;
+  lbl.style.color = color;
+}
+
+function copyMdp() {
+  const txt = document.getElementById('mdp-display').textContent;
+  if (!txt || txt.includes('Cliquez')) return;
+  navigator.clipboard.writeText(txt).then(() => {
+    const btn = document.getElementById('copyBtn');
+    btn.innerHTML = '<i class="fa-solid fa-check"></i> Copié !';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copier';
+      btn.classList.remove('copied');
+    }, 2000);
+  }).catch(() => {
+    const el = document.getElementById('mdp-display');
+    el.select && el.select();
+  });
+}
+
+function buildPageRef(){buildReferentielSection('mdp','ref-container');}
+document.addEventListener('DOMContentLoaded',()=>{
+  injectShared();applyTranslations();buildPageRef();
+});
+</script>
+</body>
+</html>

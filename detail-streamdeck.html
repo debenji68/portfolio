@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <title>Stream Deck DIY — Benjamin Deiber</title>
+  <style>
+    .proof-row{display:flex;flex-direction:column;gap:10px;}
+    .proof-line{padding:12px 16px;border:1px solid rgba(0,212,255,.15);border-radius:6px;background:rgba(0,212,255,.03);font-size:.85rem;color:var(--txt2);display:flex;align-items:flex-start;gap:10px;}
+    .proof-line i{color:var(--cyan);margin-top:2px;flex-shrink:0;}
+  </style>
+  <!-- Google Fonts: non-blocking -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&display=swap">
+  <!-- Critical CSS: prevents unstyled flash on slow connections -->
+  <style>
+    #terminal-overlay{display:none!important;position:fixed;inset:0;z-index:8000;}
+    #terminal-overlay.open{display:flex!important;}
+    .nav-drawer{display:none!important;}
+    .nav-drawer.open{display:flex!important;}
+    .header-avatar{width:100px;height:100px;border-radius:50%;object-fit:cover;flex-shrink:0;}
+    body{background:#04080f;color:#c8d8e8;}
+  </style>
+</head>
+<body>
+<div class="scanline"></div>
+<div id="terminal-overlay"><div id="terminal-box"><div id="terminal-topbar"><div class="term-dots"><div class="term-dot red"></div><div class="term-dot yellow"></div><div class="term-dot green"></div></div><span>benjamin@portfolio: ~/projets/stream-deck-diy</span><button id="terminal-close">&#x2715;</button></div><div id="terminal-output"></div><div id="terminal-input-row"><span>benjamin@portfolio:~$</span><input id="terminal-input" type="text" autocomplete="off" spellcheck="false" placeholder="tapez une commande…"></div></div></div>
+
+<div id="shared-header-nav"></div>
+
+<main class="main-wrapper">
+  <a href="projets.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> <span data-i18n="lbl_back">← Retour</span></a>
+
+  <div class="card">
+    <div class="section-title"><i class="fa-solid fa-keyboard"></i> Projet Personnel — DIY <span class="year-badge">2024 – Présent</span></div>
+    <h1 class="entry-title">Stream Deck DIY</h1>
+    <h2 class="entry-subtitle">Arduino Pro Micro · Modules de touches · Impression 3D · Soudure</h2>
+
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px;">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--cyan);background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.3);padding:3px 10px;border-radius:4px;">Émulation clavier HID</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--purple);background:rgba(180,79,255,.08);border:1px solid rgba(180,79,255,.3);padding:3px 10px;border-radius:4px;">100% fait maison</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--gold);background:rgba(255,215,0,.06);border:1px solid rgba(255,215,0,.3);padding:3px 10px;border-radius:4px;">Raccourcis personnalisables</span>
+    </div>
+
+    <p class="desc-text">Fabrication d'un contrôleur de touches programmable de type Stream Deck. L'Arduino Pro Micro est connecté à des modules de touches mécaniques. Cet appareil s'émule comme un clavier USB (protocole HID) et permet de lancer des raccourcis clavier personnalisés sur PC : lancer de la musique, ouvrir des applications, déclencher des macros... Le boîtier est entièrement modélisé et imprimé en 3D. Les composants sont soudés à la main.</p>
+
+    <h2 class="block-title" style="margin-top:20px;"><i class="fa-solid fa-list-check"></i> <span data-i18n="lbl_features">Fonctionnalités</span></h2>
+    <div class="exp-info-grid">
+      <div class="exp-info-block">
+        <h3>⌨️ Contrôle PC</h3>
+        <ul>
+          <li>Émulation clavier USB (HID)</li>
+          <li>Raccourcis clavier entièrement personnalisables</li>
+          <li>Lancement d'applications</li>
+          <li>Contrôle musique / volume</li>
+          <li>Macros multi-touches</li>
+        </ul>
+      </div>
+      <div class="exp-info-block">
+        <h3>🔌 Électronique</h3>
+        <ul>
+          <li>Arduino Pro Micro (ATmega32U4)</li>
+          <li>Modules de touches mécaniques Cherry MX</li>
+          <li>Alimentation USB directe</li>
+          <li>Câblage matriciel des touches</li>
+          <li>Soudure manuelle</li>
+        </ul>
+      </div>
+      <div class="exp-info-block">
+        <h3>💻 Programmation Arduino</h3>
+        <ul>
+          <li>Code Arduino C++</li>
+          <li>Bibliothèque HID-Project</li>
+          <li>Gestion anti-rebond (debounce)</li>
+          <li>Définition des touches en tableau</li>
+          <li>Upload via Arduino IDE</li>
+        </ul>
+      </div>
+      <div class="exp-info-block">
+        <h3>🖨️ Fabrication</h3>
+        <ul>
+          <li>Modélisation boîtier sur mesure</li>
+          <li>Impression FDM (PLA)</li>
+          <li>Encoches pour modules de touches</li>
+          <li>Couvercle vissable</li>
+          <li>Assemblage complet</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2 class="block-title" style="margin-top:20px;"><i class="fa-solid fa-layer-group"></i> <span data-i18n="lbl_stack">Stack technique</span></h2>
+    <div class="tech-tags">
+      <span class="tech-tag">Arduino Pro Micro</span><span class="tech-tag">ATmega32U4</span>
+      <span class="tech-tag">USB HID</span><span class="tech-tag">C++ Arduino</span>
+      <span class="tech-tag">HID-Project</span><span class="tech-tag">Modules de touches</span>
+      <span class="tech-tag">Soudure</span><span class="tech-tag">Modélisation 3D</span>
+      <span class="tech-tag">Impression 3D</span><span class="tech-tag">Arduino IDE</span>
+    </div>
+
+    <h2 class="block-title" style="margin-top:20px;"><i class="fa-solid fa-circle-check"></i> <span data-i18n="lbl_learned">Ce que j'ai appris</span></h2>
+    <ul class="result-list">
+      <li>Programmation d'un microcontrôleur Arduino avec émulation HID</li>
+      <li>Protocole USB HID — comment un périphérique clavier communique avec le PC</li>
+      <li>Gestion du debounce et des états de touches en code Arduino</li>
+      <li>Câblage matriciel de touches mécaniques avec soudure</li>
+      <li>Conception d'un boîtier 3D fonctionnel avec tolérances de fabrication</li>
+    </ul>
+
+    
+    <h2 class="block-title" style="margin-top:24px;"><i class="fa-solid fa-shield-halved"></i> <span data-i18n="lbl_proof">Preuves</span></h2>
+    <div class="proof-row">
+      <div class="proof-line"><i class="fa-solid fa-circle-check"></i> Stream Deck DIY fonctionnel utilisé quotidiennement sur mon PC.</div>
+      <div class="proof-line"><i class="fa-solid fa-code"></i> Code Arduino disponible sur demande.</div>
+      <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: start; margin-top: 10px;">
+        <img src="images/streamdeck_1.jpg" alt="Image du Stream Deck DIY" style="width: calc(50% - 10px); height: auto;">
+        <img src="images/streamdeck_2.jpg" alt="Image du Stream Deck DIY" style="width: calc(50% - 10px); height: auto;">
+        <img src="images/streamdeck_3.jpg" alt="Image du Stream Deck DIY" style="width: calc(50% - 10px); height: auto;">
+        <img src="images/streamdeck_4.png" alt="Image du Stream Deck DIY" style="width: calc(50% - 10px); height: auto;">
+      </div>
+    </div>
+  </div>
+  <div class="back-top"><a href="#" data-i18n="idx_back_top">RETOUR EN HAUT</a></div>
+</main>
+<footer><p>Web-design : Deiber Benjamin &nbsp;·&nbsp; <kbd>`</kbd> <span data-i18n="footer_terminal">pour le terminal</span></p></footer>
+<script src="i18n.js"></script>
+<script src="shared.js"></script>
+<script src="terminal.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  injectShared(); applyTranslations();
+});
+</script>
+</body>
+</html>

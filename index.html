@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <title>Benjamin Deiber — Portfolio</title>
+  <style>
+    .alt-mini{background:linear-gradient(135deg,rgba(0,255,136,.07),rgba(0,212,255,.05));border:1px solid rgba(0,255,136,.3);border-radius:10px;padding:20px 24px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;position:relative;overflow:hidden;}
+    .alt-mini::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--green),var(--cyan),var(--green));background-size:200%;animation:aS 3s linear infinite;}
+    @keyframes aS{0%{background-position:0%}100%{background-position:200%}}
+    .alt-mini-icon{font-size:2rem;flex-shrink:0;}
+    .alt-mini-text h3{font-family:'Orbitron',monospace;font-size:.9rem;color:#fff;margin-bottom:4px;}
+    .alt-mini-text p{font-size:.85rem;color:var(--txt2);}
+    .alt-mini-btn{margin-left:auto;flex-shrink:0;font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--green);border:1px solid rgba(0,255,136,.4);background:rgba(0,255,136,.08);padding:8px 18px;border-radius:5px;text-decoration:none;transition:all .25s;display:flex;align-items:center;gap:7px;}
+    .alt-mini-btn:hover{background:rgba(0,255,136,.16);box-shadow:0 0 15px rgba(0,255,136,.2);}
+    .alt-pulse{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);animation:aP .9s ease-in-out infinite alternate;}
+    @keyframes aP{from{opacity:.3}to{opacity:1}}
+    @media(max-width:580px){.alt-mini-btn{margin-left:0;}}
+  </style>
+  <!-- Google Fonts: non-blocking -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&display=swap">
+  <!-- Critical CSS: prevents unstyled flash on slow connections -->
+  <style>
+    #terminal-overlay{display:none!important;position:fixed;inset:0;z-index:8000;}
+    #terminal-overlay.open{display:flex!important;}
+    .nav-drawer{display:none!important;}
+    .nav-drawer.open{display:flex!important;}
+    .header-avatar{width:100px;height:100px;border-radius:50%;object-fit:cover;flex-shrink:0;}
+    body{background:#04080f;color:#c8d8e8;}
+  </style>
+</head>
+<body>
+<div class="scanline"></div>
+<div id="terminal-overlay"><div id="terminal-box"><div id="terminal-topbar"><div class="term-dots"><div class="term-dot red"></div><div class="term-dot yellow"></div><div class="term-dot green"></div></div><span>benjamin@portfolio: ~</span><button id="terminal-close">&#x2715; fermer</button></div><div id="terminal-output"></div><div id="terminal-input-row"><span>benjamin@portfolio:~$</span><input id="terminal-input" type="text" autocomplete="off" spellcheck="false" placeholder="tapez une commande…"></div></div></div>
+
+<div id="shared-header-nav"></div>
+
+<main class="main-wrapper">
+
+  <div class="alt-mini">
+    <span class="alt-mini-icon">&#x1F50D;</span>
+    <div class="alt-mini-text">
+      <h3><span class="alt-pulse"></span>&nbsp; <span data-i18n="alternance_title">Recherche d'alternance — Septembre 2026</span></h3>
+      <p data-i18n="alternance_sub">Administrateur Systèmes &amp; Réseaux · 2 ans · Alsace</p>
+    </div>
+    <a href="contact.html" class="alt-mini-btn"><i class="fa-solid fa-paper-plane"></i> <span data-i18n="alternance_btn">Me contacter</span></a>
+  </div>
+
+  <div class="two-col">
+    <a href="formation.html" class="card card-link" style="display:block;">
+      <div class="section-title"><i class="fa-solid fa-graduation-cap"></i> <span data-i18n="idx_formations_title">Formations</span></div>
+      <div class="info-item"><span class="item-date">2025–2028</span><span class="item-name">BUT Réseaux &amp; Télécommunications</span><span class="item-place">IUT de Colmar — UHA</span></div>
+      <div class="info-item"><span class="item-date">2022–2025</span><span class="item-name">Baccalauréat Général</span><span class="item-place">Lycée Théodore Deck, Guebwiller</span></div>
+      <div class="info-item"><span class="item-date">2018–2022</span><span class="item-name">Brevet des collèges</span><span class="item-place">Collège Félix Éboué, Fessenheim</span></div>
+      <div class="open-hint"><i class="fa-solid fa-arrow-right"></i> <span data-i18n="idx_see_detail">Voir le détail</span></div>
+    </a>
+    <a href="diplomes.html" class="card card-link" style="display:block;">
+      <div class="section-title"><i class="fa-solid fa-award"></i> <span data-i18n="idx_diplomes_title">Diplômes</span></div>
+      <div class="info-item"><span class="item-date">2025</span><span class="item-name">Baccalauréat Général — Mention Bien</span><span class="item-place">14,14/20 — Grand Oral 20/20</span></div>
+      <div class="info-item"><span class="item-date">2023</span><span class="item-name">DSD1 — KMK (Allemand B1)</span><span class="item-place">Diplôme allemand officiel — 4 compétences</span></div>
+      <div class="info-item"><span class="item-date">2022</span><span class="item-name">Brevet — Mention Très Bien</span><span class="item-place">17,8/20 — Oral 20/20</span></div>
+      <div class="info-item"><span class="item-date">2025</span><span class="item-name">PIX — Avancé 1</span><span class="item-place">531 pix — 5 domaines Niveau 5</span></div>
+      <div class="open-hint"><i class="fa-solid fa-arrow-right"></i> <span data-i18n="idx_see_detail">Voir le détail</span></div>
+    </a>
+  </div>
+
+  <!-- Experiences section (PRO only) -->
+  <a href="experiences.html" class="card card-link" style="display:block;">
+    <div class="section-title"><i class="fa-solid fa-briefcase"></i> <span data-i18n="nav_experiences">Expériences</span></div>
+    <div class="info-item"><span class="item-date">Janv. 2022</span><span class="item-name">Stage Crédit Mutuel — Fessenheim</span><span class="item-place">Découverte secteur bancaire · 1 semaine</span></div>
+    <div class="open-hint"><i class="fa-solid fa-arrow-right"></i> <span data-i18n="idx_see_detail">Voir le détail</span></div>
+  </a>
+
+  <!-- Projects section -->
+  <a href="projets.html" class="card card-link" style="display:block;">
+    <div class="section-title"><i class="fa-solid fa-code"></i> <span data-i18n="nav_projets">Projets</span></div>
+    <div class="info-item"><span class="item-date">2023–Présent</span><span class="item-name">Serveur NAS / Infrastructure 24/7</span><span class="item-place">Docker · WireGuard · Home Assistant · 12 services</span></div>
+    <div class="info-item"><span class="item-date">2025–2026</span><span class="item-name">Portfolio CV Web (SAÉ 1.04)</span><span class="item-place">HTML5 · CSS3 · JS · Terminal · i18n · Responsive</span></div>
+    <div class="info-item"><span class="item-date">2024–2025</span><span class="item-name">Générateur MDP (Python/Tkinter)</span><span class="item-place">Python · Tkinter · NSI Terminale</span></div>
+    <div class="info-item"><span class="item-date">2024–Présent</span><span class="item-name">Blox DIY — Nanoleaf ESP32</span><span class="item-place">ESP32 · WLED · Home Assistant · Impression 3D</span></div>
+    <div class="info-item"><span class="item-date">2024–Présent</span><span class="item-name">Stream Deck DIY — Arduino</span><span class="item-place">Arduino Pro Micro · Impression 3D · Soudure</span></div>
+    <div class="info-item"><span class="item-date">SAÉ 2025</span><span class="item-name">SAÉ BUT R&T — 1.01, 1.02, 1.03, 1.05</span><span class="item-place">Réseaux Cisco · Wi-Fi · Python · PowerShell</span></div>
+    <div class="info-item"><span class="item-date">Nov. 2025</span><span class="item-name">CTF Rhin Tech 2025 — 15ème/40</span><span class="item-place">Cybersécurité · Capture The Flag · Équipe IUT</span></div>
+    <div class="open-hint"><i class="fa-solid fa-arrow-right"></i> <span data-i18n="idx_see_projects">Voir les projets</span></div>
+  </a>
+
+  <!-- Skills -->
+  <a href="competences.html" class="card card-link" style="display:block;">
+    <div class="section-title"><i class="fa-solid fa-microchip"></i> <span data-i18n="idx_skills_title">Compétences</span></div>
+    <div class="skills-grid">
+      <div class="skill-block"><h3><i class="fa-solid fa-network-wired"></i> Réseaux &amp; Télécom</h3><ul><li>Routeurs &amp; switches Cisco</li><li>TCP/IP · VLAN · VPN · OSPF</li><li>Linux &amp; Windows Server</li><li>Virtualisation Docker</li></ul></div>
+      <div class="skill-block"><h3><i class="fa-solid fa-shield-halved"></i> Cybersécurité</h3><ul><li>iptables · UFW · Fail2Ban</li><li>WireGuard VPN · SSL/TLS</li><li>Wireshark · SSH hardening</li><li>CTF · Pi-hole</li></ul></div>
+      <div class="skill-block"><h3><i class="fa-solid fa-code"></i> Développement</h3><ul><li>Python · Bash · PowerShell</li><li>HTML5 · CSS3 · JavaScript</li><li>MySQL · GitHub</li><li>PyQt5 · JSON</li></ul></div>
+      <div class="skill-block"><h3><i class="fa-solid fa-house-signal"></i> IoT &amp; DIY</h3><ul><li>Home Assistant · ESPHome</li><li>ESP32 · Arduino</li><li>WLED · MQTT</li><li>Impression 3D · Soudure</li></ul></div>
+    </div>
+    <div class="open-hint" style="margin-top:14px;"><i class="fa-solid fa-arrow-right"></i> <span data-i18n="idx_see_all_skills">Voir toutes les compétences</span></div>
+  </a>
+
+  <div class="card">
+    <div class="section-title"><i class="fa-solid fa-circle-info"></i> <span data-i18n="section_info">Informations complémentaires</span></div>
+    <div class="extra-grid">
+      <div class="extra-block"><h3><i class="fa-solid fa-globe"></i> <span data-i18n="idx_langues">Langues</span></h3><ul><li>Français — Langue maternelle</li><li>Anglais — B1</li><li>Allemand — DSD1 (B1)</li></ul></div>
+      <div class="extra-block"><h3><i class="fa-solid fa-person-running"></i> <span data-i18n="idx_sports">Sports</span></h3><ul><li>Taekwondo — 9 ans</li><li>Handball — 3 ans</li><li>Semi-marathon 2h30</li></ul></div>
+      <div class="extra-block"><h3><i class="fa-solid fa-gamepad"></i> <span data-i18n="idx_hobbies">Hobbies</span></h3><ul><li>Impression 3D</li><li>Admin serveurs Linux</li><li>Jeux vidéo</li><li>DIY électronique</li></ul></div>
+      <div class="extra-block"><h3><i class="fa-solid fa-bookmark"></i> <span data-i18n="idx_interets">Intérêts</span></h3><ul><li>Nouvelles technologies</li><li>Cybersécurité</li><li>Culture japonaise</li><li>Cinéma</li></ul></div>
+    </div>
+  </div>
+
+  <div class="back-top"><a href="#" data-i18n="idx_back_top">RETOUR EN HAUT</a></div>
+</main>
+
+<footer><p>Web-design : Deiber Benjamin &nbsp;·&nbsp; <kbd>`</kbd> ou <kbd>F2</kbd> <span data-i18n="footer_terminal">pour le terminal</span> &nbsp;·&nbsp; <a href="contact.html"><i class="fa-solid fa-paper-plane"></i> Contact</a></p></footer>
+
+<script src="i18n.js"></script>
+<script src="shared.js"></script>
+<script src="terminal.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  injectShared();
+  applyTranslations();
+});
+</script>
+</body>
+</html>

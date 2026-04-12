@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <title>Brevet des collèges — Benjamin Deiber</title>
+  <!-- Google Fonts: non-blocking -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&display=swap">
+  <!-- Critical CSS: prevents unstyled flash on slow connections -->
+  <style>
+    #terminal-overlay{display:none!important;position:fixed;inset:0;z-index:8000;}
+    #terminal-overlay.open{display:flex!important;}
+    .nav-drawer{display:none!important;}
+    .nav-drawer.open{display:flex!important;}
+    .header-avatar{width:100px;height:100px;border-radius:50%;object-fit:cover;flex-shrink:0;}
+    body{background:#04080f;color:#c8d8e8;}
+  </style>
+</head>
+<body>
+<div class="scanline"></div>
+<div id="terminal-overlay"><div id="terminal-box"><div id="terminal-topbar"><div class="term-dots"><div class="term-dot red"></div><div class="term-dot yellow"></div><div class="term-dot green"></div></div><span>benjamin@portfolio: ~/diplomes/brevet</span><button id="terminal-close">✕ fermer</button></div><div id="terminal-output"></div><div id="terminal-input-row"><span>benjamin@portfolio:~$</span><input id="terminal-input" type="text" autocomplete="off" spellcheck="false" placeholder="tapez une commande…"></div></div></div>
+
+<div id="shared-header-nav"></div>
+
+<main class="main-wrapper">
+  <a href="diplomes.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Retour aux diplômes</a>
+
+  <div class="card">
+    <div class="dpl-header">
+      <span class="dpl-icon">🥇</span>
+      <div style="flex:1">
+        <div class="section-title" style="margin-bottom:4px;">Diplôme National du Brevet <span class="year-badge">2022</span></div>
+        <h2 class="entry-subtitle">Collège Félix Éboué, Fessenheim</h2>
+      </div>
+    </div>
+
+    <p class="desc-text">Obtenu en juin 2022 avec Mention Très Bien au Collège Félix Éboué de Fessenheim. Ce diplôme national sanctionne la fin des études de collège et valide des compétences transversales en mathématiques, sciences, langues et humanités. Les excellents résultats en contrôle continu (19,5/20) témoignent d'un travail régulier et rigoureux tout au long de la scolarité.</p>
+
+    <div class="link-row" style="margin-bottom:16px;">
+      <span class="proof-badge"><i class="fa-solid fa-file-pdf"></i> Relevé de notes officiel</span>
+      <a href="images/brevet_note.png" class="ext-link" target="_blank">Télécharger le relevé <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+    </div>
+
+    <img src="images/college_fessenheim.webp" alt="Collège Félix Éboué Fessenheim" class="detail-img">
+
+    <h2 class="block-title">Résultats globaux</h2>
+    <div class="score-row">
+      <div class="score-box"><div class="label">Note finale</div><div class="value">17.8<span style="font-size:.75rem;color:var(--txt3)">/20</span></div></div>
+      <div class="score-box"><div class="label">Mention obtenue</div><div class="value" style="color:var(--green);font-size:.9rem;">TRÈS BIEN</div></div>
+    </div>
+
+    <h2 class="block-title">Résultats détaillés</h2>
+    <div class="grade-row">
+      <div class="grade-item"><span class="subject">Contrôle continu</span><span class="grade" style="color:var(--gold);">19.5 / 20 ★</span></div>
+      <div class="grade-item"><span class="subject">Oral</span><span class="grade" style="color:var(--gold);">20 / 20 ★</span></div>
+      <div class="grade-item"><span class="subject">Mathématiques</span><span class="grade">18.8 / 20</span></div>
+      <div class="grade-item"><span class="subject">Sciences</span><span class="grade">14.8 / 20</span></div>
+      <div class="grade-item"><span class="subject">Histoire-Géographie, EMC</span><span class="grade">10 / 20</span></div>
+      <div class="grade-item"><span class="subject">Français</span><span class="grade">09 / 20</span></div>
+    </div>
+
+    <h2 class="block-title">Matières suivies</h2>
+    <div class="skills-grid">
+      <div class="skill-block"><h3>Mathématiques</h3><ul><li>Algèbre, géométrie</li><li>Fonctions, probabilités</li><li>Théorèmes de Pythagore et Thalès</li></ul></div>
+      <div class="skill-block"><h3>Sciences</h3><ul><li>Physique-Chimie</li><li>SVT</li><li>Technologie (programmation Scratch)</li></ul></div>
+      <div class="skill-block"><h3>Langues</h3><ul><li>Français</li><li>Anglais (LV2)</li><li>Allemand (LV1)</li></ul></div>
+      <div class="skill-block"><h3>Autres</h3><ul><li>Histoire-Géographie, EMC</li><li>EPS</li><li>Arts plastiques</li></ul></div>
+    </div>
+
+    <div class="link-row" style="margin-top:20px;">
+      <a href="https://clg-eboue.monbureaunumerique.fr/" class="ext-link" target="_blank">Site du collège <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      <a href="images/brevet_note.png" class="ext-link" target="_blank">Relevé de notes <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+    </div>
+  </div>
+  <div class="back-top"><a href="#">RETOUR EN HAUT <i class="fa-solid fa-arrow-up"></i></a></div>
+</main>
+<footer><p>Web-design : Deiber Benjamin &nbsp;·&nbsp; <kbd>`</kbd> <span data-i18n="footer_terminal">pour le terminal</span></p></footer>
+<script src="i18n.js"></script>
+<script src="shared.js"></script>
+<script src="terminal.js"></script>
+<script>document.addEventListener("DOMContentLoaded",()=>{injectShared();applyTranslations();});</script>
+</body>
+</html>

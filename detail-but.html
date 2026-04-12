@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <title>BUT R&T — Benjamin Deiber</title>
+  <!-- Google Fonts: non-blocking -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&display=swap">
+  <!-- Critical CSS: prevents unstyled flash on slow connections -->
+  <style>
+    #terminal-overlay{display:none!important;position:fixed;inset:0;z-index:8000;}
+    #terminal-overlay.open{display:flex!important;}
+    .nav-drawer{display:none!important;}
+    .nav-drawer.open{display:flex!important;}
+    .header-avatar{width:100px;height:100px;border-radius:50%;object-fit:cover;flex-shrink:0;}
+    body{background:#04080f;color:#c8d8e8;}
+  </style>
+</head>
+<body>
+<div class="scanline"></div>
+<div id="terminal-overlay"><div id="terminal-box"><div id="terminal-topbar"><div class="term-dots"><div class="term-dot red"></div><div class="term-dot yellow"></div><div class="term-dot green"></div></div><span>benjamin@portfolio: ~/formations/but</span><button id="terminal-close">&#x2715;</button></div><div id="terminal-output"></div><div id="terminal-input-row"><span>benjamin@portfolio:~$</span><input id="terminal-input" type="text" autocomplete="off" spellcheck="false" placeholder="tapez une commande…"></div></div></div>
+
+<div id="shared-header-nav"></div>
+
+<main class="main-wrapper">
+  <a href="formation.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> <span data-i18n="lbl_back">← Retour</span></a>
+
+  <div class="card">
+    <div class="section-title"><i class="fa-solid fa-graduation-cap"></i> BUT Réseaux &amp; Télécommunications <span class="year-badge">2025–2028</span></div>
+    <h1 class="entry-title" data-i18n="but_title">IUT de Colmar — Université de Haute-Alsace</h1>
+    <h2 class="entry-subtitle" data-i18n-html="but_subtitle">// <span style="color:var(--cyan);">Diplôme national Bac+3 · Parcours Cybersécurité &amp; Réseaux</span></h2>
+
+    <img src="images/iut_colmar.jpg" alt="IUT de Colmar" class="detail-img">
+    <p class="desc-text">Le Bachelor Universitaire de Technologie Réseaux &amp; Télécommunications est une formation de 3 ans (180 ECTS) à l'IUT de Colmar. Elle prépare aux métiers de l'administration réseau, de la cybersécurité, des systèmes embarqués et du développement logiciel. La formation allie cours théoriques, travaux pratiques en laboratoire réseau et SAÉ orientées projets professionnels.</p>
+    <a href="https://www.iutcolmar.uha.fr/" target="_blank" class="ext-link"><i class="fa-solid fa-globe"></i> Site de l'IUT de Colmar <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+
+    <h2 class="block-title" style="margin-top:20px;"><i class="fa-solid fa-list"></i> <span data-i18n="lbl_modules">Modules — Semestres 1 &amp; 2 (Année 1)</span></h2>
+    <div class="tech-tags">
+      <span class="tech-tag">Initiation aux réseaux</span><span class="tech-tag">Principes &amp; architecture réseaux</span>
+      <span class="tech-tag">Réseaux locaux &amp; équip. actifs</span><span class="tech-tag">Fondamentaux systèmes électroniques</span>
+      <span class="tech-tag">Supports de transmission</span><span class="tech-tag">Architecture systèmes numériques</span>
+      <span class="tech-tag">Fondamentaux programmation</span><span class="tech-tag">Bases des systèmes d'exploitation</span>
+      <span class="tech-tag">Introduction technologies Web</span><span class="tech-tag">Anglais technique 1</span>
+      <span class="tech-tag">Projet Personnel &amp; Professionnel</span><span class="tech-tag">Mathématiques du signal</span>
+      <span class="tech-tag">Mathématiques des transmissions</span><span class="tech-tag">Expression-Culture-Communication Pro.</span>
+    </div>
+
+    <h2 class="block-title" style="margin-top:20px;"><i class="fa-solid fa-star"></i> <span data-i18n="lbl_deep_content">Contenus approfondis</span></h2>
+    <ul class="result-list">
+      <li><strong style="color:var(--cyan);">Administration réseaux</strong> — Configuration avancée de routeurs et switches Cisco (IOS), mise en place de VLAN, routage inter-VLAN, protocoles de routage dynamique RIP et OSPF, ACL.</li>
+      <li><strong style="color:var(--red);">Cybersécurité</strong> — Pare-feu (iptables, pfSense), détection d'intrusion (IDS/IPS), VPN OpenVPN, analyse de trames avec Wireshark, sécurisation des services.</li>
+      <li><strong style="color:var(--green);">Systèmes d'exploitation</strong> — Administration Linux (Debian, Ubuntu Server), scripting Bash avancé, gestion des services systemd, Active Directory et GPO sur Windows Server.</li>
+      <li><strong style="color:var(--purple);">Développement</strong> — HTML5/CSS3, MySQL, React, création d'applications web complètes. Bases de la programmation en Python orientée réseau.</li>
+      <li><strong style="color:var(--gold);">Virtualisation</strong> — VMware ESXi, VirtualBox, Docker et Docker Compose, création et gestion d'environnements virtualisés et conteneurisés.</li>
+    </ul>
+
+    <h2 class="block-title" style="margin-top:20px;"><i class="fa-solid fa-code"></i> <span data-i18n="lbl_sae_done">SAÉ réalisées</span></h2>
+
+    <div class="project-card" style="margin-bottom:12px;">
+      <h3>📄 SAÉ 1.04 — Portfolio CV en HTML/CSS</h3>
+      <p>Création d'un site web multi-pages présentant mon CV de façon structurée et responsive. Ce portfolio en est le résultat direct !</p>
+      <ul><li>Plusieurs pages HTML reliées par des ancres et liens</li><li>Feuille de style CSS unique avec flexbox et grid</li><li>Responsive design pour mobile, tablette et desktop</li><li>Terminal interactif JavaScript intégré</li></ul>
+      <div class="tech-tags"><span class="tech-tag">HTML5</span><span class="tech-tag">CSS3</span><span class="tech-tag">JavaScript</span><span class="tech-tag">VS Code</span></div>
+      <a href="detail-cv-web.html" class="ext-link" style="margin-top:8px;display:inline-flex;gap:6px;"><i class="fa-solid fa-arrow-right"></i> Voir le détail</a>
+    </div>
+
+    <div class="project-card" style="margin-bottom:12px;">
+      <h3>🌐 SAÉ 1.02 — S'initier aux réseaux informatiques</h3>
+      <p>Configuration d'une infrastructure réseau multi-VLAN pour une entreprise fictive sur EVE-NG : VLANs, routage inter-VLAN, DHCP Linux, Wireshark 802.1Q, VTP.</p>
+      <div class="tech-tags"><span class="tech-tag">Cisco IOS</span><span class="tech-tag">VLAN</span><span class="tech-tag">DHCP</span><span class="tech-tag">EVE-NG</span><span class="tech-tag">Wireshark</span></div>
+      <a href="detail-sae102.html" class="ext-link" style="margin-top:8px;display:inline-flex;gap:6px;"><i class="fa-solid fa-arrow-right"></i> Voir le détail</a>
+    </div>
+
+    <div class="project-card" style="margin-bottom:12px;">
+      <h3>📡 SAÉ 1.03 — Découvrir un dispositif de transmission</h3>
+      <p>Étude d'un réseau Wi-Fi réel (Cisco Catalyst 2960 + AP Cisco) : heatmaps 2,4/5 GHz, mesures RSSI, PoE, débits iPerf, contrôleur WLC, simulation Packet Tracer.</p>
+      <div class="tech-tags"><span class="tech-tag">Wi-Fi 802.11</span><span class="tech-tag">PoE</span><span class="tech-tag">Heatmap</span><span class="tech-tag">iPerf</span><span class="tech-tag">Packet Tracer</span></div>
+      <a href="detail-sae103.html" class="ext-link" style="margin-top:8px;display:inline-flex;gap:6px;"><i class="fa-solid fa-arrow-right"></i> Voir le détail</a>
+    </div>
+
+    <div class="project-card" style="margin-bottom:12px;">
+      <h3>🐍 SAÉ 1.05 — Traiter les données sur internet</h3>
+      <p>Outil de reporting Python+PowerShell : 3 scripts Python (PyQt5, pathlib, QChart) pour analyser les gros fichiers d'un disque et les présenter graphiquement.</p>
+      <div class="tech-tags"><span class="tech-tag">Python 3</span><span class="tech-tag">PyQt5</span><span class="tech-tag">pathlib</span><span class="tech-tag">JSON</span><span class="tech-tag">PowerShell</span></div>
+      <a href="detail-sae105.html" class="ext-link" style="margin-top:8px;display:inline-flex;gap:6px;"><i class="fa-solid fa-arrow-right"></i> Voir le détail</a>
+    </div>
+
+    <div class="project-card">
+      <h3>🔐 SAÉ 1.01 — Hygiène informatique et cybersécurité</h3>
+      <p>Réalisation d'une vidéo de 3 minutes et d'un diaporama sur la sécurité des mots de passe et les bonnes pratiques d'hygiène numérique.</p>
+      <div class="tech-tags"><span class="tech-tag">Cybersécurité</span><span class="tech-tag">Communication</span><span class="tech-tag">Présentation</span></div>
+      <a href="detail-sae101.html" class="ext-link" style="margin-top:8px;display:inline-flex;gap:6px;"><i class="fa-solid fa-arrow-right"></i> Voir le détail</a>
+    </div>
+
+    <h2 class="block-title" style="margin-top:24px;"><i class="fa-solid fa-graduation-cap"></i> <span data-i18n="lbl_skills_aim">Compétences visées (diplôme)</span></h2>
+    <div class="comp-grid">
+      <div class="comp-block"><h3 style="color:var(--cyan);">UE1</h3><p>Administrer les réseaux et l'Internet — Gestion des équipements, sécurité, résolution de pannes</p></div>
+      <div class="comp-block"><h3 style="color:var(--green);">UE2</h3><p>Connecter les entreprises et les usagers — Déploiement de systèmes de communication filaire et sans fil</p></div>
+      <div class="comp-block"><h3 style="color:var(--purple);">UE3</h3><p>Créer des outils et applications — Développement logiciel, scripting, outils pour les R&T</p></div>
+    </div>
+  </div>
+  <div class="back-top"><a href="#" data-i18n="idx_back_top">RETOUR EN HAUT</a></div>
+</main>
+<footer><p>Web-design : Deiber Benjamin &nbsp;·&nbsp; <kbd>`</kbd> <span data-i18n="footer_terminal">pour le terminal</span></p></footer>
+<script src="i18n.js"></script>
+<script src="shared.js"></script>
+<script src="terminal.js"></script>
+<script>document.addEventListener('DOMContentLoaded', () => { injectShared(); applyTranslations(); });</script>
+</body>
+</html>

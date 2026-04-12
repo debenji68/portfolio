@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <title>SAÉ 1.01 — Benjamin Deiber</title>
+  <!-- Google Fonts: non-blocking -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&display=swap">
+  <!-- Critical CSS: prevents unstyled flash on slow connections -->
+  <style>
+    #terminal-overlay{display:none!important;position:fixed;inset:0;z-index:8000;}
+    #terminal-overlay.open{display:flex!important;}
+    .nav-drawer{display:none!important;}
+    .nav-drawer.open{display:flex!important;}
+    .header-avatar{width:100px;height:100px;border-radius:50%;object-fit:cover;flex-shrink:0;}
+    body{background:#04080f;color:#c8d8e8;}
+  </style>
+</head>
+<body>
+<div class="scanline"></div>
+<div id="terminal-overlay"><div id="terminal-box"><div id="terminal-topbar"><div class="term-dots"><div class="term-dot red"></div><div class="term-dot yellow"></div><div class="term-dot green"></div></div><span>benjamin@portfolio: ~/projets/sae-101</span><button id="terminal-close">&#x2715;</button></div><div id="terminal-output"></div><div id="terminal-input-row"><span>benjamin@portfolio:~$</span><input id="terminal-input" type="text" autocomplete="off" spellcheck="false" placeholder="tapez une commande…"></div></div></div>
+
+<div id="shared-header-nav"></div>
+
+<main class="main-wrapper">
+  <a href="projets.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> <span data-i18n="lbl_back">← Retour</span></a>
+
+  <div class="card">
+    <div class="section-title"><i class="fa-solid fa-shield-halved"></i> SAÉ 1.01 — BUT R&amp;T IUT Colmar <span class="year-badge">2025–2026</span></div>
+    <h1 class="entry-title" data-i18n="sae101_title">Sensibilisation à l'hygiène informatique et à la cybersécurité</h1>
+    <h2 class="entry-subtitle">Vidéo 3 min + diaporama · Cybersécurité · Communication · Travail en équipe</h2>
+
+    <p class="desc-text">Le but de la SAÉ 1.01 était de réaliser une vidéo de 3 minutes et un diaporama sur un sujet lié à la cybersécurité. Mon équipe a travaillé sur la thématique de la sécurité des mots de passe et des bonnes pratiques d'hygiène numérique : comment choisir un mot de passe robuste, comprendre les attaques par force brute et appliquer les recommandations de l'ANSSI.</p>
+
+    <h2 class="block-title" style="margin-top:20px;"><i class="fa-solid fa-list-check"></i> <span data-i18n="lbl_description">Description du projet</span></h2>
+    <div class="exp-info-grid">
+      <div class="exp-info-block">
+        <h3>🎬 Vidéo (3 minutes)</h3>
+        <ul>
+          <li>Sujet : sécurité des mots de passe</li>
+          <li>Vulgarisation pour un public non expert</li>
+          <li>Démonstration d'une attaque par force brute</li>
+          <li>Application de la loi de Moore aux attaques</li>
+          <li>Recommandations ANSSI et bonnes pratiques</li>
+        </ul>
+      </div>
+      <div class="exp-info-block">
+        <h3>📊 Diaporama</h3>
+        <ul>
+          <li>Présentation structurée du sujet</li>
+          <li>Statistiques sur les mots de passe courants</li>
+          <li>Illustration des risques concrets</li>
+          <li>Conseils pratiques appliqués</li>
+          <li>Sources vérifiées et référencées</li>
+        </ul>
+      </div>
+      <div class="exp-info-block">
+        <h3>👥 Travail en équipe</h3>
+        <ul>
+          <li>Collaboration en groupe de 3 étudiants</li>
+          <li>Répartition des rôles et tâches</li>
+          <li>Coordination et révisions croisées</li>
+          <li>Présentation orale au groupe</li>
+          <li>Respect des délais imposés</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2 class="block-title" style="margin-top:20px;"><i class="fa-solid fa-layer-group"></i> <span data-i18n="lbl_stack">Stack technique</span></h2>
+    <div class="tech-tags">
+      <span class="tech-tag">Cybersécurité</span>
+      <span class="tech-tag">Présentation orale</span>
+      <span class="tech-tag">Diaporama</span>
+      <span class="tech-tag">Montage vidéo</span>
+      <span class="tech-tag">Communication</span>
+      <span class="tech-tag">ANSSI</span>
+      <span class="tech-tag">Mots de passe</span>
+      <span class="tech-tag">Hygiène numérique</span>
+    </div>
+
+    <h2 class="block-title" style="margin-top:20px;"><i class="fa-solid fa-circle-check"></i> <span data-i18n="lbl_learned">Ce que j'ai appris</span></h2>
+    <ul class="result-list">
+      <li>Approfondissement des principes de sécurité des mots de passe et des attaques par force brute</li>
+      <li>Vulgarisation d'un sujet technique pour un public non spécialiste</li>
+      <li>Travail collaboratif : coordination, partage des tâches, respect des délais</li>
+      <li>Communication orale et présentation devant un groupe</li>
+      <li>Utilisation des ressources officielles (ANSSI, CNIL) pour la recherche d'information</li>
+    </ul>
+
+    <h2 class="block-title" style="margin-top:24px;"><i class="fa-solid fa-graduation-cap"></i> <span data-i18n="ref_title">Référentiel de compétences BUT R&amp;T</span></h2>
+    <div id="ref-container" data-project="sae101"></div>
+
+    <h2 class="block-title" style="margin-top:24px;"><i class="fa-solid fa-shield-halved"></i> <span data-i18n="lbl_proof">Preuves</span></h2>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div style="padding:12px 16px;border:1px solid rgba(0,212,255,.15);border-radius:6px;background:rgba(0,212,255,.03);font-size:.85rem;color:var(--txt2);display:flex;align-items:flex-start;gap:10px;">
+        <i class="fa-solid fa-file-powerpoint" style="color:var(--cyan);margin-top:2px;flex-shrink:0;"></i>
+        <a href="pdf/SAE101.pdf" target="_blank" class="ext-link">PDF de la présentation</a>
+      </div>
+      <div style="padding:12px 16px;border:1px solid rgba(0,212,255,.15);border-radius:6px;background:rgba(0,212,255,.03);font-size:.85rem;color:var(--txt2);display:flex;align-items:flex-start;gap:10px;">
+        <i class="fa-solid fa-video" style="color:var(--cyan);margin-top:2px;flex-shrink:0;"></i>
+        Vidéo de 3 minutes sur la cybercriminalité — disponible sur demande.
+      </div>
+    </div>
+  </div>
+  <div class="back-top"><a href="#" data-i18n="idx_back_top">RETOUR EN HAUT</a></div>
+</main>
+<footer><p>Web-design : Deiber Benjamin &nbsp;·&nbsp; <kbd>`</kbd> <span data-i18n="footer_terminal">pour le terminal</span></p></footer>
+<script src="i18n.js"></script>
+<script src="shared.js"></script>
+<script src="terminal.js"></script>
+<script>
+function buildPageRef() { buildReferentielSection('sae101', 'ref-container'); }
+document.addEventListener('DOMContentLoaded', () => { injectShared(); applyTranslations(); buildPageRef(); });
+</script>
+</body>
+</html>

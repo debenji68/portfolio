@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <title>SAÉ 1.03 — Benjamin Deiber</title>
+  <!-- Google Fonts: non-blocking -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&display=swap">
+  <!-- Critical CSS: prevents unstyled flash on slow connections -->
+  <style>
+    #terminal-overlay{display:none!important;position:fixed;inset:0;z-index:8000;}
+    #terminal-overlay.open{display:flex!important;}
+    .nav-drawer{display:none!important;}
+    .nav-drawer.open{display:flex!important;}
+    .header-avatar{width:100px;height:100px;border-radius:50%;object-fit:cover;flex-shrink:0;}
+    body{background:#04080f;color:#c8d8e8;}
+  </style>
+</head>
+<body>
+<div class="scanline"></div>
+<div id="terminal-overlay"><div id="terminal-box"><div id="terminal-topbar"><div class="term-dots"><div class="term-dot red"></div><div class="term-dot yellow"></div><div class="term-dot green"></div></div><span>benjamin@portfolio: ~/projets/sae-103</span><button id="terminal-close">&#x2715;</button></div><div id="terminal-output"></div><div id="terminal-input-row"><span>benjamin@portfolio:~$</span><input id="terminal-input" type="text" autocomplete="off" spellcheck="false" placeholder="tapez une commande…"></div></div></div>
+
+<div id="shared-header-nav"></div>
+
+<main class="main-wrapper">
+  <a href="projets.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> <span data-i18n="lbl_back">← Retour</span></a>
+
+  <div class="card">
+    <div class="section-title"><i class="fa-solid fa-wifi"></i> SAÉ 1.03 — BUT R&amp;T IUT Colmar <span class="year-badge">2025–2026</span></div>
+    <h1 class="entry-title" data-i18n="sae103_title">Découvrir un dispositif de transmission</h1>
+    <h2 class="entry-subtitle">Étude Wi-Fi réel · Cisco Catalyst 2960 PoE · Heatmaps · iPerf · Packet Tracer</h2>
+
+    <p class="desc-text">Étude complète d'une infrastructure Wi-Fi réelle installée dans le bâtiment C de l'IUT de Colmar. Le projet couvrait le câblage RJ45 Cat6 T568B, l'alimentation PoE (IEEE 802.3af) via un Cisco Catalyst 2960, la mesure de la couverture Wi-Fi par heatmaps (2,4 GHz et 5 GHz), les mesures de puissance RSSI à différentes distances, les débits descendants avec iPerf, l'analyse du contrôleur Wi-Fi Cisco et une simulation sous Cisco Packet Tracer.</p>
+
+    <h2 class="block-title" style="margin-top:20px;"><i class="fa-solid fa-list-check"></i> <span data-i18n="lbl_description">Description du projet</span></h2>
+    <div class="exp-info-grid">
+      <div class="exp-info-block">
+        <h3>📡 Mesures Wi-Fi</h3>
+        <ul>
+          <li>Heatmaps de couverture 2,4 GHz (802.11g) et 5 GHz (802.11a)</li>
+          <li>Mesures RSSI à 0, 10, 25, 50m depuis le point d'accès E</li>
+          <li>Calcul des pertes (dB) par distance et obstacles</li>
+          <li>Comparaison performances laptop vs smartphone</li>
+          <li>Évaluation : RSSI Coverage 97%, Overall Wi-Fi Quality 98%</li>
+        </ul>
+      </div>
+      <div class="exp-info-block">
+        <h3>🔌 Matériel étudié</h3>
+        <ul>
+          <li>Cisco Catalyst 2960 (WS-C2960-24PC-LV06) — 24 ports PoE, 370W</li>
+          <li>AP Cisco AIR-AP1231G-E-K9 — compatible IEEE 802.3af, 12,95W max</li>
+          <li>Testeur PoE PRO : 55V / 13,4W mesurés (Classe 3)</li>
+          <li>Câbles RJ45 Cat6 S/FTP, norme T568B</li>
+          <li>Contrôleur WLC Cisco (logiciel 8.0.140.0)</li>
+        </ul>
+      </div>
+      <div class="exp-info-block">
+        <h3>📊 Débits et performances</h3>
+        <ul>
+          <li>Tests iPerf en mode TCP entre client et serveur</li>
+          <li>Salle C100 (proche AP) : 5,9 Mbit/s (5GHz), 4,8 Mbit/s (2,4GHz)</li>
+          <li>Salle C101 : dégradation marquée sur 5GHz</li>
+          <li>Salle C102 : 0,55 Mbit/s (5GHz) vs 2,3 Mbit/s (2,4GHz)</li>
+          <li>Détection de Rogue APs par le contrôleur</li>
+        </ul>
+      </div>
+      <div class="exp-info-block">
+        <h3>🖥️ Simulation Packet Tracer</h3>
+        <ul>
+          <li>Routeur + Cisco 2960 + WLC + LWAP + clients WiFi</li>
+          <li>Plan d'adressage 10.129.10.0/24</li>
+          <li>DHCP interne contrôleur Wi-Fi</li>
+          <li>SSID GrX_802.11a (5GHz) et GrX_802.11b/g (2,4GHz)</li>
+          <li>Connexion SSH au commutateur validée</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2 class="block-title" style="margin-top:20px;"><i class="fa-solid fa-layer-group"></i> <span data-i18n="lbl_stack">Stack technique</span></h2>
+    <div class="tech-tags">
+      <span class="tech-tag">Wi-Fi 802.11a/g</span><span class="tech-tag">PoE IEEE 802.3af</span>
+      <span class="tech-tag">Cisco Catalyst 2960</span><span class="tech-tag">WLC Cisco</span>
+      <span class="tech-tag">iPerf TCP</span><span class="tech-tag">Heatmaps RSSI</span>
+      <span class="tech-tag">Packet Tracer</span><span class="tech-tag">RJ45 Cat6 T568B</span>
+      <span class="tech-tag">SSH</span><span class="tech-tag">DHCP</span><span class="tech-tag">DNS</span>
+    </div>
+
+    <h2 class="block-title" style="margin-top:20px;"><i class="fa-solid fa-circle-check"></i> <span data-i18n="lbl_learned">Ce que j'ai appris</span></h2>
+    <ul class="result-list">
+      <li>Fonctionnement du Wi-Fi 802.11 : différences 2,4 GHz vs 5 GHz (portée vs débit)</li>
+      <li>Alimentation PoE : protocole IEEE 802.3af, classes de puissance, budget PoE</li>
+      <li>Mesure et analyse du signal RSSI et des pertes en dB</li>
+      <li>Utilisation d'iPerf pour mesurer les débits Wi-Fi réels</li>
+      <li>Architecture d'un réseau Wi-Fi avec contrôleur (WLC + LWAP)</li>
+      <li>Simulation de réseau complet sous Cisco Packet Tracer</li>
+    </ul>
+
+    <h2 class="block-title" style="margin-top:24px;"><i class="fa-solid fa-graduation-cap"></i> <span data-i18n="ref_title">Référentiel de compétences BUT R&amp;T</span></h2>
+    <div id="ref-container" data-project="sae103"></div>
+
+    <h2 class="block-title" style="margin-top:24px;"><i class="fa-solid fa-shield-halved"></i> <span data-i18n="lbl_proof">Preuves</span></h2>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div style="padding:12px 16px;border:1px solid rgba(0,212,255,.15);border-radius:6px;background:rgba(0,212,255,.03);font-size:.85rem;color:var(--txt2);display:flex;align-items:flex-start;gap:10px;">
+        <i class="fa-solid fa-file-lines" style="color:var(--cyan);margin-top:2px;flex-shrink:0;"></i>
+        <a href="pdf/Rapport_SAE103.pdf" target="_blank" style="color:var(--cyan);text-decoration:underline;">Rapport complet SAE_wifi_report.pdf</a> — 15 pages d'analyse détaillée.
+      </div>
+      <div style="padding:12px 16px;border:1px solid rgba(0,212,255,.15);border-radius:6px;background:rgba(0,212,255,.03);font-size:.85rem;color:var(--txt2);display:flex;align-items:flex-start;gap:10px;">
+        <i class="fa-solid fa-file-powerpoint" style="color:var(--cyan);margin-top:2px;flex-shrink:0;"></i>
+        Présentation SAE_wifi.pptx — disponible sur demande.
+      </div>
+      <div style="padding:12px 16px;border:1px solid rgba(0,212,255,.15);border-radius:6px;background:rgba(0,212,255,.03);font-size:.85rem;color:var(--txt2);display:flex;align-items:flex-start;gap:10px;">
+        <ul>
+          <li><img src="images/heatmap.png" alt="Heatmap RSSI" class="detail-img-sm" style="margin-left:6px;"></li>
+          <li><img src="images/jperf.png" alt="Graphiques iPerf" class="detail-img-sm" style="margin-left:6px;"></li>
+          <li><img src="images/controlleur_cisco.png" alt="Interface contrôleur Wi-Fi Cisco" class="detail-img-sm" style="margin-left:6px;"></li>
+        </ul>
+        <ul>
+          <li><img src="images/ap_cisco.png" alt="AP Cisco" class="detail-img-sm" style="margin-left:6px;"></li>
+          <li><img src="images/poe.png" alt="POE" class="detail-img-sm" style="margin-left:6px;"></li>
+          <li><img src="images/packet_tracer.png" alt="Simulation Packet Tracer" class="detail-img-sm" style="margin-left:6px;"></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="back-top"><a href="#" data-i18n="idx_back_top">RETOUR EN HAUT</a></div>
+</main>
+<footer><p>Web-design : Deiber Benjamin &nbsp;·&nbsp; <kbd>`</kbd> <span data-i18n="footer_terminal">pour le terminal</span></p></footer>
+<script src="i18n.js"></script>
+<script src="shared.js"></script>
+<script src="terminal.js"></script>
+<script>
+function buildPageRef() { buildReferentielSection('sae103', 'ref-container'); }
+document.addEventListener('DOMContentLoaded', () => { injectShared(); applyTranslations(); buildPageRef(); });
+</script>
+</body>
+</html>

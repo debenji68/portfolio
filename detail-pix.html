@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <title>Certification PIX — Benjamin Deiber</title>
+  <!-- Google Fonts: non-blocking -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&display=swap">
+  <!-- Critical CSS: prevents unstyled flash on slow connections -->
+  <style>
+    #terminal-overlay{display:none!important;position:fixed;inset:0;z-index:8000;}
+    #terminal-overlay.open{display:flex!important;}
+    .nav-drawer{display:none!important;}
+    .nav-drawer.open{display:flex!important;}
+    .header-avatar{width:100px;height:100px;border-radius:50%;object-fit:cover;flex-shrink:0;}
+    body{background:#04080f;color:#c8d8e8;}
+  </style>
+</head>
+<body>
+<div class="scanline"></div>
+<div id="terminal-overlay"><div id="terminal-box"><div id="terminal-topbar"><div class="term-dots"><div class="term-dot red"></div><div class="term-dot yellow"></div><div class="term-dot green"></div></div><span>benjamin@portfolio: ~/diplomes/pix</span><button id="terminal-close">✕ fermer</button></div><div id="terminal-output"></div><div id="terminal-input-row"><span>benjamin@portfolio:~$</span><input id="terminal-input" type="text" autocomplete="off" spellcheck="false" placeholder="tapez une commande…"></div></div></div>
+
+<div id="shared-header-nav"></div>
+
+<main class="main-wrapper">
+  <a href="diplomes.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Retour aux diplômes</a>
+
+  <div class="card">
+    <div class="dpl-header">
+      <span class="dpl-icon">💻</span>
+      <div style="flex:1">
+        <div class="section-title" style="margin-bottom:4px;">Certification PIX <span class="year-badge">2025</span></div>
+        <h2 class="entry-subtitle">Certification nationale des compétences numériques</h2>
+      </div>
+    </div>
+
+    <p class="desc-text">PIX est la plateforme nationale française d'évaluation et de certification des compétences numériques. Elle évalue 16 compétences réparties en 5 grands domaines. J'ai obtenu un score de 531 pix avec le niveau Avancé 1 et toutes les compétences validées au niveau 5 — le niveau maximum de la certification standard.</p>
+
+    <div class="link-row" style="margin-bottom:16px;">
+      <span class="proof-badge"><i class="fa-solid fa-file-pdf"></i> Certificat officiel PIX</span>
+      <a href="pdf/certification-pix.pdf" class="ext-link" target="_blank">Télécharger le certificat <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+    </div>
+
+    <h2 class="block-title">Score global</h2>
+    <div class="score-row">
+      <div class="score-box"><div class="label">Score total</div><div class="value">531<span style="font-size:.75rem;color:var(--txt3)"> pix</span></div></div>
+      <div class="score-box"><div class="label">Niveau certifié</div><div class="value" style="color:var(--purple);font-size:1rem;">Avancé 1</div></div>
+      <div class="score-box"><div class="label">Compétences max</div><div class="value" style="color:var(--green);">5 × Niv.5</div></div>
+    </div>
+
+    <h2 class="block-title">Résultats par domaine</h2>
+    <div class="pix-domain"><span>Information et données</span><span class="level">Niveau 5</span></div>
+    <div class="pix-domain"><span>Communication et collaboration</span><span class="level">Niveau 5</span></div>
+    <div class="pix-domain"><span>Création de contenu numérique</span><span class="level">Niveau 5</span></div>
+    <div class="pix-domain"><span>Protection et sécurité</span><span class="level">Niveau 5</span></div>
+    <div class="pix-domain"><span>Environnement numérique</span><span class="level">Niveau 5</span></div>
+
+    <h2 class="block-title">Ce que valide cette certification</h2>
+    <div class="exp-info-grid">
+      <div class="exp-info-block">
+        <h3>🔍 Information &amp; données</h3>
+        <ul>
+          <li>Recherche et veille d'information</li>
+          <li>Gestion et traitement des données</li>
+          <li>Pensée critique sur les sources</li>
+        </ul>
+      </div>
+      <div class="exp-info-block">
+        <h3>💬 Communication &amp; collaboration</h3>
+        <ul>
+          <li>Partage et co-édition en ligne</li>
+          <li>Netiquette et communication numérique</li>
+          <li>Identité numérique</li>
+        </ul>
+      </div>
+      <div class="exp-info-block">
+        <h3>🎨 Création de contenu</h3>
+        <ul>
+          <li>Développement, programmation</li>
+          <li>Droits d'auteur et licences</li>
+          <li>Création de documents multimédia</li>
+        </ul>
+      </div>
+      <div class="exp-info-block">
+        <h3>🔒 Protection &amp; sécurité</h3>
+        <ul>
+          <li>Protection des données personnelles</li>
+          <li>Sécurité des appareils et connexions</li>
+          <li>Bien-être numérique</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="link-row" style="margin-top:20px;">
+      <a href="https://www.pix.fr/" class="ext-link" target="_blank">Site officiel PIX <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      <a href="pdf/certification-pix.pdf" class="ext-link" target="_blank">Mon certificat <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+    </div>
+  </div>
+  <div class="back-top"><a href="#">RETOUR EN HAUT <i class="fa-solid fa-arrow-up"></i></a></div>
+</main>
+<footer><p>Web-design : Deiber Benjamin &nbsp;·&nbsp; <kbd>`</kbd> <span data-i18n="footer_terminal">pour le terminal</span></p></footer>
+<script src="i18n.js"></script>
+<script src="shared.js"></script>
+<script src="terminal.js"></script>
+<script>document.addEventListener("DOMContentLoaded",()=>{injectShared();applyTranslations();});</script>
+</body>
+</html>

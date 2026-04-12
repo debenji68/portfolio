@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <title>Collège — Benjamin Deiber</title>
+</head>
+<body>
+<div class="scanline"></div>
+<div id="terminal-overlay"><div id="terminal-box"><div id="terminal-topbar"><div class="term-dots"><div class="term-dot red"></div><div class="term-dot yellow"></div><div class="term-dot green"></div></div><span>benjamin@portfolio: ~/formations/college</span><button id="terminal-close">✕ fermer</button></div><div id="terminal-output"></div><div id="terminal-input-row"><span>benjamin@portfolio:~$</span><input id="terminal-input" type="text" autocomplete="off" spellcheck="false" placeholder="tapez une commande…"></div></div></div>
+
+<div id="shared-header-nav"></div>
+
+<main class="main-wrapper">
+  <a href="formation.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Retour aux formations</a>
+  <div class="card">
+    <div class="section-title"><i class="fa-solid fa-building-columns"></i> Collège <span class="year-badge">2018–2022</span></div>
+    <h1 class="entry-title">Collège Félix Éboué, Fessenheim</h1>
+    <h2 class="entry-subtitle">Enseignement général — DNB Mention Très Bien (17,8/20)</h2>
+
+    <img src="images/college_fessenheim.webp" alt="Collège Félix Éboué Fessenheim" class="detail-img">
+
+    <p class="desc-text">Quatre années au collège Félix Éboué de Fessenheim. C'est ici que s'est éveillé mon intérêt pour l'informatique et la technologie, notamment via les cours de technologie avec la programmation Scratch et les projets robotiques. Excellent contrôle continu (19,5/20) témoignant d'un travail régulier.</p>
+
+    <h2 class="block-title">Matières principales</h2>
+    <div class="skills-grid">
+      <div class="skill-block"><h3>Mathématiques</h3><ul><li>Algèbre et géométrie</li><li>Théorèmes de Pythagore &amp; Thalès</li><li>Fonctions, probabilités</li><li>Résolution de problèmes complexes</li></ul></div>
+      <div class="skill-block"><h3>Sciences &amp; Techno</h3><ul><li>Physique-Chimie (labo)</li><li>SVT (biologie, géologie)</li><li>Technologie — programmation Scratch</li><li>Initiation à la robotique</li></ul></div>
+      <div class="skill-block"><h3>Langues</h3><ul><li>Français</li><li>Anglais — LV2</li><li>Allemand — LV1</li><li>Projets culturels bilingues</li></ul></div>
+      <div class="skill-block"><h3>Humanités</h3><ul><li>Histoire-Géographie, EMC</li><li>EPS — sports collectifs</li><li>Arts plastiques</li></ul></div>
+    </div>
+
+    <h2 class="block-title">Projet Technologie — Robot programmable</h2>
+    <div class="project-card">
+      <h3>🤖 Création et programmation d'un robot autonome</h3>
+      <p>Projet réalisé en cours de technologie : conception et programmation d'un robot capable de réaliser des défis progressifs de navigation.</p>
+      <ul>
+        <li>Programmation visuelle avec Scratch pour contrôler les mouvements</li>
+        <li>Utilisation de capteurs (distance, lumière) pour interactions avec l'environnement</li>
+        <li>Défis progressifs : suivre une ligne, éviter des obstacles, parcours complexe</li>
+        <li>Démarche de résolution de problèmes et pensée algorithmique</li>
+        <li>Travail en binôme — collaboration et communication</li>
+      </ul>
+      <div class="tech-tags"><span class="tech-tag">Scratch</span><span class="tech-tag">Capteurs</span><span class="tech-tag">Algorithmique</span><span class="tech-tag">Robotique</span></div>
+    </div>
+
+    <div class="link-row" style="margin-top:18px;">
+      <a href="https://clg-eboue.monbureaunumerique.fr/" class="ext-link" target="_blank">Site du collège <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      <a href="detail-brevet.html" class="ext-link">Voir les résultats du Brevet <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+  </div>
+  <div class="back-top"><a href="#">RETOUR EN HAUT <i class="fa-solid fa-arrow-up"></i></a></div>
+</main>
+<footer><
+<footer><p>Web-design : Deiber Benjamin &nbsp;·&nbsp; <kbd>`</kbd> <span data-i18n="footer_terminal">pour le terminal</span></p></footer>
+<script src="i18n.js"></script>
+<script src="shared.js"></script>
+<script src="terminal.js"></script>
+<script>document.addEventListener("DOMContentLoaded",()=>{injectShared();applyTranslations();});</script>
+</body>
+</html>

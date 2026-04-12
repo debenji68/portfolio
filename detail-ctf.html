@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <title>CTF Rhin Tech 2025 — Benjamin Deiber</title>
+  <style>
+    .proof-row{display:flex;flex-direction:column;gap:10px;}
+    .proof-line{padding:12px 16px;border:1px solid rgba(0,212,255,.15);border-radius:6px;background:rgba(0,212,255,.03);font-size:.85rem;color:var(--txt2);display:flex;align-items:flex-start;gap:10px;}
+    .proof-line i{color:var(--cyan);margin-top:2px;flex-shrink:0;}
+    .rank-box{background:linear-gradient(135deg,rgba(0,255,136,.08),rgba(0,212,255,.06));border:1px solid rgba(0,255,136,.35);border-radius:12px;padding:24px;text-align:center;margin:16px 0;}
+    .rank-num{font-family:'Orbitron',monospace;font-size:3.5rem;font-weight:900;color:var(--green);text-shadow:0 0 30px rgba(0,255,136,.4);}
+    .rank-label{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--txt2);margin-top:6px;}
+  </style>
+  <!-- Google Fonts: non-blocking -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&display=swap">
+  <!-- Critical CSS: prevents unstyled flash on slow connections -->
+  <style>
+    #terminal-overlay{display:none!important;position:fixed;inset:0;z-index:8000;}
+    #terminal-overlay.open{display:flex!important;}
+    .nav-drawer{display:none!important;}
+    .nav-drawer.open{display:flex!important;}
+    .header-avatar{width:100px;height:100px;border-radius:50%;object-fit:cover;flex-shrink:0;}
+    body{background:#04080f;color:#c8d8e8;}
+  </style>
+</head>
+<body>
+<div class="scanline"></div>
+<div id="terminal-overlay"><div id="terminal-box"><div id="terminal-topbar"><div class="term-dots"><div class="term-dot red"></div><div class="term-dot yellow"></div><div class="term-dot green"></div></div><span>benjamin@portfolio: ~/projets/ctf-rhin-tech</span><button id="terminal-close">&#x2715;</button></div><div id="terminal-output"></div><div id="terminal-input-row"><span>benjamin@portfolio:~$</span><input id="terminal-input" type="text" autocomplete="off" spellcheck="false" placeholder="tapez une commande…"></div></div></div>
+
+<div id="shared-header-nav"></div>
+
+<main class="main-wrapper">
+  <a href="projets.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> <span data-i18n="lbl_back">← Retour</span></a>
+
+  <div class="card">
+    <div class="section-title"><i class="fa-solid fa-flag"></i> Compétition CTF — Cybersécurité <span class="year-badge">Novembre 2025</span></div>
+    <h1 class="entry-title">CTF Rhin Tech 2025</h1>
+    <h2 class="entry-subtitle">Capture The Flag · Cybersécurité · Équipe de 3 via l'IUT de Colmar</h2>
+
+    <div class="rank-box">
+      <div class="rank-num">#15</div>
+      <div class="rank-label">sur 40 équipes participantes</div>
+      <div style="margin-top:10px;display:flex;justify-content:center;gap:20px;flex-wrap:wrap;">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--cyan);">🏆 Top 40% des équipes</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--gold);">👥 Équipe de 3 joueurs</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--purple);">🎯 Participation via IUT</span>
+      </div>
+    </div>
+
+    <p class="desc-text">Participation au Rhin Tech CTF 2025, une compétition de cybersécurité de type Capture The Flag organisée dans la région Alsace. En équipe de 3 étudiants représentant l'IUT de Colmar, nous avons résolu des challenges dans différentes catégories de cybersécurité. Classement final : 15ème sur 40 équipes participantes.</p>
+
+    <h2 class="block-title" style="margin-top:20px;"><i class="fa-solid fa-list-check"></i> Catégories de challenges</h2>
+    <div class="exp-info-grid">
+      <div class="exp-info-block">
+        <h3>🔐 Cryptographie</h3>
+        <ul>
+          <li>Chiffrement symétrique / asymétrique</li>
+          <li>Analyse de hash</li>
+          <li>Stéganographie</li>
+          <li>Encodage / décodage</li>
+        </ul>
+      </div>
+      <div class="exp-info-block">
+        <h3>🌐 Web</h3>
+        <ul>
+          <li>Injection SQL</li>
+          <li>XSS — Cross-Site Scripting</li>
+          <li>Failles d'authentification</li>
+          <li>Analyse des headers HTTP</li>
+        </ul>
+      </div>
+      <div class="exp-info-block">
+        <h3>🔍 Forensic &amp; OSINT</h3>
+        <ul>
+          <li>Analyse de fichiers</li>
+          <li>Métadonnées et traces numériques</li>
+          <li>OSINT (sources ouvertes)</li>
+          <li>Récupération de données</li>
+        </ul>
+      </div>
+      <div class="exp-info-block">
+        <h3>💻 Pwn &amp; Reverse</h3>
+        <ul>
+          <li>Exploitation de binaires</li>
+          <li>Reverse engineering</li>
+          <li>Analyse de code assembleur</li>
+          <li>Buffer overflow</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2 class="block-title" style="margin-top:20px;"><i class="fa-solid fa-layer-group"></i> Outils &amp; techniques utilisés</h2>
+    <div class="tech-tags">
+      <span class="tech-tag">Kali Linux</span><span class="tech-tag">Burp Suite</span>
+      <span class="tech-tag">Wireshark</span><span class="tech-tag">Metasploit</span>
+      <span class="tech-tag">John the Ripper</span><span class="tech-tag">Hashcat</span>
+      <span class="tech-tag">CyberChef</span><span class="tech-tag">Python scripting</span>
+      <span class="tech-tag">Bash</span><span class="tech-tag">OSINT</span>
+      <span class="tech-tag">Stéganographie</span><span class="tech-tag">Cryptographie</span>
+    </div>
+
+    <h2 class="block-title" style="margin-top:20px;"><i class="fa-solid fa-circle-check"></i> Ce que j'ai appris</h2>
+    <ul class="result-list">
+      <li>Mise en pratique des techniques de hacking éthique dans un cadre légal</li>
+      <li>Travail en équipe sous pression et avec une gestion du temps stricte</li>
+      <li>Découverte de catégories CTF variées : web, crypto, forensic, pwn</li>
+      <li>Utilisation d'outils de cybersécurité professionnels sous Kali Linux</li>
+      <li>Méthodologie d'analyse et de résolution de problèmes complexes</li>
+      <li>Experience réelle de la compétition et de l'ambiance cybersécurité</li>
+    </ul>
+
+    <h2 class="block-title" style="margin-top:24px;"><i class="fa-solid fa-graduation-cap"></i> Référentiel de compétences BUT R&amp;T</h2>
+    <div id="ref-container" data-project="ctf"></div>
+
+    <h2 class="block-title" style="margin-top:24px;"><i class="fa-solid fa-shield-halved"></i> Preuves</h2>
+    <div class="proof-row">
+      <div class="proof-line"><i class="fa-solid fa-circle-check"></i> Participation au CTF Rhin Tech 2025, classement 15ème/40 équipes. Organisé via l'IUT de Colmar. <a href="https://www.rhinetech-ctf.eu/" class="ext-link" target="_blank">Site du CTF <i class="fa-solid fa-arrow-up-right-from-square"></i></a></div>
+      <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: start; margin-top: 10px;">
+      <img src="images/ctf_img_2.jpg" alt="Image de l'événement" style="width: calc(50% - 10px); height: auto;">
+      <img src="images/ctf_img_1.jpg" alt="Image de l'événement" style="width: calc(50% - 10px); height: auto;">
+      </div>
+      <div style="display: flex; gap: 20px; align-items: flex-start; margin-top: 10px;">
+        <img src="images/ctf_classement.png" alt="Classement officiel" style="width: 45%; height: auto;">
+        <div style="display: flex; flex-direction: column; gap: 10px; width: 45%;">
+          <img src="images/ctf_attestation_presence.png" alt="Justificatif de présence" style="width: 100%; height: auto;">
+          <img src="images/ctf_badge.png" alt="Badge de participant" style="width: 100%; height: auto;">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="back-top"><a href="#" data-i18n="idx_back_top">RETOUR EN HAUT</a></div>
+</main>
+<footer><p>Web-design : Deiber Benjamin &nbsp;·&nbsp; <kbd>`</kbd> <span data-i18n="footer_terminal">pour le terminal</span></p></footer>
+<script src="i18n.js"></script>
+<script src="shared.js"></script>
+<script src="terminal.js"></script>
+<script>
+function buildPageRef() { buildReferentielSection('ctf', 'ref-container'); }
+document.addEventListener('DOMContentLoaded', function(){ injectShared(); applyTranslations(); buildPageRef(); });
+</script>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <title>Projets — Benjamin Deiber</title>
+  <!-- Google Fonts: non-blocking -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&display=swap">
+  <!-- Critical CSS: prevents unstyled flash on slow connections -->
+  <style>
+    #terminal-overlay{display:none!important;position:fixed;inset:0;z-index:8000;}
+    #terminal-overlay.open{display:flex!important;}
+    .nav-drawer{display:none!important;}
+    .nav-drawer.open{display:flex!important;}
+    .header-avatar{width:100px;height:100px;border-radius:50%;object-fit:cover;flex-shrink:0;}
+    body{background:#04080f;color:#c8d8e8;}
+  </style>
+</head>
+<body>
+<div class="scanline"></div>
+<div id="terminal-overlay"><div id="terminal-box"><div id="terminal-topbar"><div class="term-dots"><div class="term-dot red"></div><div class="term-dot yellow"></div><div class="term-dot green"></div></div><span>benjamin@portfolio: ~/projets</span><button id="terminal-close">&#x2715;</button></div><div id="terminal-output"></div><div id="terminal-input-row"><span>benjamin@portfolio:~$</span><input id="terminal-input" type="text" autocomplete="off" spellcheck="false" placeholder="tapez une commande…"></div></div></div>
+
+<div id="shared-header-nav"></div>
+
+<main class="main-wrapper">
+
+  <!-- NAS -->
+  <a href="detail-nas.html" class="card card-link" style="display:block;">
+    <div class="section-title"><i class="fa-solid fa-server"></i> Infrastructure NAS <span class="year-badge">2023–Présent</span></div>
+    <h1 class="entry-title">Serveur NAS Sécurisé 24/7</h1>
+    <h2 class="entry-subtitle">OpenMediaVault · Docker · WireGuard · Home Assistant · 12 services</h2>
+    <img src="images/serveur.jpg" alt="Mon serveur NAS" style="width:100%;height:200px;object-fit:cover;border-radius:6px;border:1px solid var(--border);margin:10px 0;">
+    <p class="desc-text">Infrastructure complète en production 24/7 : NAS, VPN WireGuard, Pi-hole, Nginx reverse proxy, domotique Home Assistant + ESPHome, 12 conteneurs Docker. Carte réseau interactive dans le détail.</p>
+    <div class="tech-tags"><span class="tech-tag">OpenMediaVault</span><span class="tech-tag">Docker</span><span class="tech-tag">WireGuard</span><span class="tech-tag">Home Assistant</span><span class="tech-tag">Pi-hole</span></div>
+    <div class="open-hint"><i class="fa-solid fa-arrow-right"></i> Voir le détail + carte réseau</div>
+  </a>
+
+  <!-- Blox DIY -->
+  <a href="detail-blox.html" class="card card-link" style="display:block;">
+    <div class="section-title"><i class="fa-solid fa-lightbulb"></i> Projet personnel DIY <span class="year-badge">2024–Présent</span></div>
+    <h1 class="entry-title">Blox DIY — Nanoleaf maison</h1>
+    <h2 class="entry-subtitle">ESP32 · Micro-amplificateur · WLED · Home Assistant · Impression 3D · Soudure</h2>
+    <p class="desc-text">Fabrication de panneaux LED type Nanoleaf réactifs au son. ESP32 + micro-amplificateur + firmware WLED + boîtiers imprimés en 3D soudés à la main. Intégration dans Home Assistant.</p>
+    <div class="tech-tags"><span class="tech-tag">ESP32</span><span class="tech-tag">WLED</span><span class="tech-tag">LED ARGB</span><span class="tech-tag">Impression 3D</span><span class="tech-tag">Soudure</span></div>
+    <div class="open-hint"><i class="fa-solid fa-arrow-right"></i> Voir le détail</div>
+  </a>
+
+  <!-- Stream Deck DIY -->
+  <a href="detail-streamdeck.html" class="card card-link" style="display:block;">
+    <div class="section-title"><i class="fa-solid fa-keyboard"></i> Projet personnel DIY <span class="year-badge">2024–Présent</span></div>
+    <h1 class="entry-title">Stream Deck DIY</h1>
+    <h2 class="entry-subtitle">Arduino Pro Micro · USB HID · Impression 3D · Soudure</h2>
+    <p class="desc-text">Contrôleur de touches programmable. Arduino Pro Micro émulant un clavier HID, boîtier imprimé en 3D, composants soudés à la main. Raccourcis clavier entièrement personnalisables.</p>
+    <div class="tech-tags"><span class="tech-tag">Arduino Pro Micro</span><span class="tech-tag">USB HID</span><span class="tech-tag">C++ Arduino</span><span class="tech-tag">Impression 3D</span></div>
+    <div class="open-hint"><i class="fa-solid fa-arrow-right"></i> Voir le détail</div>
+  </a>
+
+  <!-- CTF -->
+  <a href="detail-ctf.html" class="card card-link" style="display:block;">
+    <div class="section-title"><i class="fa-solid fa-flag"></i> Compétition Cybersécurité <span class="year-badge">Nov. 2025</span></div>
+    <h1 class="entry-title">CTF Rhin Tech 2025 — 15ème / 40 équipes</h1>
+    <h2 class="entry-subtitle">Capture The Flag · Équipe de 3 · IUT de Colmar</h2>
+    <p class="desc-text">Compétition CTF régionale en équipe de 3 via l'IUT. Challenges : crypto, web, forensic, pwn, OSINT. Classement : 15ème/40.</p>
+    <div class="tech-tags"><span class="tech-tag">CTF</span><span class="tech-tag">Kali Linux</span><span class="tech-tag">Cryptographie</span><span class="tech-tag">OSINT</span><span class="tech-tag">Forensic</span></div>
+    <div class="open-hint"><i class="fa-solid fa-arrow-right"></i> Voir le détail</div>
+  </a>
+
+  <!-- CV WEB SAE 1.04 -->
+  <a href="detail-cv-web.html" class="card card-link" style="display:block;">
+    <div class="section-title"><i class="fa-solid fa-globe"></i> SAÉ 1.04 — BUT R&amp;T <span class="year-badge">2025–2026</span></div>
+    <h1 class="entry-title">Portfolio CV Web Multi-pages</h1>
+    <h2 class="entry-subtitle">HTML5 · CSS3 · JavaScript · i18n FR/EN · Terminal Linux · Responsive</h2>
+    <p class="desc-text">Site web CV complet répondant à la SAÉ 1.04 : design cybersécurité, terminal interactif 20+ commandes, traduction FR/EN, responsive, 17+ pages HTML.</p>
+    <div class="tech-tags"><span class="tech-tag">HTML5</span><span class="tech-tag">CSS3</span><span class="tech-tag">JavaScript</span><span class="tech-tag">i18n</span><span class="tech-tag">Canvas API</span></div>
+    <div class="open-hint"><i class="fa-solid fa-arrow-right"></i> Voir le détail</div>
+  </a>
+
+  <!-- SAE 1.05 -->
+  <a href="detail-sae105.html" class="card card-link" style="display:block;">
+    <div class="section-title"><i class="fa-brands fa-python"></i> SAÉ 1.05 — BUT R&amp;T <span class="year-badge">2025–2026</span></div>
+    <h1 class="entry-title">Traiter les données — Reporting Python + PowerShell</h1>
+    <h2 class="entry-subtitle">Python · PyQt5 · pathlib · QChart · JSON · PowerShell</h2>
+    <p class="desc-text">Outil de reporting analysant les gros fichiers d'un disque (100 fichiers max, seuil 1 MiB). Camembert interactif PyQt5, légendes avec cases à cocher, génération d'un script PowerShell de suppression. Démo interactive avec mes vraies données !</p>
+    <div class="tech-tags"><span class="tech-tag">Python 3</span><span class="tech-tag">PyQt5</span><span class="tech-tag">pathlib</span><span class="tech-tag">JSON</span><span class="tech-tag">PowerShell</span></div>
+    <div class="open-hint"><i class="fa-solid fa-arrow-right"></i> Voir le détail + démo interactive</div>
+  </a>
+
+  <!-- SAE 1.03 -->
+  <a href="detail-sae103.html" class="card card-link" style="display:block;">
+    <div class="section-title"><i class="fa-solid fa-wifi"></i> SAÉ 1.03 — BUT R&amp;T <span class="year-badge">2025–2026</span></div>
+    <h1 class="entry-title">Découvrir un dispositif de transmission</h1>
+    <h2 class="entry-subtitle">Wi-Fi 802.11 · PoE · Heatmaps RSSI · iPerf · Cisco · Packet Tracer</h2>
+    <p class="desc-text">Étude complète du réseau Wi-Fi de l'IUT : Cisco Catalyst 2960 PoE, heatmaps 2,4/5 GHz, mesures RSSI, débits iPerf, contrôleur WLC, simulation Packet Tracer.</p>
+    <div class="tech-tags"><span class="tech-tag">Wi-Fi 802.11</span><span class="tech-tag">PoE IEEE 802.3af</span><span class="tech-tag">iPerf</span><span class="tech-tag">Heatmap</span><span class="tech-tag">WLC</span></div>
+    <div class="open-hint"><i class="fa-solid fa-arrow-right"></i> Voir le détail</div>
+  </a>
+
+  <!-- SAE 1.02 -->
+  <a href="detail-sae102.html" class="card card-link" style="display:block;">
+    <div class="section-title"><i class="fa-solid fa-network-wired"></i> SAÉ 1.02 — BUT R&amp;T <span class="year-badge">2025–2026</span></div>
+    <h1 class="entry-title">S'initier aux réseaux informatiques</h1>
+    <h2 class="entry-subtitle">Cisco IOS · VLAN · DHCP Linux · EVE-NG · Wireshark · VTP</h2>
+    <p class="desc-text">Configuration d'une infrastructure réseau multi-VLAN pour une entreprise fictive sur EVE-NG : routage inter-VLAN, DHCP Linux, trames 802.1Q Wireshark, VTP entre 2 commutateurs.</p>
+    <div class="tech-tags"><span class="tech-tag">Cisco IOS</span><span class="tech-tag">VLAN 802.1Q</span><span class="tech-tag">DHCP Linux</span><span class="tech-tag">EVE-NG</span><span class="tech-tag">Wireshark</span></div>
+    <div class="open-hint"><i class="fa-solid fa-arrow-right"></i> Voir le détail</div>
+  </a>
+
+  <!-- SAE 1.01 -->
+  <a href="detail-sae101.html" class="card card-link" style="display:block;">
+    <div class="section-title"><i class="fa-solid fa-shield-halved"></i> SAÉ 1.01 — BUT R&amp;T <span class="year-badge">2025–2026</span></div>
+    <h1 class="entry-title">Sensibilisation à la cybersécurité</h1>
+    <h2 class="entry-subtitle">Hygiène informatique · Vidéo 3 min + diaporama · Communication</h2>
+    <p class="desc-text">Vidéo de 3 minutes et diaporama sur la sécurité des mots de passe et les bonnes pratiques d'hygiène numérique (recommandations ANSSI).</p>
+    <div class="tech-tags"><span class="tech-tag">Cybersécurité</span><span class="tech-tag">Présentation</span><span class="tech-tag">Communication</span><span class="tech-tag">ANSSI</span></div>
+    <div class="open-hint"><i class="fa-solid fa-arrow-right"></i> Voir le détail</div>
+  </a>
+
+  <!-- MDP -->
+  <a href="detail-mdp.html" class="card card-link" style="display:block;">
+    <div class="section-title"><i class="fa-solid fa-key"></i> Projet NSI — Terminale <span class="year-badge">2024–2025</span></div>
+    <h1 class="entry-title">Générateur de mots de passe (Python/Tkinter)</h1>
+    <h2 class="entry-subtitle">Python · Tkinter · module random · Lycée Théodore Deck</h2>
+    <p class="desc-text">Application Python développée en Terminale NSI. Interface Tkinter, génération aléatoire. Essayez la version interactive en live dans la page de détail !</p>
+    <div class="tech-tags"><span class="tech-tag">Python 3</span><span class="tech-tag">Tkinter</span><span class="tech-tag">random</span></div>
+    <div class="open-hint"><i class="fa-solid fa-arrow-right"></i> Voir le code + démo interactive</div>
+  </a>
+
+  <div class="back-top"><a href="#" data-i18n="idx_back_top">RETOUR EN HAUT</a></div>
+</main>
+
+<footer><p>Web-design : Deiber Benjamin &nbsp;·&nbsp; <kbd>`</kbd> <span data-i18n="footer_terminal">pour le terminal</span></p></footer>
+<script src="i18n.js"></script>
+<script src="shared.js"></script>
+<script src="terminal.js"></script>
+<script>document.addEventListener('DOMContentLoaded', () => { injectShared(); applyTranslations(); });</script>
+</body>
+</html>

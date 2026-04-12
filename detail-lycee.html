@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <title>Lycée — Benjamin Deiber</title>
+</head>
+<body>
+<div class="scanline"></div>
+<div id="terminal-overlay"><div id="terminal-box"><div id="terminal-topbar"><div class="term-dots"><div class="term-dot red"></div><div class="term-dot yellow"></div><div class="term-dot green"></div></div><span>benjamin@portfolio: ~/formations/lycee</span><button id="terminal-close">✕ fermer</button></div><div id="terminal-output"></div><div id="terminal-input-row"><span>benjamin@portfolio:~$</span><input id="terminal-input" type="text" autocomplete="off" spellcheck="false" placeholder="tapez une commande…"></div></div></div>
+
+<div id="shared-header-nav"></div>
+
+<main class="main-wrapper">
+  <a href="formation.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Retour aux formations</a>
+
+  <div class="card">
+    <div class="section-title"><i class="fa-solid fa-school"></i> Baccalauréat Général <span class="year-badge">2022–2025</span></div>
+    <h1 class="entry-title">Lycée Théodore Deck, Guebwiller</h1>
+    <h2 class="entry-subtitle">Spécialités NSI · Mathématiques · Physique-Chimie</h2>
+
+    <img src="images/lycée_guebwiller.webp" alt="Lycée Théodore Deck Guebwiller" class="detail-img">
+
+    <p class="desc-text">Trois années au lycée Théodore Deck de Guebwiller avec un parcours orienté sciences et informatique. La spécialité NSI m'a permis de découvrir la programmation, les réseaux et la cybersécurité, posant les bases de ma future carrière. La combinaison NSI + Mathématiques m'a apporté une rigueur analytique essentielle.</p>
+
+    <h2 class="block-title">Spécialités</h2>
+    <div class="spe-grid">
+      <div class="spe-block"><h3>💻 NSI — Numérique &amp; Sciences Informatiques</h3><p>Programmation Python avancée, structures de données (listes chaînées, arbres, graphes), POO, bases de données SQL, architectures matérielles, protocoles réseau TCP/IP, sécurité informatique et cryptographie de base.</p></div>
+      <div class="spe-block"><h3>📐 Mathématiques</h3><p>Algèbre linéaire, suites, fonctions, probabilités conditionnelles, lois continues. Algorithmique Python pour résoudre des problèmes mathématiques. Raisonnement formel et démonstration.</p></div>
+      <div class="spe-block"><h3>⚡ Physique-Chimie (1ère uniquement)</h3><p>Ondes mécaniques et électromagnétiques, mécanique newtonienne, thermodynamique, chimie organique. Suivi jusqu'en Première, puis arrêté en Terminale pour se concentrer sur NSI.</p></div>
+    </div>
+
+    <h2 class="block-title">Projet NSI — Générateur de mots de passe</h2>
+    <div class="project-card">
+      <h3>🔐 Application Python avec interface graphique</h3>
+      <p>Développement d'une application complète pour générer des mots de passe robustes conformes aux recommandations de l'ANSSI.</p>
+      <ul>
+        <li>Interface graphique Tkinter — paramétrage longueur, types de caractères</li>
+        <li>Options : majuscules, minuscules, chiffres, caractères spéciaux, longueur personnalisée</li>
+        <li>Copie automatique dans le presse-papiers (module pyperclip)</li>
+        <li>Indicateur de robustesse du mot de passe généré</li>
+        <li>Respect des bonnes pratiques de sécurité informatique</li>
+      </ul>
+      <div class="tech-tags"><span class="tech-tag">Python 3</span><span class="tech-tag">Tkinter</span><span class="tech-tag">Thonny IDE</span><span class="tech-tag">pyperclip</span></div>
+    </div>
+
+    <div class="link-row" style="margin-top:18px;">
+      <a href="http://lyceedeck.fr/" class="ext-link" target="_blank">Site du lycée Théodore Deck <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      <a href="detail-bac.html" class="ext-link">Voir les résultats du Bac <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+  </div>
+  <div class="back-top"><a href="#">RETOUR EN HAUT <i class="fa-solid fa-arrow-up"></i></a></div>
+</main>
+<footer><
+<footer><p>Web-design : Deiber Benjamin &nbsp;·&nbsp; <kbd>`</kbd> <span data-i18n="footer_terminal">pour le terminal</span></p></footer>
+<script src="i18n.js"></script>
+<script src="shared.js"></script>
+<script src="terminal.js"></script>
+<script>document.addEventListener("DOMContentLoaded",()=>{injectShared();applyTranslations();});</script>
+</body>
+</html>
