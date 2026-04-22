@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <title>Middle School — Benjamin Deiber</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&display=swap">
+  <style>#terminal-overlay{display:none!important;position:fixed;inset:0;z-index:8000;}#terminal-overlay.open{display:flex!important;}.nav-drawer{display:none!important;}.nav-drawer.open{display:flex!important;}.header-avatar{width:100px;height:100px;border-radius:50%;object-fit:cover;flex-shrink:0;}body{background:#04080f;color:#c8d8e8;}
+  .proof-row{display:flex;flex-direction:column;gap:10px;}
+  .proof-line{padding:12px 16px;border:1px solid rgba(0,212,255,.15);border-radius:6px;background:rgba(0,212,255,.03);font-size:.85rem;color:var(--txt2);display:flex;align-items:flex-start;gap:10px;}
+  .proof-line i{color:var(--cyan);margin-top:2px;flex-shrink:0;}</style>
+</head>
+<body>
+<div class="scanline"></div>
+<div id="terminal-overlay"><div id="terminal-box"><div id="terminal-topbar"><div class="term-dots"><div class="term-dot red"></div><div class="term-dot yellow"></div><div class="term-dot green"></div></div><span>benjamin@portfolio: ~/education/college</span><button id="terminal-close">&#x2715;</button></div><div id="terminal-output"></div><div id="terminal-input-row"><span>benjamin@portfolio:~$</span><input id="terminal-input" type="text" autocomplete="off" spellcheck="false" placeholder="type a command…"></div></div></div>
+<div id="shared-header-nav"></div>
+<main class="main-wrapper">
+  <a href="formation-en.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Back to education</a>
+  <div class="card">
+
+    <div class="section-title"><i class="fa-solid fa-building-columns"></i> Middle School <span class="year-badge">2018–2022</span></div>
+    <h1 class="entry-title">Collège Félix Éboué, Fessenheim</h1>
+    <h2 class="entry-subtitle">General education — National Diploma Very Good Honours (17.8/20)</h2>
+    <img src="images/college_fessenheim.webp" alt="Collège Félix Éboué Fessenheim" class="detail-img">
+    <p class="desc-text">Four years at the Félix Éboué middle school in Fessenheim. This is where my interest in computing and technology was awakened, particularly through technology classes with Scratch programming and robotics projects. Excellent continuous assessment (19.5/20) reflecting consistent work.</p>
+    <h2 class="block-title">Main subjects</h2>
+    <div class="skills-grid">
+      <div class="skill-block"><h3>Mathematics</h3><ul><li>Algebra and geometry</li><li>Pythagoras &amp; Thales theorems</li><li>Functions, probability</li></ul></div>
+      <div class="skill-block"><h3>Sciences &amp; Technology</h3><ul><li>Physics-Chemistry (lab)</li><li>Life and Earth Sciences</li><li>Technology — Scratch programming</li><li>Introduction to robotics</li></ul></div>
+      <div class="skill-block"><h3>Languages</h3><ul><li>French</li><li>English — LV2</li><li>German — LV1</li></ul></div>
+      <div class="skill-block"><h3>Humanities</h3><ul><li>History-Geography, EMC</li><li>PE — team sports</li><li>Art</li></ul></div>
+    </div>
+    <h2 class="block-title">Technology Project — Programmable robot</h2>
+    <div class="project-card">
+      <h3>🤖 Design and programming of an autonomous robot</h3>
+      <p>Project carried out in technology class: design and programming of a robot capable of completing progressive navigation challenges.</p>
+      <ul><li>Visual programming with Scratch to control movements</li><li>Using sensors (distance, light) to interact with the environment</li><li>Progressive challenges: follow a line, avoid obstacles, complex course</li><li>Problem-solving approach and algorithmic thinking</li><li>Pair work — collaboration and communication</li></ul>
+      <div class="tech-tags"><span class="tech-tag">Scratch</span><span class="tech-tag">Sensors</span><span class="tech-tag">Algorithms</span><span class="tech-tag">Robotics</span></div>
+    </div>
+    <div class="link-row" style="margin-top:18px;">
+      <a href="https://clg-eboue.monbureaunumerique.fr/" class="ext-link" target="_blank">School website <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      <a href="detail-brevet-en.html" class="ext-link">See Diploma results <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+  </div>
+  <div class="back-top"><a href="#">BACK TO TOP</a></div>
+</main>
+<footer><p>Web-design: Deiber Benjamin &nbsp;·&nbsp; <kbd>`</kbd> to open terminal</p></footer>
+<script src="i18n.js"></script><script src="shared-en.js"></script><script src="terminal.js"></script>
+<script>
+
+document.addEventListener('DOMContentLoaded', function(){ injectSharedEn(); });
+</script>
+</body></html>

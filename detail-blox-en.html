@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <title>Blox DIY Project — Benjamin Deiber</title>
+  <style>
+    .proof-row{display:flex;flex-direction:column;gap:10px;}
+    .proof-line{padding:12px 16px;border:1px solid rgba(0,212,255,.15);border-radius:6px;background:rgba(0,212,255,.03);font-size:.85rem;color:var(--txt2);display:flex;align-items:flex-start;gap:10px;}
+    .proof-line i{color:var(--cyan);margin-top:2px;flex-shrink:0;}
+  </style>
+  <!-- Google Fonts: non-blocking -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&display=swap">
+  <!-- Critical CSS: prevents unstyled flash on slow connections -->
+  <style>
+    #terminal-overlay{display:none!important;position:fixed;inset:0;z-index:8000;}
+    #terminal-overlay.open{display:flex!important;}
+    .nav-drawer{display:none!important;}
+    .nav-drawer.open{display:flex!important;}
+    .header-avatar{width:100px;height:100px;border-radius:50%;object-fit:cover;flex-shrink:0;}
+    body{background:#04080f;color:#c8d8e8;}
+  </style>
+</head>
+<body>
+<div class="scanline"></div>
+<div id="terminal-overlay"><div id="terminal-box"><div id="terminal-topbar"><div class="term-dots"><div class="term-dot red"></div><div class="term-dot yellow"></div><div class="term-dot green"></div></div><span>benjamin@portfolio: ~/projects/blox-diy</span><button id="terminal-close">&#x2715;</button></div><div id="terminal-output"></div><div id="terminal-input-row"><span>benjamin@portfolio:~$</span><input id="terminal-input" type="text" autocomplete="off" spellcheck="false" placeholder="type a command…"></div></div></div>
+
+<div id="shared-header-nav"></div>
+
+<main class="main-wrapper">
+  <a href="projets-en.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Back</a>
+
+  <div class="card">
+    <div class="section-title"><i class="fa-solid fa-lightbulb"></i> Personal DIY Project <span class="year-badge">2024 – Present</span></div>
+    <h1 class="entry-title">Blox DIY — Homemade Nanoleaf</h1>
+    <h2 class="entry-subtitle">ESP32 · Microphone amp · WLED · Home Assistant · 3D Printing · Soldering</h2>
+
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px;">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--green);background:rgba(0,255,136,.08);border:1px solid rgba(0,255,136,.3);padding:3px 10px;border-radius:4px;display:flex;align-items:center;gap:5px;"><span style="width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green);display:inline-block;"></span>In production</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--purple);background:rgba(180,79,255,.08);border:1px solid rgba(180,79,255,.3);padding:3px 10px;border-radius:4px;">100% homemade</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--gold);background:rgba(255,215,0,.06);border:1px solid rgba(255,215,0,.3);padding:3px 10px;border-radius:4px;">Sound-reactive</span>
+    </div>
+
+    <p class="desc-text">Building my own Nanoleaf-style LED panels from scratch. The project uses an ESP32 connected to a microphone amplifier to detect ambient sound and animate an ARGB LED strip in real time. WLED firmware is installed on the ESP32 and everything is integrated into Home Assistant for centralised control. The enclosures ("Blox") are modelled and 3D-printed. Electronic components are hand-soldered.</p>
+
+    <h2 class="block-title" style="margin-top:20px;"><i class="fa-solid fa-list-check"></i> <span >Features</span></h2>
+    <div class="exp-info-grid">
+      <div class="exp-info-block">
+        <h3>💡 LED &amp; Effects</h3>
+        <ul>
+          <li>Sound-reactive ARGB LED strip</li>
+          <li>Music-synchronised animations</li>
+          <li>100+ visual effects via WLED</li>
+          <li>Full RGB colour control</li>
+          <li>Adjustable brightness and speed</li>
+        </ul>
+      </div>
+      <div class="exp-info-block">
+        <h3>🔌 Electronics</h3>
+        <ul>
+          <li>ESP32 — WiFi/BT microcontroller</li>
+          <li>Microphone amplifier for sound detection</li>
+          <li>Dedicated 5V power supply</li>
+          <li>Manual soldering of all components</li>
+          <li>Neat internal wiring</li>
+        </ul>
+      </div>
+      <div class="exp-info-block">
+        <h3>🏠 Home automation</h3>
+        <ul>
+          <li>Home Assistant integration via WLED</li>
+          <li>Control from mobile app</li>
+          <li>Automations (wake-up, ambiance, evening)</li>
+          <li>Scene and light groups</li>
+          <li>Compatible Google Home / Alexa via HA</li>
+        </ul>
+      </div>
+      <div class="exp-info-block">
+        <h3>🖨️ Manufacturing</h3>
+        <ul>
+          <li>"Blox" enclosure 3D modelling</li>
+          <li>FDM printing (PLA/PETG)</li>
+          <li>Integrated LED diffusers</li>
+          <li>Modular hexagonal design</li>
+          <li>Full mechanical assembly</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2 class="block-title" style="margin-top:20px;"><i class="fa-solid fa-layer-group"></i> <span >Tech stack</span></h2>
+    <div class="tech-tags">
+      <span class="tech-tag">ESP32</span><span class="tech-tag">WLED</span><span class="tech-tag">Microphone amp</span>
+      <span class="tech-tag">LED ARGB</span><span class="tech-tag">Home Assistant</span><span class="tech-tag">MQTT</span>
+      <span class="tech-tag">WiFi</span><span class="tech-tag">3D Modelling</span><span class="tech-tag">3D Printing</span>
+      <span class="tech-tag">Soldering</span><span class="tech-tag">Electronics DIY</span><span class="tech-tag">ESPHome</span>
+    </div>
+
+    <h2 class="block-title" style="margin-top:20px;"><i class="fa-solid fa-circle-check"></i> <span >What I learned</span></h2>
+    <ul class="result-list">
+      <li>Electronics in practice: soldering, wiring, 5V power supply</li>
+      <li>Configuring and customising WLED firmware on ESP32</li>
+      <li>Custom 3D modelling of functional parts</li>
+      <li>IoT integration in Home Assistant via WLED protocol</li>
+      <li>Hardware and software debugging of a physical project</li>
+      <li>Managing a DIY project end-to-end: design → build → integration</li>
+    </ul>
+
+    
+    <h2 class="block-title" style="margin-top:24px;"><i class="fa-solid fa-shield-halved"></i> <span >Proof</span></h2>
+    <div class="proof-row">
+      <div class="proof-line"><i class="fa-solid fa-circle-check"></i> Personal project currently running — the Blox panels are installed in my room. <a href="projets-en.html" class="ext-link" style="margin-left:6px;">See all projects <i class="fa-solid fa-arrow-up-right-from-square"></i></a></div>
+      <div class="proof-line"><i class="fa-solid fa-house-signal"></i> Visible in the Home Assistant infrastructure on the NAS project. <a href="detail-nas-en.html" class="ext-link" style="margin-left:6px;">See NAS project <i class="fa-solid fa-arrow-up-right-from-square"></i></a></div>
+      <img src="images/blox_diy_img1.jpg" alt="Photo des panneaux Blox installés dans la chambre, affichant une animation colorée réactive au son" style="border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,0.3);margin-top:10px;">
+      <img src="images/blox_diy_img2.jpg" alt="Gros plan sur un panneau Blox démonté, montrant l'ESP32, le micro-amplificateur et le câblage interne" style="border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,0.3);margin-top:10px;">
+      <video controls style="border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,0.3);margin-top:10px;">
+        <source src="video/blox_diy.mp4" type="video/mp4">
+        Votre navigateur ne supporte pas la lecture de vidéos.
+      </video>
+    </div>
+  </div>
+  <div class="back-top"><a href="#" >BACK TO TOP</a></div>
+</main>
+<footer><p>Web-design: Deiber Benjamin &nbsp;·&nbsp; <kbd>`</kbd> <span>to open terminal</span></p></footer>
+<script src="i18n.js"></script>
+<script>if(typeof currentLang!=="undefined"){currentLang="en";}</script>
+<script src="shared-en.js"></script>
+<script src="terminal.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  injectSharedEn(); 
+});
+</script>
+</body>
+</html>

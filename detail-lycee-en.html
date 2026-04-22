@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <title>High School — Benjamin Deiber</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&display=swap">
+  <style>#terminal-overlay{display:none!important;position:fixed;inset:0;z-index:8000;}#terminal-overlay.open{display:flex!important;}.nav-drawer{display:none!important;}.nav-drawer.open{display:flex!important;}.header-avatar{width:100px;height:100px;border-radius:50%;object-fit:cover;flex-shrink:0;}body{background:#04080f;color:#c8d8e8;}
+  .proof-row{display:flex;flex-direction:column;gap:10px;}
+  .proof-line{padding:12px 16px;border:1px solid rgba(0,212,255,.15);border-radius:6px;background:rgba(0,212,255,.03);font-size:.85rem;color:var(--txt2);display:flex;align-items:flex-start;gap:10px;}
+  .proof-line i{color:var(--cyan);margin-top:2px;flex-shrink:0;}</style>
+</head>
+<body>
+<div class="scanline"></div>
+<div id="terminal-overlay"><div id="terminal-box"><div id="terminal-topbar"><div class="term-dots"><div class="term-dot red"></div><div class="term-dot yellow"></div><div class="term-dot green"></div></div><span>benjamin@portfolio: ~/education/lycee</span><button id="terminal-close">&#x2715;</button></div><div id="terminal-output"></div><div id="terminal-input-row"><span>benjamin@portfolio:~$</span><input id="terminal-input" type="text" autocomplete="off" spellcheck="false" placeholder="type a command…"></div></div></div>
+<div id="shared-header-nav"></div>
+<main class="main-wrapper">
+  <a href="formation-en.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Back to education</a>
+  <div class="card">
+
+    <div class="section-title"><i class="fa-solid fa-school"></i> French Baccalaureate <span class="year-badge">2022–2025</span></div>
+    <h1 class="entry-title">Lycée Théodore Deck, Guebwiller</h1>
+    <h2 class="entry-subtitle">Specialisations: NSI · Mathematics · Physics-Chemistry</h2>
+    <img src="images/lycée_guebwiller.webp" alt="Lycée Théodore Deck Guebwiller" class="detail-img">
+    <p class="desc-text">Three years at the Théodore Deck high school in Guebwiller with a science and computer science track. The NSI specialisation introduced me to programming, networks and cybersecurity, laying the foundations for my future career. The NSI + Mathematics combination brought me essential analytical rigour.</p>
+    <h2 class="block-title">Specialisations</h2>
+    <div class="spe-grid">
+      <div class="spe-block"><h3>💻 NSI — Digital &amp; Computer Science</h3><p>Advanced Python programming, data structures, OOP, SQL databases, TCP/IP protocols, IT security and basic cryptography.</p></div>
+      <div class="spe-block"><h3>📐 Mathematics</h3><p>Linear algebra, sequences, functions, conditional probability, continuous distributions. Algorithmic reasoning with Python.</p></div>
+      <div class="spe-block"><h3>⚡ Physics-Chemistry (Year 12 only)</h3><p>Electromagnetic waves, Newtonian mechanics, thermodynamics, organic chemistry. Taken until Year 12, then stopped to focus on NSI.</p></div>
+    </div>
+    <h2 class="block-title">NSI Project — Password Generator</h2>
+    <div class="project-card">
+      <h3>🔐 Python application with graphical interface</h3>
+      <p>Development of a complete application to generate strong passwords compliant with ANSSI recommendations.</p>
+      <ul><li>Tkinter graphical interface — length and character type settings</li><li>Options: uppercase, lowercase, digits, special characters, custom length</li><li>Automatic copy to clipboard (pyperclip module)</li><li>Strength indicator for the generated password</li></ul>
+      <div class="tech-tags"><span class="tech-tag">Python 3</span><span class="tech-tag">Tkinter</span><span class="tech-tag">Thonny IDE</span><span class="tech-tag">pyperclip</span></div>
+    </div>
+    <div class="link-row" style="margin-top:18px;">
+      <a href="http://lyceedeck.fr/" class="ext-link" target="_blank">Lycée Théodore Deck website <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      <a href="detail-bac-en.html" class="ext-link">See Baccalaureate results <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+  </div>
+  <div class="back-top"><a href="#">BACK TO TOP</a></div>
+</main>
+<footer><p>Web-design: Deiber Benjamin &nbsp;·&nbsp; <kbd>`</kbd> to open terminal</p></footer>
+<script src="i18n.js"></script><script src="shared-en.js"></script><script src="terminal.js"></script>
+<script>
+
+document.addEventListener('DOMContentLoaded', function(){ injectSharedEn(); });
+</script>
+</body></html>

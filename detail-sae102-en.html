@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <title>SAÉ 1.02 — Benjamin Deiber</title>
+  <!-- Google Fonts: non-blocking -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&display=swap">
+  <!-- Critical CSS: prevents unstyled flash on slow connections -->
+  <style>
+    #terminal-overlay{display:none!important;position:fixed;inset:0;z-index:8000;}
+    #terminal-overlay.open{display:flex!important;}
+    .nav-drawer{display:none!important;}
+    .nav-drawer.open{display:flex!important;}
+    .header-avatar{width:100px;height:100px;border-radius:50%;object-fit:cover;flex-shrink:0;}
+    body{background:#04080f;color:#c8d8e8;}
+  </style>
+</head>
+<body>
+<div class="scanline"></div>
+<div id="terminal-overlay"><div id="terminal-box"><div id="terminal-topbar"><div class="term-dots"><div class="term-dot red"></div><div class="term-dot yellow"></div><div class="term-dot green"></div></div><span>benjamin@portfolio: ~/projects/sae-102</span><button id="terminal-close">&#x2715;</button></div><div id="terminal-output"></div><div id="terminal-input-row"><span>benjamin@portfolio:~$</span><input id="terminal-input" type="text" autocomplete="off" spellcheck="false" placeholder="type a command…"></div></div></div>
+
+<div id="shared-header-nav"></div>
+
+<main class="main-wrapper">
+  <a href="projets-en.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> <span> Back</span></a>
+
+  <div class="card">
+    <div class="section-title"><i class="fa-solid fa-network-wired"></i> SAÉ 1.02 — BUT R&amp;T IUT Colmar <span class="year-badge">2025–2026</span></div>
+    <h1 class="entry-title">Introduction to Computer Networks</h1>
+    <h2 class="entry-subtitle">Multi-VLAN network infrastructure · Cisco IOS · EVE-NG · Linux DHCP · Wireshark</h2>
+
+    <p class="desc-text">Complete configuration of a network infrastructure for a branch of the fictional company "Rudy and Theodor Company" (RTC). The project involved setting up a network with 4 distinct VLANs (Management, Users, Servers, Administrator), implementing inter-VLAN routing, configuring a DHCP service on Linux, analysing 802.1Q frames with Wireshark and deploying a second switch with VTP.</p>
+
+    <h2 class="block-title" style="margin-top:20px;"><i class="fa-solid fa-list-check"></i> <span >Project description</span></h2>
+    <div class="exp-info-grid">
+      <div class="exp-info-block">
+        <h3>🌐 VLAN infrastructure</h3>
+        <ul>
+          <li>4 VLANs: Management, Users, Servers, Administrator</li>
+          <li>The 172.20.x.0/24 IP address range is divided into /29 subnets</li>
+          <li>Cisco Catalyst 2960 (switch) + Cisco 2800 (router)</li>
+          <li>EVE-NG lab — network simulation</li>
+          <li>Virtual PCs per VLAN for ping/traceroute tests</li>
+        </ul>
+      </div>
+      <div class="exp-info-block">
+        <h3>⚙️ Configured services</h3>
+        <ul>
+          <li>Inter-VLAN routing (Router-on-a-stick)</li>
+          <li>DHCP on switch then migrated to Linux Ubuntu</li>
+          <li>IP Helper-address for inter-VLAN DHCP relay</li>
+          <li>Wireshark capture of 802.1Q tagged frames</li>
+          <li>VTP v2 (Server/Client mode) between 2 switches</li>
+        </ul>
+      </div>
+      <div class="exp-info-block">
+        <h3>🔧 Cisco IOS commands</h3>
+        <ul>
+          <li>VLAN and trunk configuration (802.1Q)</li>
+          <li>Static routing and sub-interfaces</li>
+          <li>DHCP pools on switch and router</li>
+          <li>show running-config, show vlan, show ip route</li>
+          <li>SSH management to switch from Admin VPC</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2 class="block-title" style="margin-top:20px;"><i class="fa-solid fa-layer-group"></i> <span >Tech stack</span></h2>
+    <div class="tech-tags">
+      <span class="tech-tag">Cisco IOS</span><span class="tech-tag">VLAN 802.1Q</span>
+      <span class="tech-tag">Router-on-a-stick</span><span class="tech-tag">DHCP</span>
+      <span class="tech-tag">Linux Ubuntu Server</span><span class="tech-tag">EVE-NG</span>
+      <span class="tech-tag">VTP v2</span><span class="tech-tag">Wireshark</span>
+      <span class="tech-tag">Spanning Tree</span><span class="tech-tag">Cisco 2960</span>
+      <span class="tech-tag">Cisco 2800</span><span class="tech-tag">IP Helper-address</span>
+    </div>
+
+    <h2 class="block-title" style="margin-top:20px;"><i class="fa-solid fa-circle-check"></i> <span >What I learned</span></h2>
+    <ul class="result-list">
+      <li>Designing and setting up a complete enterprise network infrastructure</li>
+      <li>Advanced Cisco IOS configuration: VLANs, trunks, inter-VLAN routing</li>
+      <li>IP addressing and subnetting (VLSM /29, /30)</li>
+      <li>Deploying a DHCP service on Linux Ubuntu (isc-dhcp-server)</li>
+      <li>802.1Q frame analysis with Wireshark</li>
+      <li>VLAN synchronisation between switches with VTP</li>
+    </ul>
+
+    <h2 class="block-title" style="margin-top:24px;"><i class="fa-solid fa-graduation-cap"></i> <span >BUT R&amp;T Skills Framework</span></h2>
+    <div id="ref-container" data-project="sae102"></div>
+
+    <h2 class="block-title" style="margin-top:24px;"><i class="fa-solid fa-shield-halved"></i> <span >Proof</span></h2>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div style="padding:12px 16px;border:1px solid rgba(0,212,255,.15);border-radius:6px;background:rgba(0,212,255,.03);font-size:.85rem;color:var(--txt2);display:flex;align-items:flex-start;gap:10px;">
+        <i class="fa-solid fa-file-lines" style="color:var(--cyan);margin-top:2px;flex-shrink:0;"></i>
+        <a href="txt/ConfigCommutateur.txt" target="_blank" style="color:var(--cyan);text-decoration:underline;">Cisco config file for switch 1</a> — <a href="txt/ConfigRouteur.txt" target="_blank" style="color:var(--cyan);text-decoration:underline;">Cisco config file for router</a> — <a href="txt/ConfigCommutateur2.txt" target="_blank" style="color:var(--cyan);text-decoration:underline;">Cisco config file for switch 2</a>.
+      </div>
+      <div style="padding:12px 16px;border:1px solid rgba(0,212,255,.15);border-radius:6px;background:rgba(0,212,255,.03);font-size:.85rem;color:var(--txt2);display:flex;align-items:flex-start;gap:10px;">
+        <i class="fa-solid fa-file-code" style="color:var(--cyan);margin-top:2px;flex-shrink:0;"></i>
+        <a href="unl/maquette.unl" target="_blank" style="color:var(--cyan);text-decoration:underline;">EVE-NG topology file</a>
+      </div>
+      <div style="padding:12px 16px;border:1px solid rgba(0,212,255,.15);border-radius:6px;background:rgba(0,212,255,.03);font-size:.85rem;color:var(--txt2);display:flex;align-items:flex-start;gap:10px;">
+        <ul>
+          
+          <li><img src="images/eve_switch.png" alt="Switch EVE-NG" style="max-width:100%;height:auto;"></li>
+          <li><img src="images/eve_routeur.png" alt="Routeur EVE-NG" style="max-width:100%;height:auto;"></li>
+          <li><img src="images/eve_server.png" alt="Serveur EVE-NG" style="max-width:100%;height:auto;"></li>
+        </ul>
+        <ul>
+          <li><img src="images/eve_dhcp-pc.png" alt="Service DHCP" style="max-width:100%;height:auto;"></li>
+          <li><img src="images/eve_admi.png" alt="PC administrateur" style="max-width:100%;height:auto;"></li>
+          <li><img src="images/eve_connexion.png" alt="EVE-NG connexion" style="max-width:100%;height:auto;"></li>
+          <li><img src="images/eve_ping.png" alt="Pings inter-VLAN" style="max-width:100%;height:auto;"></li>
+          <li><img src="images/eve_maquette.png" alt="Topologie EVE-NG" style="max-width:100%;height:auto;"></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="back-top"><a href="#" >BACK TO TOP</a></div>
+</main>
+<footer><p>Web-design: Deiber Benjamin &nbsp;·&nbsp; <kbd>`</kbd> <span>to open terminal</span></p></footer>
+<script src="i18n.js"></script>
+<script>if(typeof currentLang!=="undefined"){currentLang="en";}</script>
+<script src="shared-en.js"></script>
+<script src="terminal.js"></script>
+<script>
+function buildPageRef() { buildReferentielSection('sae102', 'ref-container'); }
+document.addEventListener('DOMContentLoaded', () => { injectSharedEn();  buildPageRef(); });
+</script>
+</body>
+</html>

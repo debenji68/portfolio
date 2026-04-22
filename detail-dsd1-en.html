@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <title>DSD1 KMK — Benjamin Deiber</title>
+  <style>
+    .dsd-competence-row{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid var(--border);gap:16px;flex-wrap:wrap;}
+    .dsd-competence-row:last-child{border-bottom:none;}
+    .dsd-competence-name{font-size:.92rem;color:var(--txt);flex:1;}
+    .dsd-competence-sub{font-size:.75rem;color:var(--txt3);margin-top:2px;}
+    .dsd-level-badge{font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:700;padding:4px 14px;border-radius:4px;white-space:nowrap;}
+    .level-b1{background:rgba(0,255,136,.12);color:var(--green);border:1px solid rgba(0,255,136,.4);}
+    .level-a2{background:rgba(255,215,0,.1);color:var(--gold);border:1px solid rgba(255,215,0,.4);}
+    .dsd-block{background:rgba(180,79,255,.04);border:1px solid rgba(180,79,255,.2);border-radius:8px;padding:16px;margin-top:12px;}
+    .dsd-block h3{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--purple);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;}
+  </style>
+  <!-- Google Fonts: non-blocking -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&display=swap">
+  <!-- Critical CSS: prevents unstyled flash on slow connections -->
+  <style>
+    #terminal-overlay{display:none!important;position:fixed;inset:0;z-index:8000;}
+    #terminal-overlay.open{display:flex!important;}
+    .nav-drawer{display:none!important;}
+    .nav-drawer.open{display:flex!important;}
+    .header-avatar{width:100px;height:100px;border-radius:50%;object-fit:cover;flex-shrink:0;}
+    body{background:#04080f;color:#c8d8e8;}
+  </style>
+</head>
+<body>
+<div class="scanline"></div>
+<div id="terminal-overlay"><div id="terminal-box"><div id="terminal-topbar"><div class="term-dots"><div class="term-dot red"></div><div class="term-dot yellow"></div><div class="term-dot green"></div></div><span>benjamin@portfolio: ~/degrees/dsd1</span><button id="terminal-close">&#x2715;</button></div><div id="terminal-output"></div><div id="terminal-input-row"><span>benjamin@portfolio:~$</span><input id="terminal-input" type="text" autocomplete="off" spellcheck="false" placeholder="type a command…"></div></div></div>
+
+<div id="shared-header-nav"></div>
+
+<main class="main-wrapper">
+  <a href="diplomes-en.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Back to degrees</a>
+
+  <div class="card">
+    <div class="dpl-header">
+      <span class="dpl-icon">🇩🇪</span>
+      <div style="flex:1">
+        <div class="section-title" style="margin-bottom:4px;color:var(--purple);">DSD1 — KMK <span class="year-badge" style="background:rgba(180,79,255,.15);color:var(--purple);border-color:rgba(180,79,255,.4);">09/06/2023</span></div>
+        <h2 class="entry-subtitle" style="color:var(--purple);">// Deutsches Sprachdiplom der Kultusministerkonferenz · Lycée Théodore Deck, Guebwiller</h2>
+      </div>
+    </div>
+
+    <p class="desc-text">The DSD1 (Deutsches Sprachdiplom der Kultusministerkonferenz) is an official German language diploma awarded by the Standing Conference of the Ministers of Education and Cultural Affairs (KMK) of Germany. Internationally recognised, it certifies an intermediate level of German through 4 tests covering all language skills. Obtained at the Lycée Théodore Deck in Guebwiller on 09 June 2023.</p>
+
+    <div class="link-row" style="margin-bottom:16px;">
+      <span class="proof-badge"><i class="fa-solid fa-file-pdf"></i> Official DSD1 certificate</span>
+      <a href="pdf/Releve_Notes_Kmk.pdf" class="ext-link" target="_blank">Download certificate <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+    </div>
+    
+    <!-- Overall score -->
+    <h2 class="block-title" style="color:var(--purple);">Overall score</h2>
+    <div class="score-row">
+      <div class="score-box" style="border-color:rgba(180,79,255,.3)">
+        <div class="label">Overall level</div>
+        <div class="value" style="color:var(--green);">B1</div>
+      </div>
+      <div class="score-box" style="border-color:rgba(180,79,255,.3)">
+        <div class="label">Organisme</div>
+        <div class="value" style="color:var(--purple);font-size:.85rem;">KMK</div>
+      </div>
+      <div class="score-box" style="border-color:rgba(180,79,255,.3)">
+        <div class="label">Date</div>
+        <div class="value" style="color:var(--txt);font-size:.8rem;">09.06.2023</div>
+      </div>
+      <div class="score-box" style="border-color:rgba(180,79,255,.3)">
+        <div class="label">Établissement</div>
+        <div class="value" style="color:var(--txt);font-size:.7rem;">Lycée Deck</div>
+      </div>
+    </div>
+
+    <!-- Results by skill -->
+    <h2 class="block-title" style="margin-top:20px;color:var(--purple);">Results by skill</h2>
+    <div class="card" style="padding:0;margin-top:8px;">
+      <div class="dsd-competence-row">
+        <div>
+          <div class="dsd-competence-name">Leseverstehen</div>
+          <div class="dsd-competence-sub">Reading comprehension — reading texts in German</div>
+        </div>
+        <span class="dsd-level-badge level-a2">Level A2</span>
+      </div>
+      <div class="dsd-competence-row">
+        <div>
+          <div class="dsd-competence-name">Hörverstehen</div>
+          <div class="dsd-competence-sub">Listening comprehension — listening and understanding</div>
+        </div>
+        <span class="dsd-level-badge level-b1">Level B1</span>
+      </div>
+      <div class="dsd-competence-row">
+        <div>
+          <div class="dsd-competence-name">Schriftliche Kommunikation</div>
+          <div class="dsd-competence-sub">Written expression — writing in German</div>
+        </div>
+        <span class="dsd-level-badge level-b1">Level B1</span>
+      </div>
+      <div class="dsd-competence-row">
+        <div>
+          <div class="dsd-competence-name">Mündliche Kommunikation</div>
+          <div class="dsd-competence-sub">Oral expression — conversation and presentation</div>
+        </div>
+        <span class="dsd-level-badge level-b1">Level B1</span>
+      </div>
+    </div>
+
+    <!-- What this diploma validates -->
+    <h2 class="block-title" style="margin-top:24px;color:var(--purple);">What this diploma validates</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:12px;">
+      <div class="dsd-block">
+        <h3>📖 Reading comprehension (A2)</h3>
+        <ul class="result-list" style="margin-top:8px;">
+          <li>Reading everyday texts in German</li>
+          <li>Understanding simple messages</li>
+          <li>Identifying main information</li>
+        </ul>
+      </div>
+      <div class="dsd-block">
+        <h3>🎧 Listening comprehension (B1)</h3>
+        <ul class="result-list" style="margin-top:8px;">
+          <li>Understanding dialogues and announcements</li>
+          <li>Following conversations on everyday topics</li>
+          <li>Extracting essential information</li>
+        </ul>
+      </div>
+      <div class="dsd-block">
+        <h3>✍️ Written expression (B1)</h3>
+        <ul class="result-list" style="margin-top:8px;">
+          <li>Writing simple, coherent texts</li>
+          <li>Describing experiences and events</li>
+          <li>Arguing on familiar topics</li>
+        </ul>
+      </div>
+      <div class="dsd-block">
+        <h3>🗣️ Oral expression (B1)</h3>
+        <ul class="result-list" style="margin-top:8px;">
+          <li>Communication on everyday topics</li>
+          <li>Structured oral presentation</li>
+          <li>Interaction in concrete situations</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Context -->
+    <h2 class="block-title" style="margin-top:24px;">Context</h2>
+    <div class="project-card">
+      <h3>🇩🇪 Alsace — bilingual French-German region</h3>
+      <p>Living in Fessenheim, a few kilometres from the German border, I developed my German in a naturally bilingual context. The DSD1 officially formalises this intermediate level. My high school curriculum included enhanced German teaching as part of the Franco-German programme.</p>
+      <div class="tech-tags" style="margin-top:12px;">
+        <span class="tech-tag" style="color:var(--purple);">DSD1</span>
+        <span class="tech-tag" style="color:var(--purple);">KMK</span>
+        <span class="tech-tag">B1 overall</span>
+        <span class="tech-tag">Bilingual Alsace</span>
+        <span class="tech-tag">Lycée Théodore Deck</span>
+        <span class="tech-tag">Guebwiller</span>
+      </div>
+    </div>
+
+    <div class="link-row" style="margin-top:20px;">
+      <a href="https://www.kmk.org/index.html" class="ext-link" target="_blank">
+        <i class="fa-solid fa-globe"></i> Official DSD — KMK website <i class="fa-solid fa-arrow-up-right-from-square"></i>
+      </a>
+    </div>
+  </div>
+
+  <div class="back-top"><a href="#" >BACK TO TOP</a></div>
+</main>
+<footer><p>Web-design: Deiber Benjamin &nbsp;·&nbsp; <kbd>`</kbd> <span>to open terminal</span></p></footer>
+<script src="i18n.js"></script>
+<script>if(typeof currentLang!=="undefined"){currentLang="en";}</script>
+<script src="shared-en.js"></script>
+<script src="terminal.js"></script>
+<script>document.addEventListener('DOMContentLoaded', () => { injectSharedEn();  });</script>
+</body>
+</html>

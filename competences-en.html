@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <title>Skills — Benjamin Deiber</title>
+  <style>
+    .s-header{text-align:center;padding:20px 0 8px;}
+    .s-header h1{font-family:'Orbitron',monospace;font-size:clamp(1.3rem,3vw,1.9rem);font-weight:900;color:#fff;margin-bottom:8px;}
+    .s-header p{font-size:.95rem;color:var(--txt2);}
+    .filter-bar{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:20px 0 10px;}
+    .filter-btn{font-family:'JetBrains Mono',monospace;font-size:.66rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--txt2);background:rgba(0,212,255,.04);border:1px solid var(--border);border-radius:20px;padding:7px 16px;cursor:pointer;transition:all .22s;display:flex;align-items:center;gap:6px;}
+    .filter-btn:hover{color:var(--cyan);border-color:var(--border-h);background:rgba(0,212,255,.08);}
+    .filter-btn.active{color:#000;font-weight:800;border-color:transparent;}
+    .filter-btn[data-cat="all"].active{background:var(--gold);}
+    .filter-btn[data-cat="sys"].active{background:#00d4ff;}
+    .filter-btn[data-cat="net"].active{background:#00ff88;}
+    .filter-btn[data-cat="sec"].active{background:#ff4466;color:#fff;}
+    .filter-btn[data-cat="dev"].active{background:#b44fff;color:#fff;}
+    .filter-btn[data-cat="auto"].active{background:#ff8800;}
+    .filter-btn[data-cat="iot"].active{background:#00ffcc;}
+    .filter-btn[data-cat="web"].active{background:#ff66aa;color:#fff;}
+    .search-wrap{position:relative;flex:1;min-width:220px;}
+    .search-wrap i{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--txt3);font-size:.85rem;}
+    .search-input{width:100%;background:rgba(0,20,35,.7);border:1px solid var(--border);border-radius:6px;padding:10px 16px 10px 38px;color:var(--txt);font-family:'Rajdhani',sans-serif;font-size:.92rem;outline:none;transition:border-color .25s;}
+    .search-input:focus{border-color:var(--cyan);}
+    .search-input::placeholder{color:var(--txt3);}
+    .sort-select{background:rgba(0,20,35,.7);border:1px solid var(--border);border-radius:6px;padding:10px 14px;color:var(--txt2);font-family:'JetBrains Mono',monospace;font-size:.68rem;outline:none;cursor:pointer;}
+    .search-bar{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0 14px;}
+    .results-bar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:20px;font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--txt3);}
+    .res-tag{background:rgba(0,212,255,.07);border:1px solid var(--border);border-radius:12px;padding:3px 10px;color:var(--txt2);}
+    .sec-label{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--gold);text-transform:uppercase;letter-spacing:.14em;margin:20px 0 12px;display:flex;align-items:center;gap:8px;}
+    .cpt-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;}
+    .cpt-card{background:rgba(10,25,40,.9);border:1px solid var(--border);border-radius:10px;padding:18px;cursor:pointer;transition:all .25s;position:relative;overflow:hidden;}
+    .cpt-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;opacity:0;transition:opacity .3s;}
+    .cpt-card:hover{transform:translateY(-3px);border-color:var(--border-h);box-shadow:0 8px 30px rgba(0,0,0,.5);}
+    .cpt-card:hover::before{opacity:1;}
+    .cpt-card[data-cat="sys"]::before{background:linear-gradient(90deg,var(--cyan),transparent);}
+    .cpt-card[data-cat="net"]::before{background:linear-gradient(90deg,var(--green),transparent);}
+    .cpt-card[data-cat="sec"]::before{background:linear-gradient(90deg,var(--red),transparent);}
+    .cpt-card[data-cat="dev"]::before{background:linear-gradient(90deg,var(--purple),transparent);}
+    .cpt-card[data-cat="auto"]::before{background:linear-gradient(90deg,#ff8800,transparent);}
+    .cpt-card[data-cat="iot"]::before{background:linear-gradient(90deg,#00ffcc,transparent);}
+    .cpt-card[data-cat="web"]::before{background:linear-gradient(90deg,#ff66aa,transparent);}
+    .cpt-top{display:flex;align-items:flex-start;gap:12px;margin-bottom:10px;}
+    .cpt-icon-wrap{width:42px;height:42px;border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.3rem;}
+    .cpt-card-info h3{font-family:'Rajdhani',sans-serif;font-size:1rem;font-weight:700;color:#fff;margin-bottom:3px;}
+    .cpt-card-info .cpt-cat{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--txt3);text-transform:uppercase;letter-spacing:.06em;}
+    .cpt-desc{font-size:.82rem;color:var(--txt2);line-height:1.5;margin-bottom:10px;}
+    .cpt-tags{display:flex;flex-wrap:wrap;gap:5px;}
+    .cpt-sm-tag{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--txt2);background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:2px 7px;}
+    .cpt-level{display:flex;gap:3px;margin-top:8px;}
+    .cpt-lvl-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.1);}
+    .cpt-lvl-dot.on{background:var(--cyan);box-shadow:0 0 4px var(--cyan);}
+    .cpt-featured-badge{position:absolute;top:10px;right:10px;font-family:'JetBrains Mono',monospace;font-size:.55rem;color:var(--gold);background:rgba(255,215,0,.1);border:1px solid rgba(255,215,0,.3);border-radius:3px;padding:2px 6px;letter-spacing:.06em;}
+    .cpt-open{margin-top:10px;font-family:'JetBrains Mono',monospace;font-size:.63rem;color:var(--txt3);display:flex;align-items:center;gap:5px;transition:color .2s;}
+    .cpt-card:hover .cpt-open{color:var(--cyan);}
+    .no-results{grid-column:1/-1;text-align:center;padding:48px 0;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--txt3);}
+    /* Modal */
+    .m-overlay{position:fixed;inset:0;background:rgba(0,0,0,.78);backdrop-filter:blur(6px);z-index:9000;display:none;align-items:center;justify-content:center;padding:16px;}
+    .m-overlay.open{display:flex;}
+    .m-box{background:rgba(8,18,28,.98);border:1px solid var(--border-h);border-radius:14px;width:100%;max-width:600px;max-height:90vh;overflow-y:auto;box-shadow:0 0 60px rgba(0,212,255,.15),0 20px 60px rgba(0,0,0,.8);}
+    .m-box::-webkit-scrollbar{width:4px;}.m-box::-webkit-scrollbar-thumb{background:rgba(0,212,255,.3);border-radius:2px;}
+    .m-top{position:sticky;top:0;background:rgba(8,18,28,.97);padding:18px 22px;display:flex;align-items:center;gap:14px;border-bottom:1px solid var(--border);z-index:1;}
+    .m-icon{width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0;}
+    .m-head h2{font-family:'Orbitron',monospace;font-size:1rem;color:#fff;font-weight:700;}
+    .m-head p{font-size:.8rem;color:var(--txt2);margin-top:2px;}
+    .m-close{margin-left:auto;width:30px;height:30px;border-radius:6px;border:1px solid var(--border);background:none;cursor:pointer;color:var(--txt2);font-size:.9rem;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0;}
+    .m-close:hover{color:var(--red);border-color:var(--red);}
+    .m-body{padding:22px;}
+    .m-sec{margin-bottom:20px;}
+    .m-sec-title{font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--gold);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px;display:flex;align-items:center;gap:6px;}
+    .m-sec p{font-size:.87rem;color:var(--txt2);line-height:1.6;}
+    .m-tags{display:flex;flex-wrap:wrap;gap:7px;}
+    .m-tag{font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--gold);background:rgba(255,215,0,.08);border:1px solid rgba(255,215,0,.25);padding:4px 12px;border-radius:4px;}
+    .m-proof{font-size:.85rem;color:var(--txt2);line-height:1.6;padding:10px 0;}
+    .m-link{display:flex;align-items:center;gap:10px;padding:12px 16px;border:1px solid var(--border);border-radius:6px;background:rgba(0,212,255,.04);color:var(--txt);text-decoration:none;font-size:.87rem;transition:all .25s;margin-top:8px;}
+    .m-link:hover{border-color:var(--cyan);background:rgba(0,212,255,.1);color:var(--cyan);}
+    .m-link i{color:var(--cyan);}
+    @media(max-width:600px){.filter-btn{font-size:.58rem;padding:5px 10px;}.cpt-grid{grid-template-columns:1fr;}}
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&display=swap">
+  <style>
+    #terminal-overlay{display:none!important;position:fixed;inset:0;z-index:8000;}
+    #terminal-overlay.open{display:flex!important;}
+    .nav-drawer{display:none!important;}
+    .nav-drawer.open{display:flex!important;}
+    .header-avatar{width:100px;height:100px;border-radius:50%;object-fit:cover;flex-shrink:0;}
+    body{background:#04080f;color:#c8d8e8;}
+  </style>
+</head>
+<body>
+<div class="scanline"></div>
+
+<!-- Modal -->
+<div class="m-overlay" id="skillModal">
+  <div class="m-box">
+    <div class="m-top">
+      <div class="m-icon" id="mIcon"></div>
+      <div class="m-head"><h2 id="mTitle"></h2><p id="mSub"></p></div>
+      <button class="m-close" id="mClose">&#x2715;</button>
+    </div>
+    <div class="m-body">
+      <div class="m-sec">
+        <div class="m-sec-title"><i class="fa-solid fa-bolt"></i> What I do</div>
+        <p id="mDoing"></p>
+      </div>
+      <div class="m-sec">
+        <div class="m-sec-title"><i class="fa-solid fa-tags"></i> Tools &amp; related topics</div>
+        <div class="m-tags" id="mTags"></div>
+      </div>
+      <div class="m-sec">
+        <div class="m-sec-title"><i class="fa-solid fa-shield-halved"></i> Proof</div>
+        <div class="m-proof" id="mProof"></div>
+      </div>
+      <div class="m-sec" id="mLinksSection">
+        <div class="m-sec-title"><i class="fa-solid fa-link"></i> Useful links</div>
+        <div id="mLinks"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="terminal-overlay"><div id="terminal-box"><div id="terminal-topbar"><div class="term-dots"><div class="term-dot red"></div><div class="term-dot yellow"></div><div class="term-dot green"></div></div><span>benjamin@portfolio: ~/skills</span><button id="terminal-close">&#x2715;</button></div><div id="terminal-output"></div><div id="terminal-input-row"><span>benjamin@portfolio:~$</span><input id="terminal-input" type="text" autocomplete="off" spellcheck="false" placeholder="type a command…"></div></div></div>
+
+<div id="shared-header-nav"></div>
+
+<main class="main-wrapper">
+  <div class="s-header">
+    <h1>Technical Skills</h1>
+    <p>Filter by category, search for a tool or technology.</p>
+  </div>
+
+  <div class="card" style="padding:24px 28px;">
+    <div class="filter-bar" id="filterBar">
+      <button class="filter-btn active" data-cat="all"><i class="fa-solid fa-layer-group"></i> All</button>
+      <button class="filter-btn" data-cat="sys"><i class="fa-solid fa-server"></i> Systems</button>
+      <button class="filter-btn" data-cat="net"><i class="fa-solid fa-network-wired"></i> Networks</button>
+      <button class="filter-btn" data-cat="sec"><i class="fa-solid fa-shield-halved"></i> Security</button>
+      <button class="filter-btn" data-cat="dev"><i class="fa-solid fa-code"></i> Development</button>
+      <button class="filter-btn" data-cat="auto"><i class="fa-solid fa-robot"></i> Automation</button>
+      <button class="filter-btn" data-cat="iot"><i class="fa-solid fa-house-signal"></i> IoT</button>
+      <button class="filter-btn" data-cat="web"><i class="fa-solid fa-globe"></i> Web</button>
+    </div>
+    <div class="search-bar">
+      <div class="search-wrap">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input class="search-input" id="searchInput" type="text" placeholder="Search…">
+      </div>
+      <select class="sort-select" id="sortSelect">
+        <option value="level">⇅ By level</option>
+        <option value="alpha">⇅ Alphabetical</option>
+      </select>
+    </div>
+    <div class="results-bar">
+      <span class="res-tag" id="catLabel">Category: All</span>
+      <span class="res-tag" id="countLabel">Results: 0/0</span>
+      <span class="res-tag" id="searchLabel">No search</span>
+    </div>
+
+    <div id="featuredSection">
+      <div class="sec-label" id="featuredTitle">⚡ Main skills</div>
+      <div class="cpt-grid" id="featuredGrid"></div>
+    </div>
+    <div id="otherSection" style="margin-top:24px;">
+      <div class="sec-label" id="otherTitle" style="color:var(--txt2);font-size:.66rem;">Other skills</div>
+      <div class="cpt-grid" id="otherGrid"></div>
+    </div>
+  </div>
+
+  <div class="back-top"><a href="#">BACK TO TOP</a></div>
+</main>
+
+<footer><p>Web-design: Deiber Benjamin &nbsp;·&nbsp; <kbd>`</kbd> to open terminal</p></footer>
+
+<script src="shared-en.js"></script>
+<script src="terminal.js"></script>
+<script>
+// ── Skills data (EN only — same order as FR version) ──────────────────────────
+var SKILLS = [
+  {id:'linux', cat:'sys', featured:true, level:4, icon:'🐧', bg:'rgba(255,140,0,.15)',
+    name:'Linux Debian/Ubuntu', sub:'System administration',
+    doing:'Full Linux server administration in 24/7 production: systemd, users, permissions, logs. Direct experience on my Debian NAS server.',
+    tags:['Debian','Ubuntu Server','systemd','SSH','Bash','Logs'],
+    proof:'Hands-on on real home infrastructure (NAS server 24/7 production). <a href="detail-nas-en.html" class="ext-link">See NAS project →</a>',
+    links:[{icon:'fa-server', label:'See NAS project', href:'detail-nas-en.html'}]},
+
+  {id:'docker', cat:'sys', featured:true, level:4, icon:'🐳', bg:'rgba(0,139,210,.15)',
+    name:'Docker & Containers', sub:'Containerization',
+    doing:'12 containerized services in production. Docker Compose for multi-service stacks, Portainer for web admin, volumes and networks.',
+    tags:['Docker','Docker Compose','Portainer','Volumes','Stack'],
+    proof:'12 active containers in production on my NAS since 2023. <a href="detail-nas-en.html" class="ext-link">See NAS project →</a>',
+    links:[{icon:'fa-server', label:'See NAS project', href:'detail-nas-en.html'}]},
+
+  {id:'omv', cat:'sys', featured:false, level:3, icon:'🗄️', bg:'rgba(0,212,255,.1)',
+    name:'OpenMediaVault', sub:'NAS OS',
+    doing:'Full home NAS configuration: RAID disks, SMB/NFS shares, plugins, SMART monitoring.',
+    tags:['OpenMediaVault','RAID','LVM','SMB','NFS','SMART'],
+    proof:'Home NAS running OpenMediaVault since 2023. <a href="detail-nas-en.html" class="ext-link">See NAS project →</a>',
+    links:[{icon:'fa-server', label:'See NAS project', href:'detail-nas-en.html'}]},
+
+  {id:'winsrv', cat:'sys', featured:false, level:2, icon:'🪟', bg:'rgba(0,119,181,.15)',
+    name:'Windows Server & AD', sub:'Windows administration',
+    doing:'Active Directory, GPO, users/groups, security audit. Studied in BUT R&T.',
+    tags:['Active Directory','GPO','Windows Server','DNS','DHCP'],
+    proof:'Studied in BUT R&T courses — Active Directory, GPO, Windows Server.',
+    links:[]},
+
+  {id:'cisco', cat:'net', featured:true, level:4, icon:'📡', bg:'rgba(0,255,136,.1)',
+    name:'Cisco Networks', sub:'Routers & Switches',
+    doing:'Cisco router/switch configuration (IOS): VLANs, trunking, inter-VLAN routing, OSPF, RIP, NAT/PAT, ACL, HSRP. Practical labs at IUT network lab.',
+    tags:['Cisco IOS','VLAN','Trunk','OSPF','RIP','NAT/PAT','ACL','HSRP'],
+    proof:'BUT R&T courses and SAÉ — Cisco configurations in IUT Colmar network lab.',
+    links:[]},
+
+  {id:'tcpip', cat:'net', featured:true, level:4, icon:'🌐', bg:'rgba(0,255,136,.08)',
+    name:'TCP/IP & Protocols', sub:'Network fundamentals',
+    doing:'TCP/IP stack, IPv4/IPv6, VLSM subnetting, DNS, DHCP, HTTP/S, SSH, FTP. Wireshark frame analysis.',
+    tags:['TCP/IP','IPv4','IPv6','DNS','DHCP','Wireshark','VLSM'],
+    proof:'BUT R&T courses — network configuration, Wireshark analysis.',
+    links:[]},
+
+  {id:'vpn', cat:'net', featured:false, level:3, icon:'🔐', bg:'rgba(180,79,255,.15)',
+    name:'VPN — WireGuard', sub:'Virtual private network',
+    doing:'WireGuard VPN on NAS for secure remote access. Keys, peers, routing, DuckDNS integration.',
+    tags:['WireGuard','VPN','Keys','Peers','Routing','DuckDNS'],
+    proof:'WireGuard deployed on NAS server. <a href="detail-nas-en.html" class="ext-link">See NAS project →</a>',
+    links:[{icon:'fa-server', label:'See NAS project', href:'detail-nas-en.html'}]},
+
+  {id:'wifi', cat:'net', featured:false, level:2, icon:'📶', bg:'rgba(0,212,255,.08)',
+    name:'Wi-Fi & Wireless', sub:'Wireless networks',
+    doing:'Wi-Fi analysis and measurements (802.11a/g): coverage heatmaps, RSSI and attenuation measurements, iPerf throughput, Cisco WLC controller, PoE.',
+    tags:['Wi-Fi 802.11','RSSI','PoE','Heatmap','WLC','iPerf'],
+    proof:'SAÉ 1.03 — IUT Colmar Wi-Fi network study. <a href="detail-sae103-en.html" class="ext-link">See SAÉ 1.03 →</a>',
+    links:[{icon:'fa-graduation-cap', label:'See SAÉ 1.03', href:'detail-sae103-en.html'}]},
+
+  {id:'fw', cat:'sec', featured:true, level:4, icon:'🛡️', bg:'rgba(255,68,102,.1)',
+    name:'Firewall & Filtering', sub:'Network security',
+    doing:'iptables, UFW, pfSense — strict rules, IP/port/protocol filtering. Fail2Ban brute-force protection in production.',
+    tags:['iptables','UFW','pfSense','Fail2Ban','ACL','Filtering'],
+    proof:'iptables/UFW + Fail2Ban configured on NAS server. <a href="detail-nas-en.html" class="ext-link">See NAS project →</a>',
+    links:[{icon:'fa-server', label:'See NAS project', href:'detail-nas-en.html'}]},
+
+  {id:'ssl', cat:'sec', featured:false, level:3, icon:'🔒', bg:'rgba(255,68,102,.08)',
+    name:'SSL/TLS & Certificates', sub:'Encryption',
+    doing:"Auto-renewed SSL/TLS via Nginx PM + Let's Encrypt. Forced HTTPS on all exposed services.",
+    tags:["SSL/TLS","Let's Encrypt","HTTPS","Nginx PM","Certificates"],
+    proof:"Let's Encrypt certificates on NAS server. <a href=\"detail-nas-en.html\" class=\"ext-link\">See NAS project →</a>",
+    links:[]},
+
+  {id:'harden', cat:'sec', featured:true, level:3, icon:'⚙️', bg:'rgba(255,68,102,.08)',
+    name:'System Hardening', sub:'Linux hardening',
+    doing:'SSH hardening (root disabled, keys, fail2ban), password policies, active services audit, automatic updates.',
+    tags:['SSH Hardening','Fail2Ban','Audit','Services','Logs'],
+    proof:'SSH and service hardening applied in production on NAS server.',
+    links:[]},
+
+  {id:'pihole', cat:'sec', featured:false, level:3, icon:'🚫', bg:'rgba(255,68,102,.07)',
+    name:'Pi-hole', sub:'DNS filtering',
+    doing:'Pi-hole on Docker protects the entire home network — DNS-level ad and tracker blocking.',
+    tags:['Pi-hole','DNS','Blocking','Ads','Trackers','LAN'],
+    proof:'Pi-hole on Docker, protects entire network. <a href="detail-nas-en.html" class="ext-link">See NAS project →</a>',
+    links:[{icon:'fa-server', label:'See NAS project', href:'detail-nas-en.html'}]},
+
+  {id:'ctf-kali', cat:'sec', featured:false, level:2, icon:'🎯', bg:'rgba(255,68,102,.09)',
+    name:'CTF & Pentest', sub:'Ethical hacking',
+    doing:'Participated in Rhin Tech CTF 2025 (15th/40). Challenges in cryptography, web (SQLi, XSS), forensics, OSINT, pwn. Used Kali Linux, Burp Suite, CyberChef, John the Ripper.',
+    tags:['Kali Linux','CTF','Burp Suite','CyberChef','Metasploit','OSINT'],
+    proof:'Rhin Tech CTF 2025 — ranked 15th out of 40 teams. <a href="detail-ctf-en.html" class="ext-link">See CTF →</a>',
+    links:[{icon:'fa-flag', label:'See Rhin Tech CTF 2025', href:'detail-ctf-en.html'}]},
+
+  {id:'python', cat:'dev', featured:true, level:3, icon:'🐍', bg:'rgba(53,114,165,.2)',
+    name:'Python', sub:'Programming',
+    doing:'Python app development: password generator with Tkinter, Bash/Python automation scripts, random, string, os modules.',
+    tags:['Python 3','Tkinter','random','string','scripts','algorithms'],
+    proof:'Python/Tkinter password generator (NSI project). <a href="detail-mdp-en.html" class="ext-link">See project →</a>',
+    links:[{icon:'fa-key', label:'See password project', href:'detail-mdp-en.html'}]},
+
+  {id:'bash', cat:'dev', featured:false, level:3, icon:'⌨️', bg:'rgba(0,212,255,.08)',
+    name:'Bash & Scripting', sub:'Automation',
+    doing:'Bash scripts for backup automation, cron, monitoring, service management on NAS server.',
+    tags:['Bash','Shell','cron','Automation','Scripts'],
+    proof:'Bash scripts in production on NAS server. <a href="detail-nas-en.html" class="ext-link">See NAS project →</a>',
+    links:[]},
+
+  {id:'git', cat:'dev', featured:false, level:2, icon:'🌿', bg:'rgba(240,80,50,.15)',
+    name:'Git & GitHub', sub:'Version control',
+    doing:'Git for project versioning: commits, branches, push/pull. GitHub for repo hosting and GitHub Pages.',
+    tags:['Git','GitHub','Commit','Branch','GitHub Pages'],
+    proof:'GitHub repositories available. <a href="https://github.com/debenji68" class="ext-link" target="_blank">See GitHub →</a>',
+    links:[{icon:'fa-brands fa-github', label:'My GitHub', href:'https://github.com/debenji68', target:'_blank'}]},
+
+  {id:'powershell', cat:'dev', featured:false, level:2, icon:'💻', bg:'rgba(1,114,196,.18)',
+    name:'PowerShell', sub:'Windows scripting',
+    doing:'PowerShell scripts for process orchestration, Windows automation, maintenance and deployment scripts. Used in SAÉ 1.05 to orchestrate 3 Python scripts.',
+    tags:['PowerShell','Windows','Scripts','Automation','ps1'],
+    proof:'PowerShell script (Run_SAE.ps1) developed in SAÉ 1.05. <a href="detail-sae105-en.html" class="ext-link">See SAÉ 1.05 →</a>',
+    links:[{icon:'fa-graduation-cap', label:'See SAÉ 1.05', href:'detail-sae105-en.html'}]},
+
+  {id:'nginx', cat:'auto', featured:true, level:3, icon:'🌐', bg:'rgba(0,163,82,.15)',
+    name:'Nginx Proxy Manager', sub:'Reverse proxy',
+    doing:"Reverse proxy to expose NAS services on Internet with HTTPS. Automatic Let's Encrypt, redirects, access lists.",
+    tags:['Nginx PM','Reverse Proxy',"Let's Encrypt",'HTTPS','Redirection'],
+    proof:'Nginx PM deployed on NAS server. <a href="detail-nas-en.html" class="ext-link">See NAS project →</a>',
+    links:[]},
+
+  {id:'cron', cat:'auto', featured:false, level:3, icon:'⏰', bg:'rgba(255,136,0,.1)',
+    name:'Cron & Scheduling', sub:'Automated tasks',
+    doing:'cron scheduling: automatic backups, updates, monitoring scripts, log rotation.',
+    tags:['cron','crontab','Scheduling','Backups'],
+    proof:'cron scripts for NAS backups. <a href="detail-nas-en.html" class="ext-link">See NAS project →</a>',
+    links:[]},
+
+  {id:'ha', cat:'iot', featured:true, level:3, icon:'🏠', bg:'rgba(0,130,198,.15)',
+    name:'Home Assistant', sub:'Home automation',
+    doing:'Home Assistant deployment — connected devices, automations, dashboards, ESPHome integration.',
+    tags:['Home Assistant','HASS','Automations','Dashboard','MQTT'],
+    proof:'Home Assistant in production on NAS. <a href="detail-nas-en.html" class="ext-link">See NAS project →</a>',
+    links:[{icon:'fa-server', label:'See NAS project', href:'detail-nas-en.html'}]},
+
+  {id:'esphome', cat:'iot', featured:false, level:2, icon:'⚡', bg:'rgba(0,212,255,.08)',
+    name:'ESPHome', sub:'ESP32 microcontrollers',
+    doing:'ESP8266/ESP32 firmware for DIY sensors (temperature, humidity, presence) integrated in Home Assistant.',
+    tags:['ESPHome','ESP32','YAML','MQTT','Sensors','DIY'],
+    proof:'ESPHome + DIY ESP32 sensors in Home Assistant. <a href="detail-nas-en.html" class="ext-link">See NAS project →</a>',
+    links:[]},
+
+  {id:'html', cat:'web', featured:true, level:4, icon:'🎨', bg:'rgba(255,102,0,.15)',
+    name:'HTML5 & CSS3', sub:'Web development',
+    doing:'Multi-page websites: semantic HTML, CSS Grid, Flexbox, animations, CSS variables, responsive. This portfolio demonstrates it.',
+    tags:['HTML5','CSS3','Grid','Flexbox','Animations','Responsive'],
+    proof:'Original CV site: <a href="https://debenji68.github.io/cv-web/" class="ext-link" target="_blank">debenji68.github.io/cv-web/ →</a> and this portfolio.',
+    links:[{icon:'fa-globe', label:'See CV Web project', href:'detail-cv-web-en.html'}]},
+
+  {id:'js', cat:'web', featured:true, level:3, icon:'⚙️', bg:'rgba(247,223,30,.1)',
+    name:'JavaScript', sub:'Web programming',
+    doing:'Vanilla JS: DOM, keyboard/mouse/touch events, i18n system, interactive terminal, Canvas API, animations.',
+    tags:['JavaScript','DOM','Events','i18n','Canvas','LocalStorage'],
+    proof:'Interactive terminal, i18n, Canvas in this portfolio. <a href="detail-cv-web-en.html" class="ext-link">See CV Web project →</a>',
+    links:[{icon:'fa-globe', label:'See CV Web project', href:'detail-cv-web-en.html'}]},
+
+  {id:'mysql', cat:'web', featured:false, level:2, icon:'🗃️', bg:'rgba(0,117,143,.15)',
+    name:'MySQL / SQL', sub:'Databases',
+    doing:'SQL queries: SELECT, INSERT, UPDATE, DELETE, JOIN, GROUP BY. Database creation. BUT R&T coursework.',
+    tags:['MySQL','SQL','SELECT','JOIN','INSERT','DDL'],
+    proof:'Studied in BUT R&T — SQL queries, database creation.',
+    links:[]},
+
+  {id:'arduino', cat:'iot', featured:false, level:2, icon:'🤖', bg:'rgba(0,128,82,.15)',
+    name:'Arduino & C++', sub:'Microcontrollers',
+    doing:'Arduino microcontroller programming (Pro Micro ATmega32U4): HID emulation, I/O management, specialized libraries, upload via Arduino IDE.',
+    tags:['Arduino','C++','ATmega32U4','HID','Arduino IDE','Sensors'],
+    proof:'DIY Stream Deck — Arduino Pro Micro as HID keyboard. <a href="detail-streamdeck-en.html" class="ext-link">See project →</a>',
+    links:[{icon:'fa-keyboard', label:'See DIY Stream Deck', href:'detail-streamdeck-en.html'}]},
+
+  {id:'3dprint', cat:'iot', featured:false, level:3, icon:'🖨️', bg:'rgba(255,136,0,.1)',
+    name:'3D Printing', sub:'Modelling & fabrication',
+    doing:'Custom 3D modelling of functional parts (enclosures, supports, LED diffusers). FDM printing with PLA/PETG, print parameter optimisation, mechanical assembly.',
+    tags:['3D Printing','FDM','PLA','PETG','3D Modelling','CAD'],
+    proof:'Blox DIY and Stream Deck DIY — modelled and printed enclosures. <a href="detail-blox-en.html" class="ext-link">See Blox DIY →</a>',
+    links:[{icon:'fa-lightbulb', label:'See Blox DIY', href:'detail-blox-en.html'}]},
+];
+
+// ── State ────────────────────────────────────────────────
+var currentCat    = 'all';
+var currentSearch = '';
+var currentSort   = 'level';
+
+// ── Render ────────────────────────────────────────────────
+function renderSkills() {
+  var visible = SKILLS.filter(function(s) {
+    var matchCat    = currentCat === 'all' || s.cat === currentCat;
+    var q           = currentSearch;
+    var matchSearch = !q ||
+      s.name.toLowerCase().includes(q) ||
+      s.tags.some(function(t){ return t.toLowerCase().includes(q); }) ||
+      s.doing.toLowerCase().includes(q);
+    return matchCat && matchSearch;
+  });
+
+  if (currentSort === 'level') {
+    visible.sort(function(a,b){ return b.level - a.level || a.name.localeCompare(b.name); });
+  } else {
+    visible.sort(function(a,b){ return a.name.localeCompare(b.name); });
+  }
+
+  var featured = visible.filter(function(s){ return s.featured; });
+  var others   = visible.filter(function(s){ return !s.featured; });
+
+  var fGrid = document.getElementById('featuredGrid');
+  var oGrid = document.getElementById('otherGrid');
+  var fSec  = document.getElementById('featuredSection');
+  var oSec  = document.getElementById('otherSection');
+  if (!fGrid || !oGrid) return;
+
+  var noRes = '🔍 No results — try another filter.';
+  fGrid.innerHTML = featured.length
+    ? featured.map(cardHTML).join('')
+    : (others.length ? '' : '<div class="no-results">' + noRes + '</div>');
+  oGrid.innerHTML = others.map(cardHTML).join('');
+
+  fSec.style.display = featured.length ? '' : 'none';
+  oSec.style.display = others.length   ? '' : 'none';
+
+  var catNames = {all:'All',sys:'Systems',net:'Networks',sec:'Security',dev:'Development',auto:'Automation',iot:'IoT',web:'Web'};
+  document.getElementById('catLabel').textContent    = 'Category: ' + (catNames[currentCat] || currentCat);
+  document.getElementById('countLabel').textContent  = 'Results: '  + visible.length + '/' + SKILLS.length;
+  document.getElementById('searchLabel').textContent = currentSearch ? '"' + currentSearch + '"' : 'No search';
+
+  document.querySelectorAll('.cpt-card').forEach(function(card) {
+    card.addEventListener('click', function(){ openModal(card.getAttribute('data-id')); });
+  });
+}
+
+function cardHTML(s) {
+  var dots = '';
+  for (var i = 0; i < 5; i++) dots += '<div class="cpt-lvl-dot' + (i < s.level ? ' on' : '') + '"></div>';
+  var tags  = s.tags.slice(0,4).map(function(t){ return '<span class="cpt-sm-tag">' + t + '</span>'; }).join('');
+  var badge = s.featured ? '<div class="cpt-featured-badge">⚡ FEATURED</div>' : '';
+  return '<div class="cpt-card" data-cat="' + s.cat + '" data-id="' + s.id + '">'
+    + badge
+    + '<div class="cpt-top"><div class="cpt-icon-wrap" style="background:' + s.bg + ';">' + s.icon + '</div>'
+    + '<div class="cpt-card-info"><h3>' + s.name + '</h3><div class="cpt-cat">' + s.sub + '</div></div></div>'
+    + '<div class="cpt-desc">' + s.doing.substring(0, 100) + '…</div>'
+    + '<div class="cpt-tags">' + tags + '</div>'
+    + '<div class="cpt-level">' + dots + '</div>'
+    + '<div class="cpt-open"><i class="fa-solid fa-arrow-right"></i> Open</div>'
+    + '</div>';
+}
+
+function openModal(id) {
+  var s = SKILLS.find(function(x){ return x.id === id; });
+  if (!s) return;
+  document.getElementById('mIcon').innerHTML      = s.icon;
+  document.getElementById('mIcon').style.background = s.bg;
+  document.getElementById('mTitle').textContent   = s.name;
+  document.getElementById('mSub').textContent     = s.sub;
+  document.getElementById('mDoing').textContent   = s.doing;
+  document.getElementById('mProof').innerHTML     = s.proof || '';
+
+  var tagsEl = document.getElementById('mTags');
+  tagsEl.innerHTML = s.tags.map(function(t){ return '<div class="m-tag">' + t + '</div>'; }).join('');
+
+  var linksEl      = document.getElementById('mLinks');
+  var linksSection = document.getElementById('mLinksSection');
+  if (s.links && s.links.length) {
+    linksEl.innerHTML = s.links.map(function(l){
+      return '<a href="' + l.href + '" ' + (l.target ? 'target="' + l.target + '"' : '') + ' class="m-link">'
+        + '<i class="fa-solid ' + l.icon + '"></i> ' + l.label + '</a>';
+    }).join('');
+    linksSection.style.display = '';
+  } else {
+    linksSection.style.display = 'none';
+  }
+
+  document.getElementById('skillModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('skillModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('mClose').addEventListener('click', closeModal);
+document.getElementById('skillModal').addEventListener('click', function(e){
+  if (e.target === document.getElementById('skillModal')) closeModal();
+});
+document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeModal(); });
+
+// Filters
+document.getElementById('filterBar').addEventListener('click', function(e) {
+  var btn = e.target.closest('.filter-btn');
+  if (!btn) return;
+  currentCat = btn.getAttribute('data-cat');
+  document.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.toggle('active', b === btn); });
+  renderSkills();
+});
+
+document.getElementById('searchInput').addEventListener('input', function(e) {
+  currentSearch = e.target.value.toLowerCase().trim();
+  renderSkills();
+});
+
+document.getElementById('sortSelect').addEventListener('change', function(e) {
+  currentSort = e.target.value;
+  renderSkills();
+});
+
+// ── Init ─────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', function() {
+  injectSharedEn();
+  renderSkills();
+});
+</script>
+</body>
+</html>

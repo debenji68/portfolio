@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
@@ -93,37 +93,37 @@
 </head>
 <body>
 <div class="scanline"></div>
-<div id="terminal-overlay"><div id="terminal-box"><div id="terminal-topbar"><div class="term-dots"><div class="term-dot red"></div><div class="term-dot yellow"></div><div class="term-dot green"></div></div><span>benjamin@portfolio: ~/projets/sae-105</span><button id="terminal-close">&#x2715;</button></div><div id="terminal-output"></div><div id="terminal-input-row"><span>benjamin@portfolio:~$</span><input id="terminal-input" type="text" autocomplete="off" spellcheck="false" placeholder="tapez une commande…"></div></div></div>
+<div id="terminal-overlay"><div id="terminal-box"><div id="terminal-topbar"><div class="term-dots"><div class="term-dot red"></div><div class="term-dot yellow"></div><div class="term-dot green"></div></div><span>benjamin@portfolio: ~/projects/sae-105</span><button id="terminal-close">&#x2715;</button></div><div id="terminal-output"></div><div id="terminal-input-row"><span>benjamin@portfolio:~$</span><input id="terminal-input" type="text" autocomplete="off" spellcheck="false" placeholder="type a command…"></div></div></div>
 
 <div id="shared-header-nav"></div>
 
 <main class="main-wrapper">
-  <a href="projets.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> <span data-i18n="lbl_back"> Retour</span></a>
+  <a href="projets-en.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Back</a>
 
   <div class="card">
     <div class="section-title"><i class="fa-brands fa-python"></i> SAÉ 1.05 — BUT R&amp;T IUT Colmar <span class="year-badge">2025–2026</span></div>
-    <h1 class="entry-title" data-i18n="sae105_title">Traiter les données sur internet</h1>
-    <h2 class="entry-subtitle">Outil de reporting Python + PowerShell · PyQt5 · pathlib · QChart · JSON</h2>
+    <h1 class="entry-title">Processing data on the internet</h1>
+    <h2 class="entry-subtitle">Python + PowerShell reporting tool · PyQt5 · pathlib · QChart · JSON</h2>
 
-    <p class="desc-text">Développement d'un outil complet de reporting en Python + PowerShell permettant d'analyser récursivement l'arborescence d'un disque, d'identifier les 100 plus gros fichiers dépassant un seuil (1 MiB), de les présenter graphiquement (camembert PyQt5 + légendes avec cases à cocher), et de générer un script PowerShell de suppression sécurisé. L'outil est orchestré par un script PowerShell qui enchaîne les 3 scripts Python. Essayez la démo interactive ci-dessous, basée sur mes vrais fichiers !</p>
+    <p class="desc-text">Development of a complete Python + PowerShell reporting tool to recursively analyse a disk, identify the 100 largest files exceeding a threshold (1 MiB), display them graphically (PyQt5 pie chart + checkbox legends), and generate a secure PowerShell deletion script. The tool is orchestrated by a PowerShell script that chains the 3 Python scripts. Try the interactive demo below, based on my real files!</p>
 
     <!-- LIVE DEMO -->
-    <h2 class="block-title"><i class="fa-solid fa-play"></i> Démo interactive — données réelles de mon disque</h2>
-    <p style="font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--txt3);margin-bottom:8px;">Simulation du script MainGraphique.py — données issues de resultats.json (analyse de mon disque F:\)</p>
+    <h2 class="block-title"><i class="fa-solid fa-play"></i> Interactive demo — real data from my disk</h2>
+    <p style="font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--txt3);margin-bottom:8px;">Simulation of MainGraphique.py — data from resultats.json (analysis of my F:\ drive)</p>
 
     <div class="disk-app">
-      <div class="disk-app-title">$ python3 MainGraphique.py "F:\" &nbsp;— Résultat de recherche des 'gros' fichiers…</div>
+      <div class="disk-app-title">$ python3 MainGraphique.py "F:\" &nbsp;— Search results for large files…</div>
       <div class="disk-tabs" id="diskTabs">
-        <div class="disk-tab active" data-panel="camembert">📊 Camembert</div>
-        <div class="disk-tab" data-panel="legende1">📋 Légende 1</div>
-        <div class="disk-tab" data-panel="legende2">📋 Légende 2</div>
-        <div class="disk-tab" data-panel="legende3">📋 Légende 3</div>
-        <div class="disk-tab" data-panel="ihm">⚙️ IHM</div>
+        <div class="disk-tab active" data-panel="camembert">📊 Pie chart</div>
+        <div class="disk-tab" data-panel="legende1">📋 Legend 1</div>
+        <div class="disk-tab" data-panel="legende2">📋 Legend 2</div>
+        <div class="disk-tab" data-panel="legende3">📋 Legend 3</div>
+        <div class="disk-tab" data-panel="ihm">⚙️ UI</div>
       </div>
 
       <div class="disk-panel active" id="panel-camembert">
         <canvas id="diskCanvas" height="300"></canvas>
-        <p style="text-align:center;font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--txt3);margin-top:8px;">Survol = infos du fichier · Données réelles issues de resultats.json</p>
+        <p style="text-align:center;font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--txt3);margin-top:8px;">Hover = file info · Real data from resultats.json</p>
       </div>
 
       <div class="disk-panel" id="panel-legende1">
@@ -137,59 +137,59 @@
       </div>
 
       <div class="disk-panel" id="panel-ihm">
-        <p style="font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--txt2);margin-bottom:12px;">Cochez des fichiers dans les onglets Légende, puis cliquez sur le bouton pour générer le script PowerShell.</p>
+        <p style="font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--txt2);margin-bottom:12px;">Check files in the Legend tabs, then click the button to generate the PowerShell script.</p>
         <input type="text" class="ihm-path" id="ihmPath" value="F:\" readonly>
         <button class="ihm-btn" id="generateBtn" onclick="generatePS1()">
-          <i class="fa-solid fa-terminal"></i> Créer le script pwsh de suppression des fichiers…
+          <i class="fa-solid fa-terminal"></i> Generate PowerShell deletion script…
         </button>
         <div class="ps1-output" id="ps1Output"></div>
       </div>
     </div>
 
     <!-- CODE SOURCE -->
-    <h2 class="block-title" style="margin-top:20px;"><i class="fa-solid fa-list-check"></i> <span data-i18n="lbl_description">Description du projet</span></h2>
+    <h2 class="block-title" style="margin-top:20px;"><i class="fa-solid fa-list-check"></i> <span >Project description</span></h2>
     <div class="exp-info-grid">
       <div class="exp-info-block">
         <h3>🐍 Script 1 — SelectDir.py</h3>
         <ul>
-          <li>Ouvre un sélecteur de répertoire (PyQt5)</li>
+          <li>Opens a directory selector (PyQt5)</li>
           <li>Utilise QFileDialog.getExistingDirectory()</li>
-          <li>Retourne le chemin au script PowerShell</li>
+          <li>Returns the path to the PowerShell script</li>
         </ul>
       </div>
       <div class="exp-info-block">
         <h3>🔍 Script 2 — AnalyseDisk.py</h3>
         <ul>
-          <li>Parcours récursif avec pathlib rglob()</li>
-          <li>Liste [chemin, taille_octets] par fichier</li>
-          <li>Tri décroissant avec lambda</li>
-          <li>Filtre : seuil 1 MiB + max 100 fichiers</li>
-          <li>Export JSON (resultats.json)</li>
+          <li>Recursive traversal with pathlib rglob()</li>
+          <li>List [path, size_bytes] per file</li>
+          <li>Descending sort with lambda</li>
+          <li>Filter: 1 MiB threshold + max 100 files</li>
+          <li>JSON export (resultats.json)</li>
         </ul>
       </div>
       <div class="exp-info-block">
         <h3>📊 Script 3 — MainGraphique.py</h3>
         <ul>
-          <li>Lit le fichier JSON</li>
-          <li>Génère 100 couleurs aléatoires (QColor)</li>
-          <li>Camembert PyQt5 + QChart (QPieSeries)</li>
-          <li>Légendes avec cases à cocher (25/page)</li>
-          <li>Génère delete_files.ps1 à la demande</li>
+          <li>Reads the JSON file</li>
+          <li>Generates 100 random colours (QColor)</li>
+          <li>PyQt5 pie chart + QChart (QPieSeries)</li>
+          <li>Checkbox legends (25/page)</li>
+          <li>Generates delete_files.ps1 on demand</li>
         </ul>
       </div>
       <div class="exp-info-block">
         <h3>💻 Run_SAE.ps1</h3>
         <ul>
-          <li>Orchestre les 3 scripts Python</li>
-          <li>Valide le répertoire (Test-Path)</li>
-          <li>Passe le chemin en argument</li>
-          <li>Lance MainGraphique.py en dernier</li>
-          <li>Exécute delete_files.ps1 si généré</li>
+          <li>Orchestrates the 3 Python scripts</li>
+          <li>Validates the directory (Test-Path)</li>
+          <li>Passes the path as argument</li>
+          <li>Runs MainGraphique.py last</li>
+          <li>Runs delete_files.ps1 if generated</li>
         </ul>
       </div>
     </div>
 
-    <h2 class="block-title" style="margin-top:20px;"><i class="fa-solid fa-layer-group"></i> <span data-i18n="lbl_stack">Stack technique</span></h2>
+    <h2 class="block-title" style="margin-top:20px;"><i class="fa-solid fa-layer-group"></i> <span >Tech stack</span></h2>
     <div class="tech-tags">
       <span class="tech-tag">Python 3</span><span class="tech-tag">PyQt5</span>
       <span class="tech-tag">QChart / QPieSeries</span><span class="tech-tag">pathlib</span>
@@ -198,28 +198,28 @@
       <span class="tech-tag">rglob()</span><span class="tech-tag">Windows / Linux</span>
     </div>
 
-    <h2 class="block-title" style="margin-top:20px;"><i class="fa-solid fa-circle-check"></i> <span data-i18n="lbl_learned">Ce que j'ai appris</span></h2>
+    <h2 class="block-title" style="margin-top:20px;"><i class="fa-solid fa-circle-check"></i> <span >What I learned</span></h2>
     <ul class="result-list">
-      <li>Parcours récursif d'une arborescence avec pathlib et rglob()</li>
-      <li>Tri de listes de listes avec une fonction lambda</li>
-      <li>Création d'interfaces graphiques PyQt5 avec onglets, camembert QChart, légendes</li>
-      <li>Export et import JSON avec le module json</li>
-      <li>Orchestration de scripts Python depuis PowerShell</li>
-      <li>Gestion des apostrophes dans les chemins Windows (antislash en Python/JSON)</li>
+      <li>Recursive directory traversal with pathlib and rglob()</li>
+      <li>Sorting lists of lists with a lambda function</li>
+      <li>Creating PyQt5 GUIs with tabs, QChart pie charts and legends</li>
+      <li>JSON export and import with the json module</li>
+      <li>Orchestrating Python scripts from PowerShell</li>
+      <li>Handling backslashes in Windows paths (Python/JSON)</li>
     </ul>
 
-    <h2 class="block-title" style="margin-top:24px;"><i class="fa-solid fa-graduation-cap"></i> <span data-i18n="ref_title">Référentiel de compétences BUT R&amp;T</span></h2>
+    <h2 class="block-title" style="margin-top:24px;"><i class="fa-solid fa-graduation-cap"></i> <span >BUT R&amp;T Skills Framework</span></h2>
     <div id="ref-container" data-project="sae105"></div>
 
-    <h2 class="block-title" style="margin-top:24px;"><i class="fa-solid fa-shield-halved"></i> <span data-i18n="lbl_proof">Preuves</span></h2>
+    <h2 class="block-title" style="margin-top:24px;"><i class="fa-solid fa-shield-halved"></i> <span >Proof</span></h2>
     <div style="display:flex;flex-direction:column;gap:10px;">
       <div style="padding:12px 16px;border:1px solid rgba(0,212,255,.15);border-radius:6px;background:rgba(0,212,255,.03);font-size:.85rem;color:var(--txt2);display:flex;align-items:flex-start;gap:10px;">
         <i class="fa-solid fa-circle-check" style="color:var(--cyan);margin-top:2px;flex-shrink:0;"></i>
-        La démo interactive ci-dessus utilise les données réelles issues de l'analyse de mon disque (resultats.json de 84 entrées).
+        The interactive demo above uses real data from my disk analysis (resultats.json with 84 entries).
       </div>
       <div style="padding:12px 16px;border:1px solid rgba(0,212,255,.15);border-radius:6px;background:rgba(0,212,255,.03);font-size:.85rem;color:var(--txt2);display:flex;align-items:flex-start;gap:10px;">
         <i class="fa-solid fa-file-code" style="color:var(--cyan);margin-top:2px;flex-shrink:0;"></i>
-        Scripts Python (AnalyseDisk.py, SelectDir.py, MainGraphique.py, Creation_*.py) + Run_SAE.ps1 — disponibles sur demande.
+        Python scripts (AnalyseDisk.py, SelectDir.py, MainGraphique.py, Creation_*.py) + Run_SAE.ps1 — available on request.
       </div>
       <div style="padding:12px 16px;border:1px solid rgba(0,212,255,.15);border-radius:6px;background:rgba(0,212,255,.03);font-size:.85rem;color:var(--txt2);display:flex;align-items:flex-start;gap:10px;">
         <ul>
@@ -233,12 +233,13 @@
       </div>
     </div>
   </div>
-  <div class="back-top"><a href="#" data-i18n="idx_back_top">RETOUR EN HAUT</a></div>
+  <div class="back-top"><a href="#" >BACK TO TOP</a></div>
 </main>
-<footer><p>Web-design : Deiber Benjamin &nbsp;·&nbsp; <kbd>`</kbd> <span data-i18n="footer_terminal">pour le terminal</span></p></footer>
+<footer><p>Web-design: Deiber Benjamin &nbsp;·&nbsp; <kbd>`</kbd> <span>to open terminal</span></p></footer>
 
 <script src="i18n.js"></script>
-<script src="shared.js"></script>
+<script>var currentLang="en";</script>
+<script src="shared-en.js"></script>
 <script src="terminal.js"></script>
 <script>
 // ── Disk Analyzer Data (from resultats.json) ──────────────────────
@@ -354,7 +355,7 @@ function generatePS1() {
   var out = document.getElementById('ps1Output');
   if (!checked.length) {
     out.style.color = 'var(--red)';
-    out.textContent = '⚠ Aucun fichier sélectionné. Cochez des fichiers dans les onglets Légende.';
+    out.textContent = '⚠ No file selected. Check files in the Legend tabs.';
     out.classList.add('visible');
     return;
   }
@@ -372,7 +373,7 @@ function generatePS1() {
   ps1 += '} else {\n    Write-Output "Opération annulée..."\n}\n';
 
   out.style.color = 'var(--green)';
-  out.textContent = '# delete_files.ps1 généré (' + checked.length + ' fichier(s) sélectionné(s))\n\n' + ps1;
+  out.textContent = '# delete_files.ps1 generated (' + checked.length + ' file(s) selected)\n\n' + ps1;
   out.classList.add('visible');
 }
 
@@ -380,7 +381,7 @@ function generatePS1() {
 function buildPageRef() { buildReferentielSection('sae105', 'ref-container'); }
 
 document.addEventListener('DOMContentLoaded', function() {
-  injectShared(); applyTranslations(); buildPageRef();
+  injectSharedEn();  buildPageRef();
   buildLegend('legend1', 0, Math.ceil(FILES.length / 3));
   buildLegend('legend2', Math.ceil(FILES.length / 3), Math.ceil(FILES.length * 2 / 3));
   buildLegend('legend3', Math.ceil(FILES.length * 2 / 3), FILES.length);

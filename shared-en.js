@@ -1,28 +1,27 @@
 /* ═══════════════════════════════════════════════════════════
-   shared.js  — Header + Nav (FR) + Terminal
-   Chaque page FR charge shared.js
-   Le bouton EN redirige vers *-en.html
+   shared-en.js — Header + Nav (EN)
+   Every EN page loads this file
 ═══════════════════════════════════════════════════════════ */
 
-// currentLang is set by i18n.js
+// currentLang is set by i18n.js, we override to 'en' in injectSharedEn
 
 function getActivePage() {
-  return window.location.pathname.split('/').pop() || 'index.html';
+  return window.location.pathname.split('/').pop() || 'index-en.html';
 }
 
-function injectShared() {
-  currentLang = 'fr';
+function injectSharedEn() {
+  currentLang = 'en';
   const active = getActivePage();
-  const enPage = active.replace('.html', '-en.html');
+  const frPage = active.replace('-en.html', '.html');
 
   const pages = [
-    { href:'index.html',       icon:'fa-house',          label:'CV'          },
-    { href:'formation.html',   icon:'fa-graduation-cap', label:'Formations'  },
-    { href:'diplomes.html',    icon:'fa-award',          label:'Diplômes'    },
-    { href:'experiences.html', icon:'fa-briefcase',      label:'Expériences' },
-    { href:'projets.html',     icon:'fa-code',           label:'Projets'     },
-    { href:'competences.html', icon:'fa-microchip',      label:'Compétences' },
-    { href:'contact.html',     icon:'fa-envelope',       label:'Contact'     },
+    { href:'index-en.html',       icon:'fa-house',          label:'CV'         },
+    { href:'formation-en.html',   icon:'fa-graduation-cap', label:'Education'  },
+    { href:'diplomes-en.html',    icon:'fa-award',          label:'Degrees'    },
+    { href:'experiences-en.html', icon:'fa-briefcase',      label:'Experience' },
+    { href:'projets-en.html',     icon:'fa-code',           label:'Projects'   },
+    { href:'competences-en.html', icon:'fa-microchip',      label:'Skills'     },
+    { href:'contact-en.html',     icon:'fa-envelope',       label:'Contact'    },
   ];
 
   const desktopLinks = pages.map(p =>
@@ -39,10 +38,10 @@ function injectShared() {
 
   const html = `
 <header id="site-header">
-  <img class="header-avatar" src="images/photo_profil.jpeg" alt="Photo de profil" onerror="this.style.display='none'">
+  <img class="header-avatar" src="images/photo_profil.jpeg" alt="Profile photo" onerror="this.style.display='none'">
   <div class="header-text">
     <h1>Deiber Benjamin</h1>
-    <p class="header-subtitle">Étudiant BUT Réseaux &amp; Télécommunications · Cybersécurité</p>
+    <p class="header-subtitle">Systems &amp; Network Admin · 2 years · Alsace</p>
     <div class="header-contacts">
       <a href="https://maps.app.goo.gl/VhSzwQHute3TE4Aa9" target="_blank"><i class="fa-solid fa-location-dot"></i> Fessenheim</a>
       <a href="mailto:deiber.benji@gmail.com"><i class="fa-regular fa-envelope"></i> deiber.benji@gmail.com</a>
@@ -55,8 +54,8 @@ function injectShared() {
     <div class="nav-links" id="nav-desktop-links">${desktopLinks}</div>
     <div style="display:flex;gap:6px;align-items:center;flex-shrink:0;">
       <div class="lang-switcher">
-        <button class="lang-btn active" style="cursor:default;">FR</button>
-        <a href="${enPage}" class="lang-btn" style="text-decoration:none;">EN</a>
+        <a href="${frPage}" class="lang-btn" style="text-decoration:none;">FR</a>
+        <button class="lang-btn active" style="cursor:default;">EN</button>
       </div>
       <button class="nav-terminal-btn" id="open-terminal-btn">
         <i class="fa-solid fa-terminal"></i> Terminal <span class="blink">_</span>
@@ -86,10 +85,10 @@ function injectShared() {
     });
   }
 
-  _bindTerminalButton();
+  _bindTerminalButtonEn();
 }
 
-function _bindTerminalButton() {
+function _bindTerminalButtonEn() {
   const btn = document.getElementById('open-terminal-btn');
   const overlay = document.getElementById('terminal-overlay');
   if (!btn || !overlay) return;
@@ -101,14 +100,3 @@ function _bindTerminalButton() {
     if (inp) inp.focus();
   });
 }
-
-// stub so pages that call setLang don't error
-function setLang(lang) {
-  if (lang === 'en') {
-    const active = getActivePage();
-    window.location.href = active.replace('.html', '-en.html');
-  }
-}
-
-// stub for pages that call applyTranslations
-function applyTranslations() {}

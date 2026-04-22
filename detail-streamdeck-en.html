@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <title>DIY Stream Deck — Benjamin Deiber</title>
+  <style>
+    .proof-row{display:flex;flex-direction:column;gap:10px;}
+    .proof-line{padding:12px 16px;border:1px solid rgba(0,212,255,.15);border-radius:6px;background:rgba(0,212,255,.03);font-size:.85rem;color:var(--txt2);display:flex;align-items:flex-start;gap:10px;}
+    .proof-line i{color:var(--cyan);margin-top:2px;flex-shrink:0;}
+  </style>
+  <!-- Google Fonts: non-blocking -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&display=swap">
+  <!-- Critical CSS: prevents unstyled flash on slow connections -->
+  <style>
+    #terminal-overlay{display:none!important;position:fixed;inset:0;z-index:8000;}
+    #terminal-overlay.open{display:flex!important;}
+    .nav-drawer{display:none!important;}
+    .nav-drawer.open{display:flex!important;}
+    .header-avatar{width:100px;height:100px;border-radius:50%;object-fit:cover;flex-shrink:0;}
+    body{background:#04080f;color:#c8d8e8;}
+  </style>
+</head>
+<body>
+<div class="scanline"></div>
+<div id="terminal-overlay"><div id="terminal-box"><div id="terminal-topbar"><div class="term-dots"><div class="term-dot red"></div><div class="term-dot yellow"></div><div class="term-dot green"></div></div><span>benjamin@portfolio: ~/projects/stream-deck-diy</span><button id="terminal-close">&#x2715;</button></div><div id="terminal-output"></div><div id="terminal-input-row"><span>benjamin@portfolio:~$</span><input id="terminal-input" type="text" autocomplete="off" spellcheck="false" placeholder="type a command…"></div></div></div>
+
+<div id="shared-header-nav"></div>
+
+<main class="main-wrapper">
+  <a href="projets-en.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Back</a>
+
+  <div class="card">
+    <div class="section-title"><i class="fa-solid fa-keyboard"></i> Personal DIY Project <span class="year-badge">2024 – Present</span></div>
+    <h1 class="entry-title">DIY Stream Deck</h1>
+    <h2 class="entry-subtitle">Arduino Pro Micro · Key modules · 3D Printing · Soldering</h2>
+
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px;">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--cyan);background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.3);padding:3px 10px;border-radius:4px;">HID keyboard emulation</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--purple);background:rgba(180,79,255,.08);border:1px solid rgba(180,79,255,.3);padding:3px 10px;border-radius:4px;">100% homemade</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--gold);background:rgba(255,215,0,.06);border:1px solid rgba(255,215,0,.3);padding:3px 10px;border-radius:4px;">Customisable shortcuts</span>
+    </div>
+
+    <p class="desc-text">Building a programmable macro keypad similar to a Stream Deck. The Arduino Pro Micro is connected to mechanical key switches. The device emulates a USB keyboard (HID protocol) and allows launching custom keyboard shortcuts on PC: playing music, opening applications, triggering macros... The case is entirely modelled and 3D-printed. Components are hand-soldered.</p>
+
+    <h2 class="block-title" style="margin-top:20px;"><i class="fa-solid fa-list-check"></i> <span >Features</span></h2>
+    <div class="exp-info-grid">
+      <div class="exp-info-block">
+        <h3>⌨️ PC control</h3>
+        <ul>
+          <li>USB keyboard emulation (HID)</li>
+          <li>Fully customisable keyboard shortcuts</li>
+          <li>Application launching</li>
+          <li>Music / volume control</li>
+          <li>Multi-key macros</li>
+        </ul>
+      </div>
+      <div class="exp-info-block">
+        <h3>🔌 Electronics</h3>
+        <ul>
+          <li>Arduino Pro Micro (ATmega32U4)</li>
+          <li>Cherry MX mechanical key switches</li>
+          <li>Direct USB power</li>
+          <li>Matrix wiring of keys</li>
+          <li>Manual soldering</li>
+        </ul>
+      </div>
+      <div class="exp-info-block">
+        <h3>💻 Arduino programming</h3>
+        <ul>
+          <li>Arduino C++ code</li>
+          <li>HID-Project library</li>
+          <li>Debounce management</li>
+          <li>Key definitions in array</li>
+          <li>Upload via Arduino IDE</li>
+        </ul>
+      </div>
+      <div class="exp-info-block">
+        <h3>🖨️ Manufacturing</h3>
+        <ul>
+          <li>Custom enclosure modelling</li>
+          <li>FDM printing (PLA)</li>
+          <li>Notches for key modules</li>
+          <li>Screwable lid</li>
+          <li>Full assembly</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2 class="block-title" style="margin-top:20px;"><i class="fa-solid fa-layer-group"></i> <span >Tech stack</span></h2>
+    <div class="tech-tags">
+      <span class="tech-tag">Arduino Pro Micro</span><span class="tech-tag">ATmega32U4</span>
+      <span class="tech-tag">USB HID</span><span class="tech-tag">C++ Arduino</span>
+      <span class="tech-tag">HID-Project</span><span class="tech-tag">Key modules</span>
+      <span class="tech-tag">Soldering</span><span class="tech-tag">3D Modelling</span>
+      <span class="tech-tag">3D Printing</span><span class="tech-tag">Arduino IDE</span>
+    </div>
+
+    <h2 class="block-title" style="margin-top:20px;"><i class="fa-solid fa-circle-check"></i> <span >What I learned</span></h2>
+    <ul class="result-list">
+      <li>Programming an Arduino microcontroller with HID emulation</li>
+      <li>USB HID protocol — how a keyboard device communicates with the PC</li>
+      <li>Debounce and key state management in Arduino code</li>
+      <li>Matrix wiring of mechanical keys with soldering</li>
+      <li>Designing a functional 3D enclosure with manufacturing tolerances</li>
+    </ul>
+
+    
+    <h2 class="block-title" style="margin-top:24px;"><i class="fa-solid fa-shield-halved"></i> <span >Proof</span></h2>
+    <div class="proof-row">
+      <div class="proof-line"><i class="fa-solid fa-circle-check"></i> DIY Stream Deck fonctionnel utilisé quotidiennement sur mon PC.</div>
+      <div class="proof-line"><i class="fa-solid fa-code"></i> Arduino code available on request.</div>
+      <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: start; margin-top: 10px;">
+        <img src="images/streamdeck_1.jpg" alt="Image du DIY Stream Deck" style="width: calc(50% - 10px); height: auto;">
+        <img src="images/streamdeck_2.jpg" alt="Image du DIY Stream Deck" style="width: calc(50% - 10px); height: auto;">
+        <img src="images/streamdeck_3.jpg" alt="Image du DIY Stream Deck" style="width: calc(50% - 10px); height: auto;">
+        <img src="images/streamdeck_4.png" alt="Image du DIY Stream Deck" style="width: calc(50% - 10px); height: auto;">
+      </div>
+    </div>
+  </div>
+  <div class="back-top"><a href="#" >BACK TO TOP</a></div>
+</main>
+<footer><p>Web-design: Deiber Benjamin &nbsp;·&nbsp; <kbd>`</kbd> <span>to open terminal</span></p></footer>
+<script src="i18n.js"></script>
+<script>if(typeof currentLang!=="undefined"){currentLang="en";}</script>
+<script src="shared-en.js"></script>
+<script src="terminal.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  injectSharedEn(); 
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <title>SAÉ 1.03 — Benjamin Deiber</title>
+  <!-- Google Fonts: non-blocking -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&display=swap">
+  <!-- Critical CSS: prevents unstyled flash on slow connections -->
+  <style>
+    #terminal-overlay{display:none!important;position:fixed;inset:0;z-index:8000;}
+    #terminal-overlay.open{display:flex!important;}
+    .nav-drawer{display:none!important;}
+    .nav-drawer.open{display:flex!important;}
+    .header-avatar{width:100px;height:100px;border-radius:50%;object-fit:cover;flex-shrink:0;}
+    body{background:#04080f;color:#c8d8e8;}
+  </style>
+</head>
+<body>
+<div class="scanline"></div>
+<div id="terminal-overlay"><div id="terminal-box"><div id="terminal-topbar"><div class="term-dots"><div class="term-dot red"></div><div class="term-dot yellow"></div><div class="term-dot green"></div></div><span>benjamin@portfolio: ~/projects/sae-103</span><button id="terminal-close">&#x2715;</button></div><div id="terminal-output"></div><div id="terminal-input-row"><span>benjamin@portfolio:~$</span><input id="terminal-input" type="text" autocomplete="off" spellcheck="false" placeholder="type a command…"></div></div></div>
+
+<div id="shared-header-nav"></div>
+
+<main class="main-wrapper">
+  <a href="projets-en.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> <span> Back</span></a>
+
+  <div class="card">
+    <div class="section-title"><i class="fa-solid fa-wifi"></i> SAÉ 1.03 — BUT R&amp;T IUT Colmar <span class="year-badge">2025–2026</span></div>
+    <h1 class="entry-title">Discovering a Transmission Device</h1>
+    <h2 class="entry-subtitle">Real Wi-Fi study · Cisco Catalyst 2960 PoE · Heatmaps · iPerf · Packet Tracer</h2>
+
+    <p class="desc-text">Complete study of a real Wi-Fi infrastructure installed in building C of the IUT of Colmar. The project covered RJ45 Cat6 T568B cabling, PoE power supply (IEEE 802.3af) via Cisco Catalyst 2960, Wi-Fi coverage heatmaps (2.4/5 GHz), RSSI measurements at different distances, iPerf throughput, Cisco WLC controller analysis and a Packet Tracer simulation.</p>
+
+    <h2 class="block-title" style="margin-top:20px;"><i class="fa-solid fa-list-check"></i> <span >Project description</span></h2>
+    <div class="exp-info-grid">
+      <div class="exp-info-block">
+        <h3>📡 Wi-Fi measurements</h3>
+        <ul>
+          <li>Coverage heatmaps 2.4 GHz (802.11g) and 5 GHz (802.11a)</li>
+          <li>RSSI measurements at 0, 10, 25, 50m from AP E</li>
+          <li>Loss calculation (dB) by distance and obstacles</li>
+          <li>Laptop vs smartphone performance comparison</li>
+          <li>Evaluation : RSSI Coverage 97%, Overall Wi-Fi Quality 98%</li>
+        </ul>
+      </div>
+      <div class="exp-info-block">
+        <h3>🔌 Equipment studied</h3>
+        <ul>
+          <li>Cisco Catalyst 2960 (WS-C2960-24PC-LV06) — 24 ports PoE, 370W</li>
+          <li>AP Cisco AIR-AP1231G-E-K9 — compatible IEEE 802.3af, 12,95W max</li>
+          <li>PoE PRO tester: 55V / 13.4W measured (Class 3)</li>
+          <li>Cat6 S/FTP RJ45 cables, T568B standard</li>
+          <li>Cisco WLC Controller (software version 8.0.140.0)</li>
+        </ul>
+      </div>
+      <div class="exp-info-block">
+        <h3>📊 Throughput &amp; performance</h3>
+        <ul>
+          <li>iPerf TCP tests between client and server</li>
+          <li>Room C100 (near AP): 5.9 Mbit/s (5GHz), 4.8 Mbit/s (2.4GHz)</li>
+          <li>Room C101: significant 5GHz degradation</li>
+          <li>Room C102: 0.55 Mbit/s (5GHz) vs 2.3 Mbit/s (2.4GHz)</li>
+          <li>Detection of Rogue APs by the controller</li>
+        </ul>
+      </div>
+      <div class="exp-info-block">
+        <h3>🖥️ Packet Tracer simulation</h3>
+        <ul>
+          <li>Routeur + Cisco 2960 + WLC + LWAP + clients WiFi</li>
+          <li>Addressing plan 10.129.10.0/24</li>
+          <li>Internal WLC DHCP</li>
+          <li>SSID GrX_802.11a (5GHz) et GrX_802.11b/g (2,4GHz)</li>
+          <li>SSH connection to switch validated</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2 class="block-title" style="margin-top:20px;"><i class="fa-solid fa-layer-group"></i> <span >Tech stack</span></h2>
+    <div class="tech-tags">
+      <span class="tech-tag">Wi-Fi 802.11a/g</span><span class="tech-tag">PoE IEEE 802.3af</span>
+      <span class="tech-tag">Cisco Catalyst 2960</span><span class="tech-tag">WLC Cisco</span>
+      <span class="tech-tag">iPerf TCP</span><span class="tech-tag">Heatmaps RSSI</span>
+      <span class="tech-tag">Packet Tracer</span><span class="tech-tag">RJ45 Cat6 T568B</span>
+      <span class="tech-tag">SSH</span><span class="tech-tag">DHCP</span><span class="tech-tag">DNS</span>
+    </div>
+
+    <h2 class="block-title" style="margin-top:20px;"><i class="fa-solid fa-circle-check"></i> <span >What I learned</span></h2>
+    <ul class="result-list">
+      <li>Wi-Fi 802.11 operation: 2.4 GHz vs 5 GHz differences (range vs throughput)</li>
+      <li>PoE power: IEEE 802.3af protocol, power classes, PoE budget</li>
+      <li>RSSI signal measurement and dB loss analysis</li>
+      <li>Using iPerf to measure real Wi-Fi throughput</li>
+      <li>Wi-Fi network architecture with controller (WLC + LWAP)</li>
+      <li>Complete network simulation in Cisco Packet Tracer</li>
+    </ul>
+
+    <h2 class="block-title" style="margin-top:24px;"><i class="fa-solid fa-graduation-cap"></i> <span >BUT R&amp;T Skills Framework</span></h2>
+    <div id="ref-container" data-project="sae103"></div>
+
+    <h2 class="block-title" style="margin-top:24px;"><i class="fa-solid fa-shield-halved"></i> <span >Proof</span></h2>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div style="padding:12px 16px;border:1px solid rgba(0,212,255,.15);border-radius:6px;background:rgba(0,212,255,.03);font-size:.85rem;color:var(--txt2);display:flex;align-items:flex-start;gap:10px;">
+        <i class="fa-solid fa-file-lines" style="color:var(--cyan);margin-top:2px;flex-shrink:0;"></i>
+        <a href="pdf/Rapport_SAE103.pdf" target="_blank" style="color:var(--cyan);text-decoration:underline;">Full report SAE_wifi_report.pdf</a> — 15 pages of detailed analysis.
+      </div>
+      <div style="padding:12px 16px;border:1px solid rgba(0,212,255,.15);border-radius:6px;background:rgba(0,212,255,.03);font-size:.85rem;color:var(--txt2);display:flex;align-items:flex-start;gap:10px;">
+        <i class="fa-solid fa-file-powerpoint" style="color:var(--cyan);margin-top:2px;flex-shrink:0;"></i>
+        SAE_wifi.pptx presentation — available on request.
+      </div>
+      <div style="padding:12px 16px;border:1px solid rgba(0,212,255,.15);border-radius:6px;background:rgba(0,212,255,.03);font-size:.85rem;color:var(--txt2);display:flex;align-items:flex-start;gap:10px;">
+        <ul>
+          <li><img src="images/heatmap.png" alt="Heatmap RSSI" class="detail-img-sm" style="margin-left:6px;"></li>
+          <li><img src="images/jperf.png" alt="Graphiques iPerf" class="detail-img-sm" style="margin-left:6px;"></li>
+          <li><img src="images/controlleur_cisco.png" alt="Interface contrôleur Wi-Fi Cisco" class="detail-img-sm" style="margin-left:6px;"></li>
+        </ul>
+        <ul>
+          <li><img src="images/ap_cisco.png" alt="AP Cisco" class="detail-img-sm" style="margin-left:6px;"></li>
+          <li><img src="images/poe.png" alt="POE" class="detail-img-sm" style="margin-left:6px;"></li>
+          <li><img src="images/packet_tracer.png" alt="Packet Tracer simulation" class="detail-img-sm" style="margin-left:6px;"></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="back-top"><a href="#" >BACK TO TOP</a></div>
+</main>
+<footer><p>Web-design: Deiber Benjamin &nbsp;·&nbsp; <kbd>`</kbd> <span>to open terminal</span></p></footer>
+<script src="i18n.js"></script>
+<script>if(typeof currentLang!=="undefined"){currentLang="en";}</script>
+<script src="shared-en.js"></script>
+<script src="terminal.js"></script>
+<script>
+function buildPageRef() { buildReferentielSection('sae103', 'ref-container'); }
+document.addEventListener('DOMContentLoaded', () => { injectSharedEn();  buildPageRef(); });
+</script>
+</body>
+</html>
