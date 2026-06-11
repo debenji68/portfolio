@@ -89,12 +89,12 @@ function initTerminal() {
           { t:'cyan',  v:'  cat but · cat lycee · cat college' },
           { t:'green', v:'  cat nas · cat stage · cat cvweb · cat mdp' },
           { t:'green', v:'  cat ctf · cat blox · cat streamdeck' },
-          { t:'green', v:'  cat sae101 · cat sae102 · cat sae103 · cat sae105' },
+          { t:'green', v:'  cat sae101 · cat sae102 · cat sae103 · cat sae105 · cat sae203' },
           { t:'',      v:'  open <page>  →  index / formations / diplomes / experiences' },
           { t:'',      v:'               →  projets / competences / contact' },
           { t:'',      v:'               →  bac / brevet / pix / dsd1 / but / lycee / college' },
           { t:'',      v:'               →  nas / stage / cvweb / mdp / ctf / blox / streamdeck' },
-          { t:'',      v:'               →  sae101 / sae102 / sae103 / sae105' },
+          { t:'',      v:'               →  sae101 / sae102 / sae103 / sae105 / sae203' },
           { t:'cyan',  v:'╚══════════════════════════════════════════╝' },
         ];
         return [
@@ -105,12 +105,12 @@ function initTerminal() {
           { t:'cyan',  v:'  cat but · cat lycee · cat college' },
           { t:'green', v:'  cat nas · cat stage · cat cvweb · cat mdp' },
           { t:'green', v:'  cat ctf · cat blox · cat streamdeck' },
-          { t:'green', v:'  cat sae101 · cat sae102 · cat sae103 · cat sae105' },
+          { t:'green', v:'  cat sae101 · cat sae102 · cat sae103 · cat sae105 · cat sae203' },
           { t:'',      v:'  open <page>  →  index / education / degrees / experience' },
           { t:'',      v:'               →  projects / skills / contact' },
           { t:'',      v:'               →  bac / brevet / pix / dsd1 / but / lycee / college' },
           { t:'',      v:'               →  nas / stage / cvweb / mdp / ctf / blox / streamdeck' },
-          { t:'',      v:'               →  sae101 / sae102 / sae103 / sae105' },
+          { t:'',      v:'               →  sae101 / sae102 / sae103 / sae105 / sae203' },
           { t:'cyan',  v:'╚══════════════════════════════════════════╝' },
         ];
       },
@@ -526,6 +526,25 @@ function initTerminal() {
         ];
       },
 
+      'cat sae203': function () {
+        if (fr) return [
+          { t:'gold',  v:'══ SAÉ 2.03 — Application web Ludothèque ══' },
+          { t:'',      v:'  Django · MariaDB · Nginx · Gunicorn · VirtualBox' },
+          { t:'',      v:'  CRUD : Joueur · Commentaire · Liste de jeux' },
+          { t:'',      v:'  2 VMs Linux · BDD séparée · Déploiement prod' },
+          { t:'cyan',  v:'  Python · Django · MariaDB · Nginx · Gunicorn' },
+          { t:'dim',   v:'  → open sae203' },
+        ];
+        return [
+          { t:'gold',  v:'══ SAÉ 2.03 — Board Game Library Web App ══' },
+          { t:'',      v:'  Django · MariaDB · Nginx · Gunicorn · VirtualBox' },
+          { t:'',      v:'  CRUD: Player · Comment · Game list' },
+          { t:'',      v:'  2 Linux VMs · Separate DB server · Prod deploy' },
+          { t:'cyan',  v:'  Python · Django · MariaDB · Nginx · Gunicorn' },
+          { t:'dim',   v:'  → open sae203' },
+        ];
+      },
+
       clear: function () { return null; },
     };
   }
@@ -564,6 +583,7 @@ function initTerminal() {
     sae102:       ['detail-sae102.html',     'detail-sae102-en.html'],
     sae103:       ['detail-sae103.html',     'detail-sae103-en.html'],
     sae105:       ['detail-sae105.html',     'detail-sae105-en.html'],
+    sae203:       ['detail-sae203.html',     'detail-sae203-en.html'],
     // alias EN uniquement
     education:           ['formation.html',         'formation-en.html'],
     degrees:             ['diplomes.html',           'diplomes-en.html'],
@@ -592,8 +612,8 @@ function initTerminal() {
         ? ('Destination inconnue : "' + arg + '"')
         : ('Unknown destination: "' + arg + '"'));
       appendLine('dim', fr
-        ? 'Pages : index, formations, diplomes, experiences, projets, competences, contact, bac, brevet, pix, dsd1, but, lycee, college, nas, stage, cvweb, mdp, ctf, blox, streamdeck, sae101-105'
-        : 'Pages: index, education, degrees, experience, projects, skills, contact, bac, brevet, pix, dsd1, but, lycee, college, nas, stage, cvweb, mdp, ctf, blox, streamdeck, sae101-105');
+        ? 'Pages : index, formations, diplomes, experiences, projets, competences, contact, bac, brevet, pix, dsd1, but, lycee, college, nas, stage, cvweb, mdp, ctf, blox, streamdeck, sae101-105, sae203'
+        : 'Pages: index, education, degrees, experience, projects, skills, contact, bac, brevet, pix, dsd1, but, lycee, college, nas, stage, cvweb, mdp, ctf, blox, streamdeck, sae101-105, sae203');
     }
   }
 

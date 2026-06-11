@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <title>SAÉ 2.03 — Benjamin Deiber</title>
+  <style>
+    .arch-diagram {
+      background: rgba(4,14,26,.97);
+      border: 1px solid rgba(0,212,255,.25);
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 16px 0;
+      position: relative;
+    }
+    .arch-diagram::before {
+      content:''; position:absolute; top:0;left:0;right:0; height:2px;
+      background:linear-gradient(90deg,var(--cyan),var(--green),var(--purple));
+    }
+    .arch-node {
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      padding: 14px 20px;
+      background: rgba(0,20,35,.7);
+      border: 1px solid rgba(0,212,255,.2);
+      border-radius: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .72rem;
+    }
+    .arch-node .node-icon { font-size: 1.4rem; }
+    .arch-node .node-label { color: var(--cyan); font-weight: 700; }
+    .arch-node .node-sub { color: var(--txt3); font-size: .62rem; text-align: center; }
+    .arch-arrow {
+      display: flex; align-items: center; justify-content: center;
+      color: var(--txt3); font-size: .65rem;
+      font-family: 'JetBrains Mono', monospace;
+      flex-direction: column; gap: 2px;
+    }
+    .arch-row {
+      display: flex; align-items: center; gap: 12px;
+      padding: 20px; flex-wrap: wrap; justify-content: center;
+    }
+    .crud-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 10px; margin: 14px 0;
+    }
+    .crud-card {
+      background: rgba(0,20,35,.6);
+      border: 1px solid rgba(0,212,255,.15);
+      border-radius: 8px; padding: 14px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .crud-card h4 { color: var(--cyan); font-size: .75rem; margin: 0 0 8px; }
+    .crud-card ul { margin: 0; padding-left: 16px; color: var(--txt2); font-size: .65rem; line-height: 1.7; }
+    .crud-card.mine { border-color: rgba(0,255,136,.35); }
+    .crud-card.mine h4 { color: var(--green); }
+    .mine-badge {
+      display: inline-block; padding: 2px 8px;
+      background: rgba(0,255,136,.12); border: 1px solid rgba(0,255,136,.35);
+      border-radius: 4px; color: var(--green);
+      font-family: 'JetBrains Mono', monospace; font-size: .6rem; font-weight: 700;
+      margin-left: 8px; vertical-align: middle;
+    }
+    .vm-card {
+      background: rgba(0,20,35,.6);
+      border: 1px solid rgba(120,80,255,.25);
+      border-radius: 8px; padding: 16px; margin: 8px 0;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .vm-card h4 { color: #a87dff; margin: 0 0 8px; font-size: .78rem; }
+    .vm-card ul { margin: 0; padding-left: 16px; color: var(--txt2); font-size: .68rem; line-height: 1.8; }
+    .vm-card.mine { border-color: rgba(0,255,136,.35); }
+    .vm-card.mine h4 { color: var(--green); }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&display=swap">
+  <style>
+    #terminal-overlay{display:none!important;position:fixed;inset:0;z-index:8000;}
+    #terminal-overlay.open{display:flex!important;}
+    .nav-drawer{display:none!important;}
+    .nav-drawer.open{display:flex!important;}
+    .header-avatar{width:100px;height:100px;border-radius:50%;object-fit:cover;flex-shrink:0;}
+    body{background:#04080f;color:#c8d8e8;}
+  </style>
+</head>
+<body>
+<div class="scanline"></div>
+<div id="terminal-overlay"><div id="terminal-box"><div id="terminal-topbar"><div class="term-dots"><div class="term-dot red"></div><div class="term-dot yellow"></div><div class="term-dot green"></div></div><span>benjamin@portfolio: ~/projets/sae-203</span><button id="terminal-close">&#x2715;</button></div><div id="terminal-output"></div><div id="terminal-input-row"><span>benjamin@portfolio:~$</span><input id="terminal-input" type="text" autocomplete="off" spellcheck="false" placeholder="tapez une commande…"></div></div></div>
+
+<div id="shared-header-nav"></div>
+
+<main class="main-wrapper">
+  <a href="projets.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> <span data-i18n="lbl_back"> Retour</span></a>
+
+  <div class="card">
+    <div class="section-title"><i class="fa-brands fa-python"></i> SAÉ 2.03 — BUT R&amp;T IUT Colmar <span class="year-badge">2025–2026</span></div>
+    <h1 class="entry-title" data-i18n="sae203_title">Déployer une application web — Ludothèque</h1>
+    <h2 class="entry-subtitle">Django · MariaDB · Nginx · Gunicorn · VirtualBox · Linux · Python</h2>
+
+    <p class="desc-text">
+      Conception et déploiement d'une application web complète de gestion de ludothèque (bibliothèque de jeux de société) dans le cadre de la compétence RT3 informatique. Travail réalisé en groupe de 4 étudiants : mise en place de l'infrastructure virtualisée (VMs VirtualBox), développement Django avec CRUD complet sur plusieurs modèles, hébergement via Nginx + Gunicorn sur une VM Debian dédiée, et base de données MariaDB sur une VM séparée.
+    </p>
+
+    <!-- ARCHITECTURE DIAGRAM -->
+    <h2 class="block-title"><i class="fa-solid fa-diagram-project"></i> Architecture de déploiement</h2>
+    <div class="arch-diagram">
+      <div class="arch-row">
+        <div class="arch-node">
+          <span class="node-icon">🌐</span>
+          <span class="node-label">Navigateur</span>
+          <span class="node-sub">Client HTTP</span>
+        </div>
+        <div class="arch-arrow">
+          <span style="color:var(--cyan);">──────▶</span>
+          <span>HTTP :80</span>
+        </div>
+        <div class="arch-node mine">
+          <span class="node-icon">⚙️</span>
+          <span class="node-label">VM Web <span class="mine-badge">moi</span></span>
+          <span class="node-sub">Debian Linux</span>
+          <span class="node-sub">Nginx (reverse proxy)</span>
+          <span class="node-sub">Gunicorn (WSGI)</span>
+          <span class="node-sub">Django App</span>
+        </div>
+        <div class="arch-arrow">
+          <span style="color:var(--green);">──────▶</span>
+          <span>TCP :3306</span>
+        </div>
+        <div class="arch-node mine">
+          <span class="node-icon">🗄️</span>
+          <span class="node-label">VM BDD <span class="mine-badge">moi</span></span>
+          <span class="node-sub">Debian Linux</span>
+          <span class="node-sub">MariaDB</span>
+          <span class="node-sub">ludotheque_db</span>
+        </div>
+      </div>
+      <p style="text-align:center;font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--txt3);padding:0 16px 14px;">Les deux VMs tournent sous VirtualBox — configuration réseau en bridge. <span style="color:var(--green);">Vert = mes réalisations</span></p>
+    </div>
+
+    <!-- MY CONTRIBUTIONS -->
+    <h2 class="block-title" style="margin-top:20px;"><i class="fa-solid fa-user-gear"></i> Mes contributions personnelles</h2>
+
+    <h3 style="font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--green);margin:16px 0 10px;">
+      <i class="fa-solid fa-server"></i> Infrastructure VirtualBox
+    </h3>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
+      <div class="vm-card mine">
+        <h4><i class="fa-solid fa-database"></i> VM MariaDB</h4>
+        <ul>
+          <li>Installation Debian Linux</li>
+          <li>Installation et configuration MariaDB</li>
+          <li>Création de la base <code>ludotheque_db</code></li>
+          <li>Création d'un utilisateur dédié Django</li>
+          <li>Configuration du bind-address réseau</li>
+          <li>Import du schéma et des données initiales</li>
+        </ul>
+      </div>
+      <div class="vm-card mine">
+        <h4><i class="fa-solid fa-globe"></i> VM Web (Nginx + Gunicorn)</h4>
+        <ul>
+          <li>Installation Debian Linux</li>
+          <li>Installation Python, Django, Gunicorn</li>
+          <li>Configuration Nginx en reverse proxy</li>
+          <li>Liaison Nginx ↔ Gunicorn via socket Unix</li>
+          <li>Configuration du service systemd Gunicorn</li>
+          <li>Déploiement de l'application Django</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 style="font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--green);margin:16px 0 10px;">
+      <i class="fa-brands fa-python"></i> Développement Django — CRUD réalisés
+    </h3>
+    <div class="crud-grid">
+      <div class="crud-card mine">
+        <h4><i class="fa-solid fa-user"></i> Joueur <span class="mine-badge">moi</span></h4>
+        <ul>
+          <li>Model : username, nom, prénom, mail, mot de passe, type (pro/particulier)</li>
+          <li>Form : ModelForm avec validation</li>
+          <li>Views : list, detail, create, update, delete</li>
+          <li>Templates HTML de test CRUD</li>
+          <li>URLs configurées</li>
+        </ul>
+      </div>
+      <div class="crud-card mine">
+        <h4><i class="fa-solid fa-comment"></i> Commentaire <span class="mine-badge">moi</span></h4>
+        <ul>
+          <li>Model : jeu (FK), joueur (FK), note, commentaire, date</li>
+          <li>Form : ModelForm</li>
+          <li>Views : list, detail, create, update, delete</li>
+          <li>Templates HTML de test CRUD</li>
+          <li>URLs configurées</li>
+        </ul>
+      </div>
+      <div class="crud-card mine">
+        <h4><i class="fa-solid fa-list-check"></i> Liste de jeux <span class="mine-badge">moi</span></h4>
+        <ul>
+          <li>Model : joueur (FK), jeu (FK), relation M2M</li>
+          <li>Form : ModelForm</li>
+          <li>Views : list, detail, create, update, delete</li>
+          <li>Templates HTML de test CRUD</li>
+          <li>URLs configurées</li>
+        </ul>
+      </div>
+      <div class="crud-card">
+        <h4><i class="fa-solid fa-gamepad"></i> Jeu / Catégorie / Auteur</h4>
+        <ul>
+          <li>Réalisés par les autres membres du groupe</li>
+          <li>Modèles interconnectés via FK</li>
+          <li>Import par fichier (jeux)</li>
+          <li>CRUD complet</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- PROJECT DESCRIPTION -->
+    <h2 class="block-title" style="margin-top:20px;"><i class="fa-solid fa-list-check"></i> <span data-i18n="lbl_description">Description du projet</span></h2>
+    <div class="exp-info-grid">
+      <div class="exp-info-block">
+        <h3>📋 Schéma de données</h3>
+        <ul>
+          <li>Catégories (id, nom, descriptif)</li>
+          <li>Jeux (id, titre, année, photo, éditeur, auteur, catégorie)</li>
+          <li>Auteurs (id, nom, prénom, âge, photo)</li>
+          <li>Joueurs (id, nom, prénom, mail, mdp, type)</li>
+          <li>Commentaires (jeu FK, joueur FK, note, commentaire, date)</li>
+          <li>Liste de jeux par usager</li>
+        </ul>
+      </div>
+      <div class="exp-info-block">
+        <h3>🌐 Fonctionnalités du site</h3>
+        <ul>
+          <li>CRUD complet sur tous les modèles</li>
+          <li>Inscription de nouveaux usagers</li>
+          <li>Commentaires + notes sur les jeux</li>
+          <li>Moyenne des notes par type d'usager</li>
+          <li>Meilleur et pire commentaire par jeu</li>
+          <li>Import de jeux via fichier (création auto d'auteur)</li>
+          <li>Fiche joueur avec liste + commentaires</li>
+          <li>🎲 Reroll — sélection aléatoire d'un jeu/auteur/catégorie sur la page d'accueil</li>
+        </ul>
+      </div>
+      <div class="exp-info-block">
+        <h3>🔧 Outils collaboratifs</h3>
+        <ul>
+          <li>GitHub pour le code source</li>
+          <li>Diagramme de Gantt (répartition des tâches)</li>
+          <li>Procédure d'installation écrite</li>
+          <li>Présentation + démo 5 min</li>
+        </ul>
+      </div>
+      <div class="exp-info-block">
+        <h3>📚 Ressources mobilisées</h3>
+        <ul>
+          <li>R107 — Fondamentaux programmation</li>
+          <li>R108 — Systèmes d'exploitation</li>
+          <li>R109 — Technologies web</li>
+          <li>R207/208/209 — Données & web</li>
+          <li>R210/211 — Anglais & communication</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2 class="block-title" style="margin-top:20px;"><i class="fa-solid fa-layer-group"></i> <span data-i18n="lbl_stack">Stack technique</span></h2>
+    <div class="tech-tags">
+      <span class="tech-tag">Python 3</span>
+      <span class="tech-tag">Django</span>
+      <span class="tech-tag">MariaDB</span>
+      <span class="tech-tag">Nginx</span>
+      <span class="tech-tag">Gunicorn</span>
+      <span class="tech-tag">VirtualBox</span>
+      <span class="tech-tag">Debian Linux</span>
+      <span class="tech-tag">HTML5 / CSS3</span>
+      <span class="tech-tag">ModelForm</span>
+      <span class="tech-tag">ORM Django</span>
+      <span class="tech-tag">GitHub</span>
+      <span class="tech-tag">systemd</span>
+    </div>
+
+    <h2 class="block-title" style="margin-top:20px;"><i class="fa-solid fa-circle-check"></i> <span data-i18n="lbl_learned">Ce que j'ai appris</span></h2>
+    <ul class="result-list">
+      <li>Mise en place d'une infrastructure virtualisée multi-VM sous VirtualBox (VM web + VM BDD)</li>
+      <li>Configuration d'un serveur Nginx en reverse proxy et liaison avec Gunicorn (WSGI)</li>
+      <li>Installation et configuration de MariaDB : création de base, utilisateur dédié, accès réseau</li>
+      <li>Développement de CRUDs complets en Django : models, forms, views (CBV/FBV), URLs, templates</li>
+      <li>Gestion des relations entre modèles : ForeignKey, ManyToMany dans l'ORM Django</li>
+      <li>Travail collaboratif avec Git / GitHub et répartition des tâches via Gantt</li>
+      <li>Déploiement d'une application Django en production sur Linux avec service systemd</li>
+    </ul>
+
+    <!-- ENGLISH SUMMARY (required by SAE spec) -->
+    <h2 class="block-title" style="margin-top:24px;"><i class="fa-solid fa-flag-usa"></i> Project summary <span style="font-size:.7rem;color:var(--txt3);font-weight:400;">(English)</span></h2>
+    <div style="padding:16px;border:1px solid rgba(0,212,255,.15);border-radius:8px;background:rgba(0,20,35,.5);font-family:'JetBrains Mono',monospace;font-size:.72rem;line-height:1.8;color:var(--txt2);">
+      <p style="margin:0 0 10px;">
+        This project is part of the RT3 competency (IT development). Working in a team of four, we designed and deployed a full-stack web application for managing a board game library (<em>ludothèque</em>). The application allows users to browse games, post reviews, manage personal game lists, and discover random content via a <strong style="color:var(--cyan);">Reroll</strong> feature on the homepage.
+      </p>
+      <p style="margin:0 0 10px;">
+        <strong style="color:var(--cyan);">My personal contributions:</strong> I set up two VirtualBox virtual machines running Debian Linux — one hosting MariaDB as the database server, and one hosting the Django application served through Nginx and Gunicorn. I also implemented three complete CRUD modules in Django: <em>Joueur</em> (player — with fields: username, first_name, last_name, email, password, type), <em>Commentaire</em> (game reviews), and <em>ListeJeux</em> (personal game lists), including models, forms, views, URL routing, and HTML test templates.
+      </p>
+      <p style="margin:0;">
+        <strong style="color:var(--cyan);">Skills validated:</strong> AC0311 (IT systems), AC0312 (reading/correcting programs), AC0313 (algorithm to code), AC0314 (web architecture), AC0315 (data management mechanisms), AC0316 (collaborative development environment).
+      </p>
+    </div>
+
+    <h2 class="block-title" style="margin-top:24px;"><i class="fa-solid fa-graduation-cap"></i> <span data-i18n="ref_title">Référentiel de compétences BUT R&amp;T</span></h2>
+    <div id="ref-container" data-project="sae203"></div>
+
+    <h2 class="block-title" style="margin-top:24px;"><i class="fa-solid fa-shield-halved"></i> <span data-i18n="lbl_proof">Preuves</span></h2>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div style="padding:12px 16px;border:1px solid rgba(0,212,255,.15);border-radius:6px;background:rgba(0,212,255,.03);font-size:.85rem;color:var(--txt2);display:flex;align-items:flex-start;gap:10px;">
+        <i class="fa-brands fa-github" style="color:var(--cyan);margin-top:2px;flex-shrink:0;"></i>
+        <span>Code source disponible sur <a href="https://github.com/debenji68/SAE-2.03" target="_blank" rel="noopener" style="color:var(--cyan);">github.com/debenji68/SAE-2.03</a> — modèles, vues, formulaires, templates et fichiers de configuration.</span>
+      </div>
+      <div style="padding:12px 16px;border:1px solid rgba(0,212,255,.15);border-radius:6px;background:rgba(0,212,255,.03);font-size:.85rem;color:var(--txt2);display:flex;align-items:flex-start;gap:10px;">
+        <li><img src="images/vbox.png" alt="Capture d'écran de virtualbox" class="detail-img-sm" style="margin-left:6px;"></li>
+      </div>  
+      <div style="padding:12px 16px;border:1px solid rgba(0,212,255,.15);border-radius:6px;background:rgba(0,212,255,.03);font-size:.85rem;color:var(--txt2);display:flex;align-items:flex-start;gap:10px;">
+        <ul>
+          <li><img src="images/vue_joueur.png" alt="Capture d'écran de la vue utilisateur" class="detail-img-sm" style="margin-left:6px;"></li>
+          <li><img src="images/vue_commentaire.png" alt="Capture d'écran de la vue commentaire" class="detail-img-sm" style="margin-left:6px;"></li>
+          <li><img src="images/liste_commentaire.png" alt="Capture d'écran de la liste des commentaires" class="detail-img-sm" style="margin-left:6px;"></li>
+          <li><img src="images/forms_py.png" alt="Capture d'écran du script Python forms" class="detail-img-sm" style="margin-left:6px;"></li>
+          <li><img src="images/views0_py.png" alt="Capture d'écran du script Python views0" class="detail-img-sm" style="margin-left:6px;"></li>
+          <li><img src="images/nginx_django.png" alt="Capture d'écran de la configuration nginx" class="detail-img-sm" style="margin-left:6px;"></li>
+          <li><img src="images/urls_py.png" alt="Capture d'écran du script Python urls" class="detail-img-sm" style="margin-left:6px;"></li>
+        </ul>
+        <ul>
+          <li><img src="images/vue_ensemble.png" alt="Capture d'écran de l'ensemble du joueur" class="detail-img-sm" style="margin-left:6px;"></li>
+          <li><img src="images/vue_liste.png" alt="Capture d'écran de la vue liste" class="detail-img-sm" style="margin-left:6px;"></li>
+          <li><img src="images/liste_joueur.png" alt="Capture d'écran de la liste des joueurs" class="detail-img-sm" style="margin-left:6px;"></li>
+          <li><img src="images/models_py.png" alt="Capture d'écran du script Python models" class="detail-img-sm" style="margin-left:6px;"></li>
+          <li><img src="images/views_py.png" alt="Capture d'écran du script Python views" class="detail-img-sm" style="margin-left:6px;"></li>
+          <li><img src="images/gunicorn_django.png" alt="Capture d'écran de la configuration gunicorn" class="detail-img-sm" style="margin-left:6px;"></li>
+          <li><img src="images/BDD.png" alt="Capture d'écran de la base de données" class="detail-img-sm" style="margin-left:6px;"></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="back-top"><a href="#" data-i18n="idx_back_top">RETOUR EN HAUT</a></div>
+</main>
+<footer><p>Web-design : Deiber Benjamin &nbsp;·&nbsp; <kbd>`</kbd> <span data-i18n="footer_terminal">pour le terminal</span></p></footer>
+
+<script src="i18n.js"></script>
+<script src="shared.js"></script>
+<script src="terminal.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  injectShared(); applyTranslations();
+  buildReferentielSection('sae203', 'ref-container');
+});
+</script>
+</body>
+</html>

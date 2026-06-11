@@ -641,6 +641,11 @@ PROJECT_REF.sae105 = {
   AC: ['AC13.01', 'AC13.02', 'AC13.03'],
   CE: ['CE3.01', 'CE3.02', 'CE3.03'],
 };
+PROJECT_REF.sae203 = {
+  UE: ['UE3'],
+  AC: ['AC13.01', 'AC13.02', 'AC13.03', 'AC13.04', 'AC13.05'],
+  CE: ['CE3.01', 'CE3.02', 'CE3.03', 'CE3.04'],
+};
 
 // ════════════════════════════════════════════════════════════
 // PAGE-SPECIFIC STATIC TEXT TRANSLATIONS
@@ -721,6 +726,8 @@ TRANSLATIONS.fr.sae103_title = 'Découvrir un dispositif de transmission';
 TRANSLATIONS.en.sae103_title = 'Discovering a transmission device';
 TRANSLATIONS.fr.sae105_title = 'Traiter les données sur internet';
 TRANSLATIONS.en.sae105_title = 'Processing data on the internet';
+TRANSLATIONS.fr.sae203_title = 'Déployer une application web — Ludothèque';
+TRANSLATIONS.en.sae203_title = 'Deploy a Web Application — Board Game Library';
 
 // Experiences/Stage
 TRANSLATIONS.fr.stage_title    = 'Stage d\'Observation de 3ème';
