@@ -21,8 +21,9 @@ function injectShared() {
     { href:'diplomes.html',    icon:'fa-award',          label:'Diplômes'    },
     { href:'experiences.html', icon:'fa-briefcase',      label:'Expériences' },
     { href:'projets.html',     icon:'fa-code',           label:'Projets'     },
-    { href:'competences.html', icon:'fa-microchip',      label:'Compétences' },
-    { href:'contact.html',     icon:'fa-envelope',       label:'Contact'     },
+    { href:'competences.html',     icon:'fa-microchip',      label:'Compétences'    },
+    { href:'competences-uha.html', icon:'fa-graduation-cap', label:'Compétences UHA'},
+    { href:'contact.html',         icon:'fa-envelope',       label:'Contact'        },
   ];
 
   const desktopLinks = pages.map(p =>

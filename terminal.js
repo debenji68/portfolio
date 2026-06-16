@@ -90,8 +90,9 @@ function initTerminal() {
           { t:'green', v:'  cat nas · cat stage · cat cvweb · cat mdp' },
           { t:'green', v:'  cat ctf · cat blox · cat streamdeck' },
           { t:'green', v:'  cat sae101 · cat sae102 · cat sae103 · cat sae105 · cat sae203' },
+          { t:'gold',  v:'  cat uha  →  Référentiel de compétences BUT R&T' },
           { t:'',      v:'  open <page>  →  index / formations / diplomes / experiences' },
-          { t:'',      v:'               →  projets / competences / contact' },
+          { t:'',      v:'               →  projets / competences / uha / contact' },
           { t:'',      v:'               →  bac / brevet / pix / dsd1 / but / lycee / college' },
           { t:'',      v:'               →  nas / stage / cvweb / mdp / ctf / blox / streamdeck' },
           { t:'',      v:'               →  sae101 / sae102 / sae103 / sae105 / sae203' },
@@ -106,8 +107,9 @@ function initTerminal() {
           { t:'green', v:'  cat nas · cat stage · cat cvweb · cat mdp' },
           { t:'green', v:'  cat ctf · cat blox · cat streamdeck' },
           { t:'green', v:'  cat sae101 · cat sae102 · cat sae103 · cat sae105 · cat sae203' },
+          { t:'gold',  v:'  cat uha  →  UHA Competency Framework' },
           { t:'',      v:'  open <page>  →  index / education / degrees / experience' },
-          { t:'',      v:'               →  projects / skills / contact' },
+          { t:'',      v:'               →  projects / skills / uha / contact' },
           { t:'',      v:'               →  bac / brevet / pix / dsd1 / but / lycee / college' },
           { t:'',      v:'               →  nas / stage / cvweb / mdp / ctf / blox / streamdeck' },
           { t:'',      v:'               →  sae101 / sae102 / sae103 / sae105 / sae203' },
@@ -526,6 +528,29 @@ function initTerminal() {
         ];
       },
 
+      'cat uha': function () {
+        if (fr) return [
+          { t:'gold',  v:'══ Référentiel de Compétences UHA ══' },
+          { t:'cyan',  v:'  UE1 — Administrer les réseaux et l\'Internet' },
+          { t:'',      v:'       5 AC · 5 CE' },
+          { t:'green', v:'  UE2 — Connecter les entreprises et les usagers' },
+          { t:'',      v:'       4 AC · 3 CE' },
+          { t:'',      v:'  UE3 — Créer des outils et applications informatiques' },
+          { t:'',      v:'       6 AC · 3 CE' },
+          { t:'dim',   v:'  → open uha' },
+        ];
+        return [
+          { t:'gold',  v:'══ UHA Competency Framework ══' },
+          { t:'cyan',  v:'  UE1 — Administer Networks and the Internet' },
+          { t:'',      v:'       5 AC · 5 CE' },
+          { t:'green', v:'  UE2 — Connect Companies and Users' },
+          { t:'',      v:'       4 AC · 3 CE' },
+          { t:'',      v:'  UE3 — Create IT Tools and Applications' },
+          { t:'',      v:'       6 AC · 3 CE' },
+          { t:'dim',   v:'  → open uha' },
+        ];
+      },
+
       'cat sae203': function () {
         if (fr) return [
           { t:'gold',  v:'══ SAÉ 2.03 — Application web Ludothèque ══' },
@@ -563,6 +588,9 @@ function initTerminal() {
     projets:      ['projets.html',           'projets-en.html'],
     projet:       ['projets.html',           'projets-en.html'],
     competences:  ['competences.html',       'competences-en.html'],
+    uha:          ['competences-uha.html',   'competences-uha-en.html'],
+    'competences-uha': ['competences-uha.html', 'competences-uha-en.html'],
+    'uha-framework':   ['competences-uha.html', 'competences-uha-en.html'],
     contact:      ['contact.html',           'contact-en.html'],
     bac:          ['detail-bac.html',        'detail-bac-en.html'],
     brevet:       ['detail-brevet.html',     'detail-brevet-en.html'],
@@ -612,8 +640,8 @@ function initTerminal() {
         ? ('Destination inconnue : "' + arg + '"')
         : ('Unknown destination: "' + arg + '"'));
       appendLine('dim', fr
-        ? 'Pages : index, formations, diplomes, experiences, projets, competences, contact, bac, brevet, pix, dsd1, but, lycee, college, nas, stage, cvweb, mdp, ctf, blox, streamdeck, sae101-105, sae203'
-        : 'Pages: index, education, degrees, experience, projects, skills, contact, bac, brevet, pix, dsd1, but, lycee, college, nas, stage, cvweb, mdp, ctf, blox, streamdeck, sae101-105, sae203');
+        ? 'Pages : index, formations, diplomes, experiences, projets, competences, uha, contact, bac, brevet, pix, dsd1, but, lycee, college, nas, stage, cvweb, mdp, ctf, blox, streamdeck, sae101-105, sae203'
+        : 'Pages: index, education, degrees, experience, projects, skills, uha, contact, bac, brevet, pix, dsd1, but, lycee, college, nas, stage, cvweb, mdp, ctf, blox, streamdeck, sae101-105, sae203');
     }
   }
 

@@ -20,8 +20,9 @@ function injectSharedEn() {
     { href:'diplomes-en.html',    icon:'fa-award',          label:'Degrees'    },
     { href:'experiences-en.html', icon:'fa-briefcase',      label:'Experience' },
     { href:'projets-en.html',     icon:'fa-code',           label:'Projects'   },
-    { href:'competences-en.html', icon:'fa-microchip',      label:'Skills'     },
-    { href:'contact-en.html',     icon:'fa-envelope',       label:'Contact'    },
+    { href:'competences-en.html',     icon:'fa-microchip',      label:'Skills'         },
+    { href:'competences-uha-en.html', icon:'fa-graduation-cap', label:'UHA Framework'  },
+    { href:'contact-en.html',         icon:'fa-envelope',       label:'Contact'        },
   ];
 
   const desktopLinks = pages.map(p =>

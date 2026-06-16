@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <title>Compétences UHA — Benjamin Deiber</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&display=swap">
+  <style>
+    #terminal-overlay{display:none!important;position:fixed;inset:0;z-index:8000;}
+    #terminal-overlay.open{display:flex!important;}
+    .nav-drawer{display:none!important;}
+    .nav-drawer.open{display:flex!important;}
+    body{background:#04080f;color:#c8d8e8;}
+
+    /* ── UE Cards ── */
+    .ue-card {
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 28px;
+      border: 1px solid rgba(255,255,255,.07);
+      position: relative;
+    }
+    .ue-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    }
+    .ue-card.ue1::before { background: linear-gradient(90deg, #00d4ff, #0088aa); }
+    .ue-card.ue2::before { background: linear-gradient(90deg, #00ff88, #00aa55); }
+    .ue-card.ue3::before { background: linear-gradient(90deg, #b44fff, #6600cc); }
+
+    .ue-header {
+      padding: 22px 24px 18px;
+      display: flex; align-items: flex-start; gap: 18px;
+      background: rgba(4,14,26,.95);
+    }
+    .ue-icon {
+      font-size: 2.2rem;
+      line-height: 1;
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+    .ue-header-text { flex: 1; }
+    .ue-code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      padding: 3px 10px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: 8px;
+    }
+    .ue1 .ue-code { background: rgba(0,212,255,.12); color: #00d4ff; border: 1px solid rgba(0,212,255,.3); }
+    .ue2 .ue-code { background: rgba(0,255,136,.1);  color: #00ff88; border: 1px solid rgba(0,255,136,.3); }
+    .ue3 .ue-code { background: rgba(180,79,255,.12);color: #b44fff; border: 1px solid rgba(180,79,255,.3);}
+
+    .ue-title {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin: 0 0 6px;
+    }
+    .ue1 .ue-title { color: #00d4ff; }
+    .ue2 .ue-title { color: #00ff88; }
+    .ue3 .ue-title { color: #b44fff; }
+
+    .ue-desc {
+      font-size: .85rem;
+      color: var(--txt2);
+      line-height: 1.65;
+      margin: 0;
+      max-width: 680px;
+    }
+
+    .ue-body {
+      padding: 0 24px 22px;
+      background: rgba(4,14,26,.92);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media(max-width:680px){ .ue-body { grid-template-columns: 1fr; } }
+
+    .ue-section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .6rem;
+      letter-spacing: .14em;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin: 0 0 10px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .ue1 .ue-section-label { color: #00d4ff; }
+    .ue2 .ue-section-label { color: #00ff88; }
+    .ue3 .ue-section-label { color: #b44fff; }
+
+    .ce-list, .ac-list {
+      list-style: none;
+      margin: 0; padding: 0;
+      display: flex; flex-direction: column; gap: 7px;
+    }
+    .ce-item, .ac-item {
+      display: flex; align-items: flex-start; gap: 10px;
+      padding: 9px 12px;
+      border-radius: 6px;
+      font-size: .78rem;
+      line-height: 1.5;
+      color: var(--txt2);
+    }
+    .ce-item { background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.06); }
+    .ac-item { background: rgba(0,0,0,.2); border: 1px solid rgba(255,255,255,.05); }
+
+    .badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .58rem;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 3px;
+      flex-shrink: 0;
+      margin-top: 1px;
+      letter-spacing: .04em;
+    }
+    .ue1 .badge { background: rgba(0,212,255,.12); color: #00d4ff; border: 1px solid rgba(0,212,255,.25); }
+    .ue2 .badge { background: rgba(0,255,136,.1);  color: #00ff88; border: 1px solid rgba(0,255,136,.25); }
+    .ue3 .badge { background: rgba(180,79,255,.12);color: #b44fff; border: 1px solid rgba(180,79,255,.25);}
+
+    /* Progress bar */
+    .ue-progress-wrap {
+      padding: 14px 24px;
+      background: rgba(0,0,0,.25);
+      display: flex; align-items: center; gap: 14px;
+      border-top: 1px solid rgba(255,255,255,.05);
+    }
+    .ue-progress-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .62rem;
+      color: var(--txt3);
+      white-space: nowrap;
+    }
+    .ue-progress-bar {
+      flex: 1; height: 4px;
+      background: rgba(255,255,255,.06);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .ue-progress-fill {
+      height: 100%; border-radius: 2px;
+      transition: width .8s ease;
+    }
+    .ue1 .ue-progress-fill { background: linear-gradient(90deg,#00d4ff,#0088aa); }
+    .ue2 .ue-progress-fill { background: linear-gradient(90deg,#00ff88,#00aa55); }
+    .ue3 .ue-progress-fill { background: linear-gradient(90deg,#b44fff,#6600cc); }
+    .ue-progress-pct {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .62rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .ue1 .ue-progress-pct { color: #00d4ff; }
+    .ue2 .ue-progress-pct { color: #00ff88; }
+    .ue3 .ue-progress-pct { color: #b44fff; }
+
+    /* Divider between columns */
+    .ue-col { }
+    .ue-col + .ue-col {
+      border-left: 1px solid rgba(255,255,255,.05);
+      padding-left: 16px;
+    }
+    @media(max-width:680px){ .ue-col + .ue-col { border-left: none; padding-left: 0; border-top: 1px solid rgba(255,255,255,.05); padding-top: 14px; } }
+
+    /* Intro banner */
+    .uha-intro {
+      display: flex; align-items: flex-start; gap: 16px;
+      padding: 18px 20px;
+      border: 1px solid rgba(0,212,255,.15);
+      border-radius: 10px;
+      background: rgba(0,212,255,.03);
+      margin-bottom: 28px;
+      font-size: .84rem;
+      color: var(--txt2);
+      line-height: 1.7;
+    }
+    .uha-intro i { color: var(--cyan); font-size: 1.2rem; margin-top: 3px; flex-shrink: 0; }
+    .uha-intro strong { color: var(--cyan); }
+  </style>
+</head>
+<body>
+<div class="scanline"></div>
+<div id="terminal-overlay">
+  <div id="terminal-box">
+    <div id="terminal-topbar">
+      <div class="term-dots"><div class="term-dot red"></div><div class="term-dot yellow"></div><div class="term-dot green"></div></div>
+      <span>benjamin@portfolio: ~/competences-uha</span>
+      <button id="terminal-close">&#x2715;</button>
+    </div>
+    <div id="terminal-output"></div>
+    <div id="terminal-input-row"><span>benjamin@portfolio:~$</span><input id="terminal-input" type="text" autocomplete="off" spellcheck="false" placeholder="tapez une commande…"></div>
+  </div>
+</div>
+
+<div id="shared-header-nav"></div>
+
+<main class="main-wrapper">
+  <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Retour</a>
+
+  <div class="card" style="margin-bottom:20px;">
+    <div class="section-title"><i class="fa-solid fa-graduation-cap"></i> BUT Réseaux &amp; Télécommunications — IUT Colmar · UHA <span class="year-badge">2025–2028</span></div>
+    <h1 class="entry-title">Référentiel de Compétences UHA</h1>
+    <h2 class="entry-subtitle">3 Unités d'Enseignement · Apprentissages Critiques · Critères d'Évaluation</h2>
+  </div>
+
+  <div class="uha-intro">
+    <i class="fa-solid fa-circle-info"></i>
+    <div>
+      Le BUT R&T de l'IUT Colmar (Université de Haute-Alsace) est structuré autour de <strong>3 compétences principales</strong>, chacune correspondant à une Unité d'Enseignement (UE). Chaque UE regroupe des <strong>Apprentissages Critiques (AC)</strong> — les savoirs-faire concrets à maîtriser — et des <strong>Critères d'Évaluation (CE)</strong> qui définissent les conditions dans lesquelles ces compétences sont évaluées. Cette page présente le référentiel officiel du BUT R&T tel qu'il est appliqué dans ma formation.
+    </div>
+  </div>
+
+  <!-- ══════════════════ UE1 ══════════════════ -->
+  <div class="ue-card ue1">
+    <div class="ue-header">
+      <div class="ue-icon">🌐</div>
+      <div class="ue-header-text">
+        <span class="ue-code">UE1 — Compétence 1</span>
+        <h2 class="ue-title">Administrer les réseaux et l'Internet</h2>
+        <p class="ue-desc">
+          Concevoir, configurer, déployer et maintenir des infrastructures réseau et des services Internet. Cette compétence couvre l'ensemble des équipements de commutation et de routage, les protocoles réseaux fondamentaux, la sécurité des accès, ainsi que le diagnostic et la résolution des dysfonctionnements. Elle mobilise des connaissances solides en électricité, en supports de transmission et en protocoles locaux.
+        </p>
+      </div>
+    </div>
+    <div class="ue-body">
+      <div class="ue-col">
+        <p class="ue-section-label"><i class="fa-solid fa-list-check"></i> Critères d'Évaluation (CE)</p>
+        <ul class="ce-list">
+          <li class="ce-item"><span class="badge">CE1.01</span> En choisissant les solutions et technologies réseaux adaptées</li>
+          <li class="ce-item"><span class="badge">CE1.02</span> En respectant les principes fondamentaux de la sécurité informatique</li>
+          <li class="ce-item"><span class="badge">CE1.03</span> En utilisant une approche rigoureuse pour la résolution des dysfonctionnements</li>
+          <li class="ce-item"><span class="badge">CE1.04</span> En respectant les règles métiers</li>
+          <li class="ce-item"><span class="badge">CE1.05</span> En assurant une veille technologique</li>
+        </ul>
+      </div>
+      <div class="ue-col">
+        <p class="ue-section-label"><i class="fa-solid fa-bullseye"></i> Apprentissages Critiques (AC)</p>
+        <ul class="ac-list">
+          <li class="ac-item"><span class="badge">AC11.01</span> Maîtriser les lois fondamentales de l'électricité afin d'intervenir sur des équipements de réseaux et télécommunications</li>
+          <li class="ac-item"><span class="badge">AC11.02</span> Comprendre les supports de transmission et leurs caractéristiques</li>
+          <li class="ac-item"><span class="badge">AC11.03</span> Configurer et dépanner les équipements de commutation et de routage</li>
+          <li class="ac-item"><span class="badge">AC11.04</span> Maîtriser les protocoles et technologies des réseaux locaux</li>
+          <li class="ac-item"><span class="badge">AC11.05</span> Identifier les dysfonctionnements du réseau local</li>
+        </ul>
+      </div>
+    </div>
+    <div class="ue-progress-wrap">
+      <span class="ue-progress-label">Progression SAÉs validées</span>
+      <div class="ue-progress-bar"><div class="ue-progress-fill ue1" style="width:55%;"></div></div>
+      <span class="ue-progress-pct ue1">S1–S2 en cours</span>
+    </div>
+  </div>
+
+  <!-- ══════════════════ UE2 ══════════════════ -->
+  <div class="ue-card ue2">
+    <div class="ue-header">
+      <div class="ue-icon">💻</div>
+      <div class="ue-header-text">
+        <span class="ue-code">UE2 — Compétence 2</span>
+        <h2 class="ue-title">Connecter les entreprises et les usagers</h2>
+        <p class="ue-desc">
+          Déployer et configurer des solutions de connectivité pour relier les entreprises, les sites distants et les utilisateurs finaux à Internet et aux services Cloud. Cette compétence englobe les réseaux avancés (OSPF, BGP, VPN), les accès sans fil sécurisés, la téléphonie sur IP et l'intégration dans des environnements hétérogènes, en respectant des contraintes de débit, de latence et de disponibilité.
+        </p>
+      </div>
+    </div>
+    <div class="ue-body">
+      <div class="ue-col">
+        <p class="ue-section-label"><i class="fa-solid fa-list-check"></i> Critères d'Évaluation (CE)</p>
+        <ul class="ce-list">
+          <li class="ce-item"><span class="badge">CE2.01</span> En choisissant les solutions techniques appropriées</li>
+          <li class="ce-item"><span class="badge">CE2.02</span> En respectant les contraintes de débit, de latence, de disponibilité et de sécurité</li>
+          <li class="ce-item"><span class="badge">CE2.03</span> En intégrant les solutions dans l'environnement existant</li>
+        </ul>
+      </div>
+      <div class="ue-col">
+        <p class="ue-section-label"><i class="fa-solid fa-bullseye"></i> Apprentissages Critiques (AC)</p>
+        <ul class="ac-list">
+          <li class="ac-item"><span class="badge">AC12.01</span> Déployer des équipements de réseaux avancés</li>
+          <li class="ac-item"><span class="badge">AC12.02</span> Configurer des services réseaux avancés</li>
+          <li class="ac-item"><span class="badge">AC12.03</span> Déployer un accès sans fil sécurisé</li>
+          <li class="ac-item"><span class="badge">AC12.04</span> Mettre en place une infrastructure VPN</li>
+        </ul>
+      </div>
+    </div>
+    <div class="ue-progress-wrap">
+      <span class="ue-progress-label">Progression SAÉs validées</span>
+      <div class="ue-progress-bar"><div class="ue-progress-fill ue2" style="width:45%;"></div></div>
+      <span class="ue-progress-pct ue2">S1–S2 en cours</span>
+    </div>
+  </div>
+
+  <!-- ══════════════════ UE3 ══════════════════ -->
+  <div class="ue-card ue3">
+    <div class="ue-header">
+      <div class="ue-icon">🛠️</div>
+      <div class="ue-header-text">
+        <span class="ue-code">UE3 — Compétence 3</span>
+        <h2 class="ue-title">Créer des outils et applications informatiques</h2>
+        <p class="ue-desc">
+          Concevoir et développer des applications et outils logiciels adaptés aux besoins des réseaux et télécommunications. Cette compétence couvre la programmation (Python, Django, C++), les architectures web (client-serveur, API, bases de données), le déploiement en production (Linux, Nginx, Gunicorn), la sécurisation des applications, et l'utilisation des systèmes embarqués. Elle valorise la rigueur algorithmique, le travail collaboratif (Git) et l'autonomie dans la mise en place de services.
+        </p>
+      </div>
+    </div>
+    <div class="ue-body">
+      <div class="ue-col">
+        <p class="ue-section-label"><i class="fa-solid fa-list-check"></i> Critères d'Évaluation (CE)</p>
+        <ul class="ce-list">
+          <li class="ce-item"><span class="badge">CE3.01</span> En utilisant des langages et des environnements de développement adaptés</li>
+          <li class="ce-item"><span class="badge">CE3.02</span> En respectant les principes algorithmiques et de programmation</li>
+          <li class="ce-item"><span class="badge">CE3.03</span> En intégrant des contraintes de sécurité</li>
+        </ul>
+      </div>
+      <div class="ue-col">
+        <p class="ue-section-label"><i class="fa-solid fa-bullseye"></i> Apprentissages Critiques (AC)</p>
+        <ul class="ac-list">
+          <li class="ac-item"><span class="badge">AC13.01</span> Utiliser un système informatique et ses outils</li>
+          <li class="ac-item"><span class="badge">AC13.02</span> Lire, exécuter, corriger et écrire un programme</li>
+          <li class="ac-item"><span class="badge">AC13.03</span> Traduire un algorithme dans un langage de programmation</li>
+          <li class="ac-item"><span class="badge">AC13.04</span> Connaître l'architecture et les technologies d'un site Web</li>
+          <li class="ac-item"><span class="badge">AC13.05</span> Mettre en place des outils et services informatiques</li>
+          <li class="ac-item"><span class="badge">AC13.06</span> Utiliser les systèmes informatiques embarqués</li>
+        </ul>
+      </div>
+    </div>
+    <div class="ue-progress-wrap">
+      <span class="ue-progress-label">Progression SAÉs validées</span>
+      <div class="ue-progress-bar"><div class="ue-progress-fill ue3" style="width:65%;"></div></div>
+      <span class="ue-progress-pct ue3">S1–S2 en cours</span>
+    </div>
+  </div>
+
+  <div class="back-top"><a href="#" data-i18n="idx_back_top">RETOUR EN HAUT</a></div>
+</main>
+
+<footer><p>Web-design : Deiber Benjamin &nbsp;·&nbsp; <kbd>`</kbd> pour le terminal</p></footer>
+
+<script src="i18n.js"></script>
+<script src="shared.js"></script>
+<script src="terminal.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  injectShared();
+  applyTranslations();
+});
+</script>
+</body>
+</html>
