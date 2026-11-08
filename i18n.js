@@ -730,6 +730,8 @@ TRANSLATIONS.fr.sae105_title = 'Traiter les données sur internet';
 TRANSLATIONS.en.sae105_title = 'Processing data on the internet';
 TRANSLATIONS.fr.sae203_title = 'Déployer une application web — Ludothèque';
 TRANSLATIONS.en.sae203_title = 'Deploy a Web Application — Board Game Library';
+TRANSLATIONS.fr.sae302_title = 'Développer une application communicante';
+TRANSLATIONS.en.sae302_title = 'Developing a Communicating Application';
 
 // Experiences/Stage
 TRANSLATIONS.fr.stage_title    = 'Stage d\'Observation de 3ème';

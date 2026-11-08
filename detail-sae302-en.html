@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <title>SAÉ 3.02 — Benjamin Deiber</title>
+  <style>
+    .arch-diagram { background: rgba(4,14,26,.97); border: 1px solid rgba(0,212,255,.25); border-radius: 12px; overflow: hidden; margin: 16px 0; position: relative; }
+    .arch-diagram::before { content:''; position:absolute; top:0;left:0;right:0; height:2px; background:linear-gradient(90deg,var(--cyan),var(--green),var(--purple)); }
+    .arch-node { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 14px 20px; background: rgba(0,20,35,.7); border: 1px solid rgba(0,212,255,.2); border-radius: 8px; font-family: 'JetBrains Mono', monospace; font-size: .72rem; }
+    .arch-node.mine { border-color: rgba(0,255,136,.4); }
+    .arch-node .node-icon { font-size: 1.4rem; }
+    .arch-node .node-label { color: var(--cyan); font-weight: 700; }
+    .arch-node.mine .node-label { color: var(--green); }
+    .arch-node .node-sub { color: var(--txt3); font-size: .62rem; text-align: center; }
+    .arch-arrow { display: flex; align-items: center; justify-content: center; color: var(--txt3); font-size: .65rem; font-family: 'JetBrains Mono', monospace; flex-direction: column; gap: 2px; }
+    .arch-row { display: flex; align-items: center; gap: 12px; padding: 20px; flex-wrap: wrap; justify-content: center; }
+    .arch-vm { display:flex; flex-direction:column; gap:8px; padding:12px; border:1px dashed rgba(180,79,255,.35); border-radius:10px; }
+    .arch-vm-title { font-family:'JetBrains Mono',monospace; font-size:.66rem; color:#a87dff; text-align:center; font-weight:700; }
+    .mine-badge { display: inline-block; padding: 2px 8px; background: rgba(0,255,136,.12); border: 1px solid rgba(0,255,136,.35); border-radius: 4px; color: var(--green); font-family: 'JetBrains Mono', monospace; font-size: .6rem; font-weight: 700; margin-left: 6px; vertical-align: middle; }
+
+    .role-table { width:100%; border-collapse:collapse; font-family:'JetBrains Mono',monospace; font-size:.68rem; margin:12px 0; }
+    .role-table th, .role-table td { border:1px solid rgba(0,212,255,.15); padding:8px 10px; text-align:left; vertical-align:top; color:var(--txt2); }
+    .role-table th { color:var(--cyan); background:rgba(0,212,255,.06); }
+    .role-table tr.mine td:first-child { color:var(--green); font-weight:700; }
+
+    .fiche { margin:26px 0; border:1px solid rgba(0,212,255,.22); border-radius:12px; background:rgba(0,14,26,.6); overflow:hidden; }
+    .fiche-head { padding:16px 18px; border-bottom:1px solid rgba(0,212,255,.15); background:linear-gradient(90deg,rgba(0,212,255,.08),transparent); }
+    .fiche-head .comp-code { font-family:'Orbitron',sans-serif; font-size:.7rem; letter-spacing:.08em; }
+    .fiche-head h3 { margin:6px 0 2px; font-family:'Rajdhani',sans-serif; font-size:1.25rem; color:#e6f4ff; }
+    .fiche-head .niveau { font-family:'JetBrains Mono',monospace; font-size:.66rem; color:var(--txt3); }
+    .fiche-body { padding:6px 18px 16px; }
+    .etape { margin-top:16px; }
+    .etape h4 { display:flex; align-items:center; gap:10px; margin:0 0 8px; font-family:'JetBrains Mono',monospace; font-size:.78rem; color:var(--cyan); }
+    .etape h4 .num { display:inline-flex; align-items:center; justify-content:center; width:22px; height:22px; border-radius:50%; border:1px solid var(--cyan); font-size:.66rem; }
+    .etape p, .etape li { color:var(--txt2); font-size:.86rem; line-height:1.65; }
+    .etape ul { margin:6px 0; padding-left:20px; }
+    .ac-quote { margin:10px 0; padding:10px 14px; border-left:3px solid var(--green); background:rgba(0,255,136,.05); border-radius:0 6px 6px 0; }
+    .ac-quote .ac-id { font-family:'JetBrains Mono',monospace; font-size:.7rem; font-weight:700; color:var(--green); }
+    .ac-quote q { display:block; margin:4px 0 6px; color:#e6f4ff; font-style:italic; font-size:.88rem; }
+    .ac-quote .lien { color:var(--txt2); font-size:.82rem; line-height:1.6; }
+    .ac-quote.partiel { border-left-color:#ffb547; background:rgba(255,181,71,.05); }
+    .ac-quote.partiel .ac-id { color:#ffb547; }
+    .difficulte { margin:8px 0; padding:8px 12px; font-size:.84rem; line-height:1.6; color:var(--txt2); border:1px solid rgba(180,79,255,.22); border-radius:6px; background:rgba(180,79,255,.04); }
+    .difficulte b { color:#c9a6ff; }
+    .preuve { display:flex; gap:10px; align-items:flex-start; margin:8px 0; padding:10px 14px; border:1px solid rgba(0,212,255,.15); border-radius:6px; background:rgba(0,212,255,.03); font-size:.84rem; color:var(--txt2); }
+    .preuve > i { color:var(--cyan); margin-top:3px; flex-shrink:0; }
+    .preuve a { color:var(--cyan); word-break:break-all; }
+    .preuve code { font-size:.72rem; }
+    .figure { margin:12px 0; }
+    .figure img { width:100%; border-radius:8px; border:1px solid var(--border); display:block; }
+    .figure a { display:block; }
+    .figure.large { max-width:720px; margin-left:auto; margin-right:auto; }
+    .fig-grid .figure img { height:190px; object-fit:cover; object-position:top; }
+    .figure figcaption { font-family:'JetBrains Mono',monospace; font-size:.64rem; color:var(--txt3); margin-top:6px; text-align:center; }
+    .fig-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:12px; }
+    .placeholder { padding:28px 14px; border:2px dashed rgba(255,181,71,.45); border-radius:8px; color:#ffb547; text-align:center; font-family:'JetBrains Mono',monospace; font-size:.72rem; }
+    .extrait { margin:10px 0; padding:10px 14px; border:1px solid rgba(255,215,0,.2); border-radius:6px; background:rgba(255,215,0,.03); color:var(--txt2); font-size:.82rem; line-height:1.6; }
+    .extrait .src { display:block; font-family:'JetBrains Mono',monospace; font-size:.62rem; color:var(--txt3); margin-top:4px; }
+    .code-block { background:#060e18; border:1px solid rgba(0,212,255,.18); border-radius:8px; padding:14px 16px; overflow-x:auto; margin:10px 0 4px; }
+    .code-block pre { font-family:'JetBrains Mono',monospace; font-size:.66rem; line-height:1.6; color:var(--txt); margin:0; white-space:pre; }
+    .code-src { font-family:'JetBrains Mono',monospace; font-size:.62rem; color:var(--txt3); margin-bottom:10px; }
+    .code-src a { color:var(--cyan); }
+    .kw{color:#cc88ff;}.fn{color:#00ff88;}.st{color:#88dd88;}.cm{color:#4a6a7a;}.cn{color:#00d4ff;}
+    @media (max-width:640px){ .role-table{font-size:.6rem;} .fiche-body{padding:4px 12px 12px;} }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&display=swap">
+  <style>
+    #terminal-overlay{display:none!important;position:fixed;inset:0;z-index:8000;}
+    #terminal-overlay.open{display:flex!important;}
+    .nav-drawer{display:none!important;}
+    .nav-drawer.open{display:flex!important;}
+    .header-avatar{width:100px;height:100px;border-radius:50%;object-fit:cover;flex-shrink:0;}
+    body{background:#04080f;color:#c8d8e8;}
+  </style>
+</head>
+<body>
+<div class="scanline"></div>
+<div id="terminal-overlay"><div id="terminal-box"><div id="terminal-topbar"><div class="term-dots"><div class="term-dot red"></div><div class="term-dot yellow"></div><div class="term-dot green"></div></div><span>benjamin@portfolio: ~/projets/sae-302</span><button id="terminal-close">&#x2715;</button></div><div id="terminal-output"></div><div id="terminal-input-row"><span>benjamin@portfolio:~$</span><input id="terminal-input" type="text" autocomplete="off" spellcheck="false" placeholder="type a command…"></div></div></div>
+
+<div id="shared-header-nav"></div>
+
+<main class="main-wrapper">
+  <a href="projets-en.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Back</a>
+
+  <div class="card">
+    <div class="section-title"><i class="fa-solid fa-traffic-light"></i> SAÉ 3.02 — BUT R&amp;T IUT Colmar <span class="year-badge">2026–2027</span></div>
+    <h1 class="entry-title">Distributed Traffic Simulation — Emergency Vehicle Priority</h1>
+    <h2 class="entry-subtitle">Python · PyQt6 · MariaDB · TCP Sockets · VirtualBox · Debian · Bash · Git</h2>
+
+    <p class="desc-text">
+      A connected-crossroads mock-up for a fictitious client in charge of emergency vehicles: when a fire truck or an ambulance comes within 50 m of a traffic light, the light turns green automatically. The application runs on two Debian virtual machines: VM 1 computes the simulation, stores statistics in MariaDB and streams the state over TCP; VM 2 displays the live map and dashboard in PyQt6. Team project by group <strong>Zero Trust</strong> (3 students), September to late October 2026.
+    </p>
+
+    <h2 class="block-title"><i class="fa-solid fa-diagram-project"></i> Architecture and team roles</h2>
+    <div class="arch-diagram">
+      <div class="arch-row">
+        <div class="arch-vm">
+          <div class="arch-vm-title">VM 1 — Server (Debian)</div>
+          <div class="arch-node"><span class="node-icon">🚦</span><span class="node-label">Simulation</span><span class="node-sub">lights, vehicles, 50 m rule</span><span class="node-sub">Lucas</span></div>
+          <div class="arch-node mine"><span class="node-icon">🗄️</span><span class="node-label">MariaDB <span class="mine-badge">me</span></span><span class="node-sub">schema.sql · stats_db.py</span></div>
+          <div class="arch-node"><span class="node-icon">📡</span><span class="node-label">TCP server :5000</span><span class="node-sub">Quentin</span></div>
+        </div>
+        <div class="arch-arrow"><span style="color:var(--cyan);">──────▶</span><span>JSON / TCP</span><span>10 states/s</span></div>
+        <div class="arch-vm">
+          <div class="arch-vm-title">VM 2 — Client (Debian + GNOME)</div>
+          <div class="arch-node"><span class="node-icon">🔌</span><span class="node-label">TCP client (QThread)</span><span class="node-sub">Quentin · integration by me</span></div>
+          <div class="arch-node mine"><span class="node-icon">🖥️</span><span class="node-label">PyQt6 interface <span class="mine-badge">me</span></span><span class="node-sub">GPS map · dashboard</span></div>
+        </div>
+      </div>
+      <p style="text-align:center;font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--txt3);padding:0 16px 14px;">Both VMs deployed with Bash scripts <span class="mine-badge">me</span> &nbsp;·&nbsp; <span style="color:var(--green);">Green = my work</span></p>
+    </div>
+
+    <table class="role-table">
+      <tr><th>Member</th><th>Responsibility (specifications)</th></tr>
+      <tr class="mine"><td>Benjamin Deiber (me)</td><td>Database (<code>database/</code>), graphical interface (<code>gui/</code>), deployment scripts (<code>setup_vm1_server.sh</code>, <code>setup_vm2_client.sh</code>), GitHub repository and documentation — then final integration</td></tr>
+      <tr><td>Lucas Bucher</td><td>Object models (<code>models/</code>) and simulation engine, documentation</td></tr>
+      <tr><td>Quentin Altinok</td><td>TCP networking (<code>network/</code>) and GPS computations (<code>utils/</code>), documentation</td></tr>
+    </table>
+
+    <!-- ================================================== SKILL 1 -->
+    <div class="fiche">
+      <div class="fiche-head">
+        <span class="comp-code" style="color:#b44fff;">SKILL RT3 — PROGRAMMING</span>
+        <h3>Create IT tools and applications for networks &amp; telecoms</h3>
+      </div>
+      <div class="fiche-body">
+        <div class="etape">
+          <h4><span class="num">1</span> Context &amp; professional situation</h4>
+          <p>I was the <strong>developer of two components</strong> of a three-person client/server application: <strong>data persistence</strong> (MariaDB on VM 1) and the <strong>user interface</strong> (PyQt6 window on VM 2). Our specifications set the frame: PyQt6 for the interface, <code>mysql-connector-python</code> for the database, JSON over TCP. My part had to plug into code written by two teammates that I did not control: Lucas's simulation produces the data, Quentin's network client carries it to my interface.</p>
+        </div>
+        <div class="etape">
+          <h4><span class="num">2</span> Targeted critical learnings (AC)</h4>
+          <div class="ac-quote"><span class="ac-id">AC23.04</span><q>Installer, administrer un système de gestion de données</q><span class="lien"><em>(Install and administer a data management system.)</em> I designed the <code>simu_db</code> schema (<code>evenement</code> and <code>info_traffic</code> tables), created a dedicated <code>simu_user</code> account with rights limited to that database, and automated the MariaDB installation on VM 1 in the deployment script.</span></div>
+          <div class="ac-quote"><span class="ac-id">AC23.05</span><q>Accéder à un ensemble de données depuis une application et/ou un site web</q><span class="lien"><em>(Access a dataset from an application and/or a website.)</em> My <code>StatsDB</code> class lets the Python application record every priority passage and the traffic metrics, then read back the indicators (number of emergencies, average speed) shown on the dashboard.</span></div>
+          <div class="ac-quote"><span class="ac-id">AC23.03</span><q>Utiliser un protocole réseau pour programmer une application client/serveur</q><span class="lien"><em>(Use a network protocol to program a client/server application.)</em> The TCP server is Quentin's work; my part is on the client side: connecting the TCP client, which runs in a <code>QThread</code>, to the interface through Qt signals, and enforcing the “one full JSON state per line” protocol so the map can read it. I also added a clean shutdown of the thread when the window closes.</span></div>
+          <div class="ac-quote"><span class="ac-id">AC23.02</span><q>Développer une application à partir d'un cahier des charges donné, pour le Web ou les périphériques mobiles</q><span class="lien"><em>(Develop an application from given specifications, for the Web or mobile devices.)</em> The interface was built from our specifications (PyQt6, crossroads map, statistics dashboard).</span></div>
+        </div>
+        <div class="etape">
+          <h4><span class="num">3</span> Reflective description</h4>
+          <p><strong>What I did.</strong> I wrote <code>schema.sql</code> and <code>stats_db.py</code>, then the interface: the tabbed window (<code>main_window.py</code>), the dashboard (<code>stats_panel.py</code>) and the map (<code>map_canvas.py</code>), which converts the GPS positions sent by the server into pixels and puts each vehicle in its right-hand lane.</p>
+          <p><strong>Method.</strong> I first developed each part on its own with test data, as decided in weekly report 3. From 18 October, I had the whole repository reviewed and ran <em>every entry point</em> (standalone simulation, server, client) after each update to catch integration errors.</p>
+          <p><strong>Difficulties and solutions.</strong></p>
+          <div class="difficulte"><b>The database was never filled.</b> My first <code>stats_db.py</code> called <code>connect(self.config)</code> instead of <code>connect(**self.config)</code>, and the table names in the queries did not match the schema. I aligned both files, and added <code>COALESCE(AVG(...), 0)</code> because an empty table returned <code>NULL</code>, displayed as “None km/h”.</div>
+          <div class="difficulte"><b>My code worked alone but not once integrated.</b> <code>from map_canvas import …</code> worked when running the file but crashed through <code>main.py</code>. Likewise, my window expected a <code>data_received</code> signal while Quentin's client emitted <code>state_received</code>.</div>
+          <div class="difficulte"><b>The window could freeze.</b> My first version read the database on every message, in the GUI thread. I understood that a Qt interface must never do blocking I/O: indicators now arrive in the server's JSON, and VM 2 no longer needs MariaDB at all.</div>
+          <div class="difficulte"><b>Everything was drawn in the top-left corner.</b> The simulation works in metres with the Y axis pointing up; the screen is in pixels with Y pointing down. I used the GPS-to-pixel conversion from Quentin's module, which gave that module a real purpose.</div>
+          <p><strong>What I learned.</strong> One person's code is rarely the problem: the <strong>contact points</strong> (signal names, JSON format, parameters) are what break. I also learned to delegate a code review to an AI (Claude) without delegating the decisions: I applied, tested and sometimes rejected its suggestions (for instance, I chose to make the database mandatory rather than optional). This use is declared in the project's AI log (IA-graphie).</p>
+        </div>
+        <div class="etape">
+          <h4><span class="num">4</span> Evidence</h4>
+          <div class="preuve"><i class="fa-brands fa-github"></i><span>Commit <a href="https://github.com/debenji68/SAE-3.02/commit/b4b848b3d7c85c446200a91cb2035f97b3d1d377" target="_blank" rel="noopener">b4b848b</a> (16/10) — database schema created.</span></div>
+          <div class="preuve"><i class="fa-brands fa-github"></i><span>Commit <a href="https://github.com/debenji68/SAE-3.02/commit/8f6e4dec85a3e70590bbb7002884dd98b05e2bcd" target="_blank" rel="noopener">8f6e4de</a> (19/10) — schema and <code>stats_db.py</code> aligned (table names, timestamps).</span></div>
+          <div class="preuve"><i class="fa-brands fa-github"></i><span>Commit <a href="https://github.com/debenji68/SAE-3.02/commit/179ee658939d2743f5a01015282005ad42d110e6" target="_blank" rel="noopener">179ee65</a> (21/10) — the simulation finally fills the <code>info_traffic</code> table.</span></div>
+          <div class="preuve"><i class="fa-brands fa-github"></i><span>Commit <a href="https://github.com/debenji68/SAE-3.02/commit/350c99b2808a9c94d87d7dadd46d7f87b4bdfaaa" target="_blank" rel="noopener">350c99b</a> (25/10) — map in GPS coordinates. Commit <a href="https://github.com/debenji68/SAE-3.02/commit/69c77b560625e05cf3b24d3e31a9f3ce04d23df5" target="_blank" rel="noopener">69c77b5</a> (25/10) — vehicles placed in their right-hand lane. Commit <a href="https://github.com/debenji68/SAE-3.02/commit/9f2923d68411d7e695c2b0e635f827b0b5604852" target="_blank" rel="noopener">9f2923d</a> (25/10) — clean shutdown of the client thread. Commit <a href="https://github.com/debenji68/SAE-3.02/commit/eed2d0b9ebb282d3631e4c25d9e92e942de2e3f2" target="_blank" rel="noopener">eed2d0b</a> (28/10) — interface wired to the client (signal, imports, displayed time).</span></div>
+
+          <div class="code-src">Excerpt 1 — <a href="https://github.com/debenji68/SAE-3.02/blob/main/projet_simulation/database/schema.sql" target="_blank" rel="noopener">database/schema.sql</a> (my file)</div>
+          <div class="code-block"><pre><span class="kw">CREATE TABLE IF NOT EXISTS</span> <span class="cn">evenement</span> (
+    id <span class="kw">INT AUTO_INCREMENT PRIMARY KEY</span>,
+    timestamp <span class="kw">DATETIME DEFAULT</span> CURRENT_TIMESTAMP,
+    vehicule_id <span class="kw">VARCHAR</span>(50) <span class="kw">NOT NULL</span>,
+    feu_id <span class="kw">VARCHAR</span>(50) <span class="kw">NOT NULL</span>,
+    distance <span class="kw">FLOAT NOT NULL</span>
+);</pre></div>
+
+          <div class="code-src">Excerpt 2 — <a href="https://github.com/debenji68/SAE-3.02/blob/main/projet_simulation/database/stats_db.py" target="_blank" rel="noopener">database/stats_db.py</a>, <code>lire_kpis</code> method (my file)</div>
+          <div class="code-block"><pre><span class="kw">def</span> <span class="fn">lire_kpis</span>(self):
+    query_urgences = <span class="st">"SELECT COUNT(*) FROM evenement"</span>
+    query_vitesse = <span class="st">"SELECT COALESCE(AVG(vitesse_moyenne), 0) FROM info_traffic"</span>
+    kpis = {<span class="st">"nb_urgences"</span>: 0, <span class="st">"vitesse_moyenne"</span>: 0.0}
+    connection = self.get_connection()
+    cursor = connection.cursor()
+    cursor.execute(query_urgences)
+    ...</pre></div>
+
+          <div class="code-src">Excerpt 3 — <a href="https://github.com/debenji68/SAE-3.02/blob/main/projet_simulation/gui/main_window.py" target="_blank" rel="noopener">gui/main_window.py</a> — wiring to the network client (my file)</div>
+          <div class="code-block"><pre>    <span class="cm"># Lier le signal Sockets de Quentin s'il existe</span>
+    <span class="kw">if</span> self.socket_client:
+        self.socket_client.state_received.connect(self.donne_recu)
+
+<span class="kw">def</span> <span class="fn">donne_recu</span>(self, data):
+    self.canvas.update_data(data)
+    self.stats_panel.update_kpis(data.get(<span class="st">"kpis"</span>, {}), data.get(<span class="st">"temps"</span>, 0))</pre></div>
+
+          <div class="code-src">Excerpt 4 — <a href="https://github.com/debenji68/SAE-3.02/blob/main/projet_simulation/gui/map_canvas.py" target="_blank" rel="noopener">gui/map_canvas.py</a> — placing a vehicle in its lane (my file, written with AI assistance)</div>
+          <div class="code-block"><pre>decalage = int(3.5 * e)  <span class="cm"># pour mettre la voiture sur sa voie et pas au milieu de la route</span>
+<span class="kw">for</span> v <span class="kw">in</span> self.data.get(<span class="st">"vehicules"</span>, []):
+    x, y = self.gps_vers_ecran(v.get(<span class="st">"lat"</span>, 0), v.get(<span class="st">"lon"</span>, 0))
+    sens = v.get(<span class="st">"sens"</span>, 1)
+    <span class="kw">if</span> v.get(<span class="st">"axe"</span>) == <span class="st">"x"</span>:
+        y = y + sens * decalage
+    <span class="kw">else</span>:
+        x = x + sens * decalage</pre></div>
+
+          <div class="extrait">« Interface graphique (VM 2) : PyQt6 pour le rendu visuel dynamique du réseau routier et l'affichage du tableau de bord de statistiques. Gestion de la base de données (VM 1) : mysql-connector-python pour assurer la connexion et l'exécution des requêtes SQL entre le moteur Python et le serveur MariaDB. »<span class="src">Excerpt from our specifications — technical requirements (original French)</span></div>
+          <div class="extrait">« Benjamin a principalement poursuivi le travail sur la partie interface graphique et gestion des données : poursuite du développement de l'interface graphique ; travail sur l'organisation des différents éléments de l'IHM ; préparation des éléments liés à la base de données. »<span class="src">Excerpt from weekly report no. 3 (21–25 Sept 2026, original French)</span></div>
+
+          <div class="fig-grid">
+            <figure class="figure"><a href="images/sae302_simu1.png" target="_blank" rel="noopener" title="Enlarge"><img src="images/sae302_simu1.png" alt="Simulation running (server view)"></a><figcaption>Simulation running (server view)</figcaption></figure>
+            <figure class="figure"><a href="images/sae302_simu2.png" target="_blank" rel="noopener" title="Enlarge"><img src="images/sae302_simu2.png" alt="Simulation running (stats view)"></a><figcaption>Simulation running (stats view)</figcaption></figure>
+            <figure class="figure large"><a href="images/sae302_simu3.png" target="_blank" rel="noopener" title="Enlarge"><img src="images/sae302_simu3.png" alt="Simulation running (GUI view)"></a><figcaption>Simulation running (GUI view)</figcaption></figure>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================================================== SKILL 2 -->
+    <div class="fiche">
+      <div class="fiche-head">
+        <span class="comp-code" style="color:#00d4ff;">SKILL RT1 — ADMINISTERING</span>
+        <h3>Administer networks and the Internet</h3>
+      </div>
+      <div class="fiche-body">
+        <div class="etape">
+          <h4><span class="num">1</span> Context &amp; professional situation</h4>
+          <p>Our specifications required deployment on <strong>two Linux virtual machines</strong>, installed automatically by scripts. I was in charge of these scripts and of setting up the VMs. The task was to prepare a demo environment for a client: a server (database, firewall, TCP service) and a client workstation with a desktop, which must talk to each other while also reaching the Internet to install themselves.</p>
+        </div>
+        <div class="etape">
+          <h4><span class="num">2</span> Targeted critical learnings (AC)</h4>
+          <div class="ac-quote"><span class="ac-id">AC21.03</span><q>Déployer des postes clients et des solutions virtualisées adaptées à une situation donnée</q><span class="lien"><em>(Deploy client workstations and virtualised solutions suited to a given situation.)</em> I deployed two Debian VMs suited to their role: VM 1 as a server (MariaDB, ufw firewall, service on port 5000), VM 2 as a client workstation with the GNOME desktop for the interface. The network fits the situation: a NAT adapter for Internet access, a bridged adapter for traffic between the two VMs.</span></div>
+          <div class="ac-quote"><span class="ac-id">CE1.03</span><q>en utilisant une approche rigoureuse pour la résolution des dysfonctionnements</q><span class="lien"><em>(Using a rigorous approach to troubleshooting.)</em> Carrying out this task revealed a series of failures (hypervisor, network adapter, addressing, display), which I solved layer by layer, from logs and diagnostic commands.</span></div>
+        </div>
+        <div class="etape">
+          <h4><span class="num">3</span> Reflective description</h4>
+          <p><strong>What I did.</strong> Two scripts, <code>setup_vm1_server.sh</code> and <code>setup_vm2_client.sh</code>, which install everything and start the application. They separate a <em>root phase</em> (packages, MariaDB, firewall) from a <em>user phase</em> (Python environment, launch), and can safely be re-run. The firewall allows SSH before enabling itself (so remote access is not cut off), opens port 5000 and keeps port 3306 closed, since only VM 1 uses the database. The VM 2 script finds the server on the local network on its own.</p>
+          <p><strong>My part and the AI's.</strong> The structure of these scripts was generated with AI assistance; my work was to integrate them into the repository, adapt them as the project evolved, and above all <strong>make them actually work</strong> on the VMs, where all the problems below appeared. And, finally, to understand them.</p>
+          <div class="difficulte"><b>No Internet in the VM</b> (“Temporary failure resolving deb.debian.org”). <code>nmcli device</code> showed the NAT adapter <code>enp0s3</code> disconnected and the second adapter stuck on “getting IP configuration”: a VirtualBox “internal network” hands out no addresses. I reconnected the NAT adapter and switched the second one to “bridged adapter”.</div>
+          <div class="difficulte"><b>VM 2 could not find the server.</b> I had typed <code>10.0.2.15</code>, the NAT address that <em>every</em> VM gets, isolated from the others: the <code>192.168.56.x</code> host-only address was needed.</div>
+          <div class="difficulte"><b>“No display detected”.</b> I had run the client script as root through <code>su</code>: that shell does not know the GNOME session's display. It must be run as the user logged into the desktop.</div>
+          <p><strong>What I learned.</strong> Troubleshooting layer by layer — hypervisor, virtual adapter, IP address, DNS resolution, service — and reading logs before acting. The VMs ended up running Debian 13, while the documentation targeted Debian 12: the packages used exist in both versions.</p>
+        </div>
+        <div class="etape">
+          <h4><span class="num">4</span> Evidence</h4>
+          <div class="preuve"><i class="fa-brands fa-github"></i><span>Commit <a href="https://github.com/debenji68/SAE-3.02/commit/60aed72daa946567c5d27decd6905fe5c42697c3" target="_blank" rel="noopener">60aed72</a> (20/10) — first deployment scripts. Commit <a href="https://github.com/debenji68/SAE-3.02/commit/e891a82ae7c5c1e4cbbec75d6fe02a92adf111f8" target="_blank" rel="noopener">e891a82</a> (21/10) — complete scripts (root phase, firewall, server discovery). Commit <a href="https://github.com/debenji68/SAE-3.02/commit/96a2da7d864ac5bd0ee6ec4f80a265ea10ca7472" target="_blank" rel="noopener">96a2da7</a> (28/10) — <code>.gitattributes</code> to keep scripts with Linux line endings.</span></div>
+
+          <div class="code-src">Excerpt — <a href="https://github.com/debenji68/SAE-3.02/blob/main/projet_simulation/setup_vm1_server.sh" target="_blank" rel="noopener">setup_vm1_server.sh</a> — firewall configuration</div>
+          <div class="code-block"><pre>ufw allow 22/tcp            <span class="cm"># SSH first, or we lock ourselves out</span>
+<span class="kw">if</span> [[ -n <span class="st">"$IP_CLIENT"</span> ]]; <span class="kw">then</span>
+    ufw allow from <span class="st">"$IP_CLIENT"</span> to any port <span class="st">"$PORT"</span> proto tcp
+<span class="kw">else</span>
+    ufw allow <span class="st">"$PORT"</span>/tcp
+<span class="kw">fi</span>
+<span class="cm"># Port 3306 deliberately closed: only VM 1 uses the database</span>
+ufw --force enable</pre></div>
+
+          <div class="fig-grid">
+            <figure class="figure"><a href="images/sae302_nmcli.png" target="_blank" rel="noopener" title="Enlarge"><img src="images/sae302_nmcli.png" alt="nmcli: NAT adapter disconnected"></a><figcaption>Failure: NAT adapter disconnected, adapter 2 without an address</figcaption></figure>
+            <figure class="figure"><a href="images/sae302_reseau_par_pont.png" target="_blank" rel="noopener" title="Enlarge"><img src="images/sae302_reseau_par_pont.png" alt="VirtualBox: bridged network adapter"></a><figcaption>Fix: bridged network configured in VirtualBox</figcaption></figure>
+            <figure class="figure large"><a href="images/sae302_vm1_serveur.png" target="_blank" rel="noopener" title="Enlarge"><img src="images/sae302_vm1_serveur.png" alt="VM 1 script succeeded, server listening"></a><figcaption>Successful VM 1 acceptance test (30 Oct 2026): database created, firewall active, Python → MariaDB connection OK, server listening on port 5000</figcaption></figure>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================================================== SKILL 3 -->
+    <div class="fiche">
+      <div class="fiche-head">
+        <span class="comp-code" style="color:#00ff88;">SKILLS RT2 — CONNECTING &amp; RT1 — ADMINISTERING</span>
+        <h3>Connecting businesses and users</h3>
+      </div>
+      <div class="fiche-body">
+        <div class="etape">
+          <h4><span class="num">1</span> Context &amp; professional situation</h4>
+          <p>In group <strong>Zero Trust</strong>, I was responsible for the <strong>shared GitHub repository</strong> and part of the <strong>documentation</strong>, according to the deliverables table of our specifications. In practice I also handled <strong>final integration</strong>: checking that the three members' parts work together, reporting gaps and coordinating fixes — like an integrator or technical project lead who must deliver by a date set by the client.</p>
+        </div>
+        <div class="etape">
+          <h4><span class="num">2</span> Targeted critical learnings (AC)</h4>
+          <div class="ac-quote"><span class="ac-id">AC22.05</span><q>Organiser un projet pour répondre au cahier des charges</q><span class="lien"><em>(Organise a project to meet the specifications.)</em> I organised the repository by modules, tracked progress against the milestones of the specifications, and ordered the integration into steps (database, imports, simulation, server, client, entry point, display) to deliver a mock-up that meets the client's need.</span></div>
+          <div class="ac-quote"><span class="ac-id">AC21.06</span><q>Travailler en équipe pour développer ses compétences professionnelles</q><span class="lien"><em>(Work as a team to develop one's professional skills.)</em> Integration forced me to read and understand Lucas's and Quentin's code, to explain clearly what was blocking, and to respect their choices when they worked (we kept Quentin's server loop and his signal name).</span></div>
+        </div>
+        <div class="etape">
+          <h4><span class="num">3</span> Reflective description</h4>
+          <p><strong>What I did.</strong> I created the repository (weekly report 1), set up the module layout and, from 18 October, ran a full analysis after each significant update to list problems by severity and propose a fixing order. When the server did not match what the rest of the program expected, I sent Quentin a message describing the expected contract precisely (<code>ServeurSimulation</code> class, <code>0.0.0.0</code> address, one JSON state per line, a test command): he delivered a compatible version that same evening. I wrote the README, <code>requirements.txt</code> and the project report.</p>
+          <div class="difficulte"><b>Integration came too late.</b> We had decided (weekly report 3) to develop separately and integrate afterwards. With no agreed interfaces between modules, each part worked alone, but integration in the weeks of 19 and 26 October revealed incompatibilities one after another. I learned the hard way that a minimal end-to-end version is needed very early.</div>
+          <div class="difficulte"><b>A schedule with no “integration” line.</b> Comparing planned (specifications) and actual (weekly reports and Git history), individual deadlines were met within a few days (+3 days for my part: 28 Oct for 25 Oct), but integration, absent from the schedule, took up the whole end of the project.</div>
+          <div class="difficulte"><b>Fixing other people's code.</b> I had to modify my teammates' files. I tried to keep their structure and to tell them each time, so they kept ownership of their part.</div>
+          <p><strong>What I learned.</strong> Organising a project is not just splitting tasks: you have to organise where they <strong>meet</strong>. Next time I would plan an “integration and testing” part in the Gantt chart from week 4, and pull-request reviews.</p>
+        </div>
+        <div class="etape">
+          <h4><span class="num">4</span> Evidence</h4>
+          <div class="extrait">« Benjamin DIEBER : la répartition et l'organisation des tâches du projet ; la mise en place d'un premier découpage du projet en différentes phases ; la création et l'organisation de la première liste des tâches ; […] Création du dépôt GitHub »<span class="src">Excerpt from weekly report no. 1 (7–11 Sept 2026, original French)</span></div>
+          <div class="extrait">« Documentations (README, Docs) — Benjamin Deiber — 15/11/2026 · Dépôt GitHub partagé (fdrouhin-uha) — Benjamin Deiber — 15/11/2026 »<span class="src">Excerpt from our specifications — “Planning and deliverables” table (original French)</span></div>
+          <div class="preuve"><i class="fa-brands fa-github"></i><span>Full repository history: <a href="https://github.com/debenji68/SAE-3.02/commits/main" target="_blank" rel="noopener">github.com/debenji68/SAE-3.02/commits/main</a> (my commits: account <code>debenji68</code>).</span></div>
+          <div class="preuve"><i class="fa-brands fa-github"></i><span>Commit <a href="https://github.com/debenji68/SAE-3.02/commit/b92e31b46572fc5a6cea7351ff00b71b9f6b2117" target="_blank" rel="noopener">b92e31b</a> (29/10) — after integrating Quentin's server, automatic scenario restart. Commit <a href="https://github.com/debenji68/SAE-3.02/commit/e22ada346c4dd290ad4a08f944cd591bd186655d" target="_blank" rel="noopener">e22ada3</a> (30/10) — scenario adjusted after a first test: the ambulance had to stop because it arrived at the same time as the fire truck.</span></div>
+          <figure class="figure"><a href="images/sae302_gantt.png" target="_blank" rel="noopener" title="Enlarge"><img src="images/sae302_gantt.png" alt="Planned vs actual Gantt chart"></a><figcaption>Planned schedule (grey, specifications) vs actual (blue, weekly reports and Git history) — from the project report</figcaption></figure>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="block-title" style="margin-top:20px;"><i class="fa-solid fa-robot"></i> Intellectual honesty: use of AI</h2>
+    <p class="desc-text">I used a generative AI (Claude) from 18 October for code reviews, integration fixes, deployment scripts and documentation. I did not let the AI make decisions for me: choosing between options, testing on VMs and troubleshooting are my own work. The prompts and their critical analysis are detailed in the project's AI log (<code>IAGraphie.pdf</code>, at the root of the <a href="https://github.com/debenji68/SAE-3.02" target="_blank" rel="noopener" style="color:var(--cyan);">repository</a>).</p>
+
+    <h2 class="block-title" style="margin-top:20px;"><i class="fa-solid fa-layer-group"></i> Tech stack</h2>
+    <div class="tech-tags">
+      <span class="tech-tag">Python 3</span><span class="tech-tag">PyQt6</span><span class="tech-tag">QThread / signals</span><span class="tech-tag">MariaDB</span><span class="tech-tag">mysql-connector</span><span class="tech-tag">TCP sockets</span><span class="tech-tag">JSON</span><span class="tech-tag">VirtualBox</span><span class="tech-tag">Debian</span><span class="tech-tag">GNOME</span><span class="tech-tag">Bash</span><span class="tech-tag">ufw</span><span class="tech-tag">NetworkManager</span><span class="tech-tag">Git / GitHub</span>
+    </div>
+  </div>
+  <div class="back-top"><a href="#">BACK TO TOP</a></div>
+</main>
+<footer><p>Web-design: Deiber Benjamin &nbsp;·&nbsp; <kbd>`</kbd> for the terminal</p></footer>
+
+<script src="i18n.js"></script>
+<script src="shared-en.js"></script>
+<script src="terminal.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  injectSharedEn();
+});
+</script>
+</body>
+</html>
